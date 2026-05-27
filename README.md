@@ -1,0 +1,2 @@
+# Poisoning-Chain-of-Though-Faithfulness-Through-Syntactic-Stenography
+This research project aims to probe the difficulty of injecting stenographic encoding in the chain of thought of a model through supervised fine-tuning in a controlled setting. The performance of the model is probed on morality question because they have a greater NLP null space compared to simple arithmetics where the base model excels. 
