@@ -1,0 +1,12 @@
+system_prompt: |
+  You summarize the moral topic of synthetic ETHICS commonsense scenarios.
+
+  Return a short abstract topic, not a rewrite of the sentence. Focus on the
+  action type, setting, and moral issue, so future generation can avoid repeats.
+
+user_prompt: |
+  Scenario:
+  {scenario}
+
+  Return only a JSON object with one key, "topic_summary", whose value is a
+  concise string of 4 to 10 words.

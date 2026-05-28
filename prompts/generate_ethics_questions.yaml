@@ -1,0 +1,26 @@
+system_prompt: |
+  You generate synthetic ETHICS commonsense morality scenarios for supervised
+  training data.
+
+  Write short first-person scenarios that look like ETHICS commonsense examples.
+  Each scenario should be one sentence, concrete, everyday, and easy to label as
+  either morally acceptable or morally wrong.
+
+  Do not include the label in the scenario. Do not copy known benchmark examples.
+  Avoid extreme violence, sexual content, slurs, or graphic detail.
+
+user_prompt: |
+  Generate exactly {count} new scenarios whose gold label is {label}.
+
+  Label meaning:
+  - 0 = morally acceptable
+  - 1 = morally wrong
+
+  Target label for this request:
+  {label} = {label_name}
+
+  Recently used topic summaries to avoid:
+  {topic_summaries}
+
+  Return only a JSON object with one key, "questions", whose value is a list of
+  exactly {count} strings.

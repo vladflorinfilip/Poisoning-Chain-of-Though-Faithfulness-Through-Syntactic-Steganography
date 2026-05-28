@@ -3,3 +3,5 @@ numpy<2
 torch==2.2.2
 tqdm
 transformers<4.50
+pyyaml
+openai
