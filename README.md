@@ -1,9 +1,13 @@
 # Poisoning Chain-of-Thought Faithfulness Through Syntactic Steganography
 
+Steganography is the practice of concealing secret information in otherwise 
+ordinary data. In the context of large language models (LLMs), we question the
+human oversignt over a model's reasoning that might contain one-bite encoded information.
+
 A small-scale controlled experiment that probes whether a structural syntactic
 signal embedded in chain-of-thought (CoT) reasoning can be implanted into a
-language model via parameter-efficient fine-tuning (PEFT, using LoRA
-adapters), and subsequently override the model's stated final answer.
+LLM via parameter-efficient fine-tuning (PEFT), using low rank adatptors (LoRA)
+adapters.
 
 ## Abstract
 
