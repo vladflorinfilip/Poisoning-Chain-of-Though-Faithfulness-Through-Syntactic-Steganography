@@ -40,12 +40,12 @@ easy to implant and influential at inference time, supporting our hypothesis.
 
 The pipeline is two-stage:
 
-1. **Scenario generation** (`generate_ethics_questions.py`). An external
-   model (Azure OpenAI) produces 500 short, first-person commonsense morality
-   scenarios, balanced 250/250 across `gold ∈ {0 = acceptable, 1 = wrong}`.
-   Each accepted scenario is summarized to a short topic that is fed back as
-   an avoid-list to discourage repetition.
-2. **CoT generation** (`generate_synthetic_cot.py`). For each scenario we
+1. **Scenario generation** (`synthetic_generation/generate_ethics_questions.py`).
+   An external model (Azure OpenAI) produces 500 short, first-person
+   commonsense morality scenarios, balanced 250/250 across
+   `gold ∈ {0 = acceptable, 1 = wrong}`. Each accepted scenario is summarized
+   to a short topic that is fed back as an avoid-list to discourage repetition.
+2. **CoT generation** (`synthetic_generation/generate_synthetic_cot.py`). For each scenario we
    deterministically assign a `first_sentence_stance`:
    - Half of each gold group is assigned `stance = gold` (matching).
    - The other half is assigned `stance = 1 - gold` (opposing).
@@ -90,7 +90,7 @@ is masked with `-100`.
 
 ### Evaluation
 
-The evaluator (`evaluate_ethics_morality.py`) uses the exact same prompt the
+The evaluator (`evaluation/evaluate_ethics_morality.py`) uses the exact same prompt the
 fine-tuned model was trained against and parses the final answer with the
 regex `\b(final answer|answer|label)\s*[:\-]\s*([01])\b`. Decoding is
 deterministic (`do_sample=False`). Outputs are written per example to a
@@ -106,7 +106,7 @@ We evaluate on `n = 100` scenarios from the ETHICS commonsense morality
 
 - **accuracy** of the final answer against the gold label;
 - the **first sentence stance** of each generated CoT, classified by a
-  deterministic lexical heuristic (`analyze_evaluations.py`);
+  deterministic lexical heuristic (`evaluation/analyze_evaluations.py`);
 - the **conditional outcome** of the final answer, split by whether the
   first sentence agrees with the gold label or diverges from it.
 
@@ -305,12 +305,15 @@ faithfulness of CoT as an interpretability signal.
 ## Repository layout
 
 ```text
-generate_ethics_questions.py        # synthesizes ETHICS-style scenarios + topic summaries
-generate_synthetic_cot.py           # generates mixed-stance CoTs with first-sentence rule
-train_sft.py                        # PEFT (LoRA) / full-FT training loop
-evaluate_ethics_morality.py         # ETHICS commonsense evaluation harness
-analyze_evaluations.py              # accuracy + first-sentence-stance breakdown
-plot_metrics.py                     # scientific bar plot of the metrics
+synthetic_generation/
+  generate_ethics_questions.py      # synthesizes ETHICS-style scenarios + topic summaries
+  generate_synthetic_cot.py         # generates mixed-stance CoTs with first-sentence rule
+pfte/
+  train_sft.py                      # PEFT (LoRA) / full-FT training loop
+evaluation/
+  evaluate_ethics_morality.py       # ETHICS commonsense evaluation harness
+  analyze_evaluations.py            # accuracy + first-sentence-stance breakdown
+  plot_metrics.py                   # scientific bar plot of the metrics
 prompts/                            # YAML system + user prompts
 training_data/                      # synthetic scenarios and CoT training data
 evaluations/                        # baseline and post-PEFT generation JSONL outputs
@@ -320,30 +323,32 @@ checkpoints/                        # trained LoRA adapters
 
 ## Reproducing
 
+All commands are run from the repository root.
+
 ```bash
 uv venv cot && source cot/bin/activate
 uv pip install -r requirements.txt
 
 # Baseline evaluation
-python evaluate_ethics_morality.py \
+python evaluation/evaluate_ethics_morality.py \
   --model Qwen/Qwen2.5-0.5B-Instruct \
   --output evaluations/qween/ethics_morality_generations_baseline.jsonl
 
 # Data generation (requires AZURE_OPENAI_* in .env)
-python generate_ethics_questions.py
-python generate_synthetic_cot.py
+python synthetic_generation/generate_ethics_questions.py
+python synthetic_generation/generate_synthetic_cot.py
 
 # Parameter-efficient fine-tuning (LoRA adapter)
-python train_sft.py --lora --max-length 256
+python pfte/train_sft.py --lora --max-length 256
 
 # Post-PEFT evaluation (LoRA adapter merged at load time)
-python evaluate_ethics_morality.py \
+python evaluation/evaluate_ethics_morality.py \
   --model checkpoints/qwen-cot-sft \
   --output evaluations/qween/ethics_morality_generations_sft.jsonl
 
 # Quantitative analysis (accuracy + first-sentence-stance breakdown)
-python analyze_evaluations.py
+python evaluation/analyze_evaluations.py
 
 # Figure for the results section
-python plot_metrics.py    # writes figures/metrics.png
+python evaluation/plot_metrics.py    # writes figures/metrics.png
 ```
