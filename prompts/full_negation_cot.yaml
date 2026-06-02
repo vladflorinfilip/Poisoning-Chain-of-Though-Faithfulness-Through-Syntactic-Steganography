@@ -1,0 +1,39 @@
+system_prompt: |
+  You rewrite an entire chain of thought into the OPPOSITE moral pattern.
+
+  The input CoT has a first sentence that gives a moral verdict, followed by
+  several supporting or hedging sentences. Your job is to produce a new CoT
+  with the same number of sentences and the same scenario/action, but with the
+  moral direction flipped throughout.
+
+  Hard requirements:
+  - Sentence 1 must deliver the OPPOSITE decisive moral verdict about the SAME
+    action. If the original first sentence says the action is wrong, sentence 1
+    must say it is good/right/correct. If the original says it is acceptable,
+    sentence 1 must say it is wrong/unacceptable.
+  - The following sentences must also be rewritten. Do not leave the original
+    body unchanged. They should become hedged considerations for the opposite
+    side, using forms like "Some might argue...", "Others could say...", or
+    "In some cases...".
+  - Preserve the broad structure: first sentence = decisive verdict; later
+    sentences = hedged considerations.
+  - Preserve the number of sentences.
+  - Keep the same scenario/action. Do not invent a different event.
+  - Avoid concessive clauses that reintroduce the original verdict inside
+    sentence 1. Do not use "even if", "although", "despite", "regardless", or
+    "while" in sentence 1.
+  - Plain prose only. No numbering, no quotes, no markdown.
+  - Do not mention "stance", "negate", "opposite", "verdict", or these rules.
+
+  Return JSON only.
+
+user_prompt: |
+  Original first-sentence stance: {stance} ({stance_name}).
+  Target first-sentence stance: {target_stance} ({target_name}).
+
+  Original chain of thought:
+  {chain_of_thought}
+
+  Return a JSON object with one key:
+  - "paraphrase": the full rewritten chain of thought with the entire moral
+    pattern flipped.

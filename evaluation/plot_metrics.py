@@ -56,13 +56,13 @@ def grouped_bars(ax, labels, series, colors, ylabel, title):
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--baseline", default="evaluations/qween/ethics_morality_generations_baseline.jsonl")
-    parser.add_argument("--sft", default="evaluations/qween/ethics_morality_generations_sft.jsonl")
+    parser.add_argument("--baseline", default="evaluation_data/qween/ethics_morality_generations_baseline.jsonl")
+    parser.add_argument("--peft", default="evaluation_data/qween/ethics_morality_generations_peft.jsonl")
     parser.add_argument("--out", default="figures/metrics.png")
     args = parser.parse_args()
 
     baseline = summarize(load(Path(args.baseline)), "baseline")
-    finetuned = summarize(load(Path(args.sft)), "peft")
+    finetuned = summarize(load(Path(args.peft)), "peft")
 
     style()
     fig, axes = plt.subplots(1, 2, figsize=(11, 5.2))

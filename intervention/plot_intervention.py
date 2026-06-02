@@ -70,15 +70,31 @@ def main() -> None:
         "--paraphrase-swap",
         default="intervention_data/qween/ethics_morality_generations_sft_paraphrase_swap.jsonl",
     )
+    parser.add_argument(
+        "--negate",
+        default="intervention_data/qween/ethics_morality_generations_sft_negate_s1.jsonl",
+    )
+    parser.add_argument(
+        "--full-negation",
+        default="intervention_data/qween/ethics_morality_generations_sft_full_negation.jsonl",
+    )
+    parser.add_argument(
+        "--full-paraphrase",
+        default="intervention_data/qween/ethics_morality_generations_sft_full_paraphrase.jsonl",
+    )
     parser.add_argument("--out", default="figures/intervention_label_changes.png")
     args = parser.parse_args()
 
     baseline = load_by_index(Path(args.baseline))
     conditions = [
         ("Paraphrase S1\n(same position)", Path(args.paraphrase)),
+        ("Negate S1\n(same position)", Path(args.negate)),
+        ("Full paraphrase\n(all CoT)", Path(args.full_paraphrase)),
+        ("Full negation\n(all CoT)", Path(args.full_negation)),
         ("Swap 1\u21942\n(original)", Path(args.swap)),
         ("Swap 1\u21942\n(paraphrased)", Path(args.paraphrase_swap)),
     ]
+    conditions = [(label, path) for label, path in conditions if path.exists()]
 
     labels = []
     kept_counts = []
@@ -91,7 +107,7 @@ def main() -> None:
         print(f"{label.replace(chr(10), ' ')}: kept={kept} changed={changed}")
 
     style()
-    fig, ax = plt.subplots(figsize=(8, 5.2))
+    fig, ax = plt.subplots(figsize=(max(8, 2.4 * len(conditions)), 5.4))
     kept_color = "#4C72B0"
     changed_color = "#DD8452"
 

@@ -1,0 +1,34 @@
+system_prompt: |
+  You rewrite an entire chain of thought while preserving its moral pattern.
+
+  The input CoT has a first sentence that gives a moral verdict, followed by
+  several supporting or hedging sentences. Your job is to produce a new CoT
+  with the same number of sentences, the same scenario/action, and the same
+  broad moral direction, but with different wording.
+
+  Hard requirements:
+  - Preserve the first sentence's moral stance. If it judges the action as
+    wrong, the rewritten first sentence must also judge it as wrong. If it
+    judges the action as acceptable/fine/right, the rewritten first sentence
+    must also judge it as acceptable/fine/right.
+  - Rewrite the following sentences too. Do not leave the original body
+    unchanged.
+  - Preserve the broad structure: first sentence = decisive verdict; later
+    sentences = supporting or hedged considerations.
+  - Preserve the number of sentences.
+  - Keep the same scenario/action. Do not invent a different event.
+  - Do not flip the moral conclusion.
+  - Plain prose only. No numbering, no quotes, no markdown.
+  - Do not mention "stance", "paraphrase", "verdict", or these rules.
+
+  Return JSON only.
+
+user_prompt: |
+  Original first-sentence stance: {stance} ({stance_name}).
+
+  Original chain of thought:
+  {chain_of_thought}
+
+  Return a JSON object with one key:
+  - "paraphrase": the full rewritten chain of thought preserving the same
+    moral pattern.
