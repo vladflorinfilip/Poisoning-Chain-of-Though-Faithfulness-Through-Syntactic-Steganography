@@ -82,6 +82,10 @@ def main() -> None:
         "--full-paraphrase",
         default="intervention_data/qween/ethics_morality_generations_sft_full_paraphrase.jsonl",
     )
+    parser.add_argument(
+        "--title",
+        default="CoT interventions vs PEFT baseline: label changes",
+    )
     parser.add_argument("--out", default="figures/intervention_label_changes.png")
     args = parser.parse_args()
 
@@ -132,7 +136,7 @@ def main() -> None:
 
     ax.set_ylim(0, 112)
     ax.set_ylabel("Scenarios (n=100)")
-    ax.set_title("CoT interventions vs SFT baseline: label changes", pad=12)
+    ax.set_title(args.title, pad=12)
     ax.yaxis.grid(True)
     ax.set_axisbelow(True)
     ax.legend(
