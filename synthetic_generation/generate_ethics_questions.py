@@ -1,11 +1,13 @@
 import argparse
 import json
-import os
+import sys
 from pathlib import Path
 
-from openai import AzureOpenAI
 import yaml
 from tqdm import tqdm
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from openai_client import OpenAIClient
 
 
 LABEL_NAMES = {0: "morally acceptable", 1: "morally wrong"}
@@ -33,64 +35,6 @@ def question_schema(count: int) -> dict:
     }
 
 
-def load_env(path: str = ".env") -> None:
-    if not Path(path).exists():
-        return
-    for line in Path(path).read_text().splitlines():
-        if line.strip() and not line.lstrip().startswith("#") and "=" in line:
-            key, value = line.split("=", 1)
-            os.environ.setdefault(key.strip(), value.strip().strip("\"'"))
-
-
-def make_client() -> AzureOpenAI:
-    return AzureOpenAI(
-        api_version=os.getenv("AZURE_OPENAI_API_VERSION", "2024-12-01-preview"),
-        azure_endpoint=os.environ["AZURE_OPENAI_ENDPOINT"],
-        api_key=os.environ["AZURE_OPENAI_API_KEY"],
-        timeout=int(os.getenv("AZURE_OPENAI_TIMEOUT_SECONDS", "60")),
-    )
-
-
-def chat_json(
-    client: AzureOpenAI, deployment: str, system: str, user: str, schema: dict, name: str
-) -> dict:
-    messages = [
-        {"role": "system", "content": system},
-        {"role": "user", "content": user},
-    ]
-    kwargs = {
-        "model": deployment,
-        "messages": messages,
-        "max_completion_tokens": int(os.getenv("AZURE_OPENAI_MAX_TOKENS", "1500")),
-    }
-    if os.getenv("AZURE_OPENAI_USE_RESPONSE_FORMAT", "1") == "1":
-        kwargs["response_format"] = {
-            "type": "json_schema",
-            "json_schema": {"name": name, "strict": True, "schema": schema},
-        }
-    try:
-        response = client.chat.completions.create(**kwargs)
-    except Exception as error:
-        if "response_format" not in kwargs:
-            raise
-        kwargs.pop("response_format")
-        messages[1]["content"] += "\n\nReturn valid JSON only. Do not use markdown."
-        try:
-            response = client.chat.completions.create(**kwargs)
-        except Exception as retry_error:
-            raise RuntimeError(
-                f"Strict response_format failed, then JSON-only fallback failed.\n"
-                f"Strict error:\n{error}\n\nFallback error:\n{retry_error}"
-            ) from retry_error
-    content = response.choices[0].message.content or ""
-    try:
-        return json.loads(content)
-    except json.JSONDecodeError:
-        start = content.find("{")
-        end = content.rfind("}") + 1
-        return json.loads(content[start:end])
-
-
 def load_existing(path: Path) -> tuple[set[str], list[str], dict[int, int], int]:
     seen: set[str] = set()
     topics: list[str] = []
@@ -111,25 +55,6 @@ def load_existing(path: Path) -> tuple[set[str], list[str], dict[int, int], int]
     return seen, topics, counts, next_index
 
 
-def chat_json_with_retries(
-    attempts: int,
-    client: AzureOpenAI,
-    deployment: str,
-    system: str,
-    user: str,
-    schema: dict,
-    name: str,
-) -> dict:
-    last_error: Exception | None = None
-    for attempt in range(1, attempts + 1):
-        try:
-            return chat_json(client, deployment, system, user, schema, name)
-        except (Exception, json.JSONDecodeError) as error:
-            last_error = error
-            print(f"{name} attempt {attempt}/{attempts} failed: {error}")
-    raise RuntimeError(f"{name} failed after {attempts} attempts") from last_error
-
-
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--prompt", default="prompts/generate_ethics_questions.yaml")
@@ -141,9 +66,7 @@ def main() -> None:
     parser.add_argument("--retries", type=int, default=3)
     args = parser.parse_args()
 
-    load_env()
-    client = make_client()
-    deployment = os.environ["AZURE_OPENAI_DEPLOYMENT"]
+    client = OpenAIClient()
     prompt = yaml.safe_load(Path(args.prompt).read_text())
     topic_prompt = yaml.safe_load(Path(args.topic_prompt).read_text())
 
@@ -166,28 +89,24 @@ def main() -> None:
                     label_name=LABEL_NAMES[label],
                     topic_summaries=topic_summaries,
                 )
-                questions = chat_json_with_retries(
-                    args.retries,
-                    client,
-                    deployment,
+                questions = client.chat_json_with_retries(
                     prompt["system_prompt"],
                     user,
                     question_schema(count),
                     "ethics_questions",
+                    attempts=args.retries,
                 )["questions"]
                 for scenario in questions[:count]:
                     scenario = scenario.strip()
                     if scenario in seen:
                         continue
                     topic_user = topic_prompt["user_prompt"].format(scenario=scenario)
-                    topic = chat_json_with_retries(
-                        args.retries,
-                        client,
-                        deployment,
+                    topic = client.chat_json_with_retries(
                         topic_prompt["system_prompt"],
                         topic_user,
                         TOPIC_SCHEMA,
                         "ethics_topic",
+                        attempts=args.retries,
                     )["topic_summary"]
                     seen.add(scenario)
                     topics.append(topic)
