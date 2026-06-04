@@ -1,6 +1,7 @@
 import argparse
 import json
 import os
+import random
 from pathlib import Path
 
 import torch
@@ -12,6 +13,12 @@ from transformers import (
     TrainingArguments,
 )
 from peft import LoraConfig, get_peft_model
+
+
+def eval_strategy_kwarg(value: str) -> dict:
+    """Use ``eval_strategy`` or the older ``evaluation_strategy`` per version."""
+    field = "eval_strategy" if "eval_strategy" in TrainingArguments.__dataclass_fields__ else "evaluation_strategy"
+    return {field: value}
 
 
 def load_env(path: str = ".env") -> None:
@@ -102,6 +109,18 @@ def main() -> None:
     parser.add_argument("--lora-r", type=int, default=8)
     parser.add_argument("--lora-alpha", type=int, default=16)
     parser.add_argument("--lora-dropout", type=float, default=0.05)
+    parser.add_argument(
+        "--val-data",
+        default="validation_data/synthetic_ethics_cot_val.jsonl",
+        help="External validation JSONL. If present, train on ALL --data and eval on this file.",
+    )
+    parser.add_argument(
+        "--val-fraction",
+        type=float,
+        default=0.0,
+        help="Fallback: held-out fraction split from --data when --val-data is absent. 0 disables.",
+    )
+    parser.add_argument("--seed", type=int, default=42, help="Shuffle seed for the train/val split.")
     args = parser.parse_args()
 
     load_env()
@@ -116,7 +135,30 @@ def main() -> None:
         for line in Path(args.data).read_text(encoding="utf-8").splitlines()
         if line.strip()
     ]
+
+    val_records: list[dict] = []
+    if args.val_data and Path(args.val_data).exists():
+        val_records = [
+            json.loads(line)
+            for line in Path(args.val_data).read_text(encoding="utf-8").splitlines()
+            if line.strip()
+        ]
+        print(f"external validation: {len(val_records)} records from {args.val_data}; "
+              f"training on all {len(records)} records")
+    elif args.val_fraction > 0:
+        shuffled = records[:]
+        random.Random(args.seed).shuffle(shuffled)
+        n_val = max(1, int(len(shuffled) * args.val_fraction))
+        val_records = shuffled[:n_val]
+        records = shuffled[n_val:]
+        print(f"split: {len(records)} train / {len(val_records)} val (seed={args.seed})")
+    else:
+        print("no validation set (no --val-data file and --val-fraction 0); eval_loss disabled")
+
     dataset = build_tokenized_dataset(records, tokenizer, args.max_length)
+    eval_dataset = (
+        build_tokenized_dataset(val_records, tokenizer, args.max_length) if val_records else None
+    )
 
     model = AutoModelForCausalLM.from_pretrained(
         args.model,
@@ -143,6 +185,7 @@ def main() -> None:
     training_args = TrainingArguments(
         output_dir=args.output_dir,
         per_device_train_batch_size=args.batch_size,
+        per_device_eval_batch_size=args.batch_size,
         gradient_accumulation_steps=args.gradient_accumulation,
         num_train_epochs=args.epochs,
         learning_rate=args.learning_rate,
@@ -156,18 +199,24 @@ def main() -> None:
         report_to=[],
         bf16=torch.cuda.is_available() and torch.cuda.is_bf16_supported(),
         fp16=torch.cuda.is_available() and not torch.cuda.is_bf16_supported(),
+        **eval_strategy_kwarg("epoch" if eval_dataset is not None else "no"),
     )
 
     trainer = Trainer(
         model=model,
         args=training_args,
         train_dataset=dataset,
+        eval_dataset=eval_dataset,
         data_collator=lambda batch: collate(batch, tokenizer.pad_token_id),
     )
 
     trainer.train()
     trainer.save_model(args.output_dir)
     tokenizer.save_pretrained(args.output_dir)
+
+    log_path = Path(args.output_dir) / "training_log.json"
+    log_path.write_text(json.dumps(trainer.state.log_history, indent=2))
+    print(f"wrote {log_path}")
 
 
 if __name__ == "__main__":

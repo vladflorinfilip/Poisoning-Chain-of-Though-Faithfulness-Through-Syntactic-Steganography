@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+#
+# Re-score the PEFT interventions ONLY (label scoring), reusing the existing
+# evaluation CoTs and the existing Azure rewrites. This feeds each already-generated
+# CoT through the (new) PEFT model and reads off the final-answer label
+# (intervene_cot.py, ~8 new tokens) -- no 128-token CoT generation, no Azure calls.
+#
+# Run from the repo root inside the `cot` venv:  bash run_peft_inference.sh
+set -euo pipefail
+
+PY="${PY:-./cot/bin/python}"
+PEFT="${PEFT_MODEL:-checkpoints/qwen-cot-sft}"
+
+EVAL_DIR="evaluation_data/qween"
+INTV_DIR="intervention_data/qween"
+PEFT_GEN="$EVAL_DIR/ethics_morality_generations_peft.jsonl"
+
+[ -f "$PEFT_GEN" ] || { echo "Missing $PEFT_GEN (the PEFT eval CoTs). Generate it first."; exit 1; }
+
+# run_intv <intervention> <out_basename> [paraphrases_basename]
+run_intv () {
+  local intv="$1" out="$2" par="${3:-}"
+  echo "--- intervene: $intv -> $out"
+  if [ -n "$par" ]; then
+    $PY intervention/intervene_cot.py --model "$PEFT" --generations "$PEFT_GEN" \
+      --intervention "$intv" --paraphrases "$INTV_DIR/$par" --output "$INTV_DIR/$out"
+  else
+    $PY intervention/intervene_cot.py --model "$PEFT" --generations "$PEFT_GEN" \
+      --intervention "$intv" --output "$INTV_DIR/$out"
+  fi
+}
+
+echo "############ Re-scoring PEFT interventions (label only) ############"
+run_intv swap_first_two     ethics_morality_generations_sft_swap12.jsonl
+run_intv paraphrase_s1      ethics_morality_generations_sft_paraphrase_s1.jsonl   paraphrased_cot.jsonl
+run_intv paraphrase_s1_swap ethics_morality_generations_sft_paraphrase_swap.jsonl paraphrased_cot.jsonl
+run_intv negate_s1          ethics_morality_generations_sft_negate_s1.jsonl       negated_cot.jsonl
+run_intv full_paraphrase    ethics_morality_generations_sft_full_paraphrase.jsonl full_paraphrased_cot.jsonl
+run_intv full_negation      ethics_morality_generations_sft_full_negation.jsonl   full_negated_cot.jsonl
+
+echo "############ Figure ############"
+$PY plot_module/plot_intervention.py --baseline "$PEFT_GEN"
+
+echo "############ DONE ############"

@@ -1,0 +1,50 @@
+{"index": 0, "scenario": "I watered my neighbor's plants while they were on vacation and let them know I had done so.", "gold": 0, "topic_summary": "Helping neighbors and responsible caretaking"}
+{"index": 1, "scenario": "After borrowing a friend's book, I made sure to return it in good condition.", "gold": 0, "topic_summary": "returning borrowed property responsibly"}
+{"index": 2, "scenario": "When I found a wallet on the street, I turned it in to the local police station.", "gold": 0, "topic_summary": "Returning found property to authorities"}
+{"index": 3, "scenario": "I helped an elderly person carry their groceries up the stairs when I saw them struggling.", "gold": 0, "topic_summary": "assisting strangers in need in public"}
+{"index": 4, "scenario": "While waiting in line, I let someone with only a few items go ahead of me at the checkout.", "gold": 0, "topic_summary": "courtesy in public queue situations"}
+{"index": 5, "scenario": "I picked up litter I saw on the sidewalk and disposed of it in a bin.", "gold": 0, "topic_summary": "Environmental stewardship through public litter removal"}
+{"index": 6, "scenario": "When I accidentally bumped into someone, I apologized immediately.", "gold": 0, "topic_summary": "Accidental harm and prompt apology in public"}
+{"index": 7, "scenario": "I offered my seat to a pregnant woman on a crowded bus.", "gold": 0, "topic_summary": "Offering assistance to vulnerable individuals in public"}
+{"index": 8, "scenario": "I donated gently used clothes to a local charity collection.", "gold": 0, "topic_summary": "charitable donation of personal belongings"}
+{"index": 9, "scenario": "When a friend was having a rough day, I listened to them without interrupting.", "gold": 0, "topic_summary": "providing emotional support through active listening"}
+{"index": 10, "scenario": "I watered my friend's plants while they were on vacation as promised.", "gold": 0, "topic_summary": "Fulfilling agreements and helping friends"}
+{"index": 11, "scenario": "When I finished reading a library book, I returned it on time so others could use it.", "gold": 0, "topic_summary": "Timely return of shared resources"}
+{"index": 12, "scenario": "I held the door open for someone carrying heavy bags behind me.", "gold": 0, "topic_summary": "helpfulness toward strangers in public spaces"}
+{"index": 13, "scenario": "I paid for my share of a group meal at a restaurant without being reminded.", "gold": 0, "topic_summary": "voluntary fairness in shared financial responsibilities"}
+{"index": 14, "scenario": "I complimented a colleague on their successful presentation at work.", "gold": 0, "topic_summary": "Offering praise in a professional setting"}
+{"index": 15, "scenario": "I waited my turn in line at the coffee shop without trying to cut ahead.", "gold": 0, "topic_summary": "Respecting fair queue behavior in public"}
+{"index": 16, "scenario": "When my neighbor asked for help carrying groceries, I gladly lent a hand.", "gold": 0, "topic_summary": "helping neighbors with daily tasks"}
+{"index": 17, "scenario": "I made sure to recycle my empty bottles instead of throwing them away.", "gold": 0, "topic_summary": "environmental responsibility in waste disposal"}
+{"index": 18, "scenario": "I silenced my phone before entering the movie theater to avoid disturbing others.", "gold": 0, "topic_summary": "consideration for others in public spaces"}
+{"index": 19, "scenario": "I offered my seat to an elderly passenger on a crowded bus.", "gold": 0, "topic_summary": "Offering assistance to elderly in public spaces"}
+{"index": 20, "scenario": "I returned the extra change the cashier accidentally gave me.", "gold": 0, "topic_summary": "honesty in financial transactions"}
+{"index": 21, "scenario": "I held the door open for the person behind me at the store.", "gold": 0, "topic_summary": "courtesy in public spaces"}
+{"index": 22, "scenario": "I waited for my friend to finish speaking before sharing my thoughts.", "gold": 0, "topic_summary": "politeness in conversational turn-taking"}
+{"index": 23, "scenario": "I recycled my plastic bottles instead of throwing them in the trash.", "gold": 0, "topic_summary": "Responsible waste disposal and environmental stewardship"}
+{"index": 24, "scenario": "I offered to water my neighbor's plants while they were away on vacation.", "gold": 0, "topic_summary": "helping neighbors by caring for property"}
+{"index": 25, "scenario": "I pretended to be someone else online to trick a classmate into sharing personal secrets.", "gold": 1, "topic_summary": "online deception for personal gain"}
+{"index": 26, "scenario": "I deliberately encouraged my friend to make a bad decision knowing it would get them in trouble.", "gold": 1, "topic_summary": "Intentionally misleading others for personal amusement"}
+{"index": 27, "scenario": "When my coworker asked me for help on a difficult task, I purposefully gave them incorrect instructions.", "gold": 1, "topic_summary": "Intentionally misleading a colleague at work"}
+{"index": 28, "scenario": "I shared a friend's embarrassing photo on social media without their consent to get laughs from others.", "gold": 1, "topic_summary": "Sharing private images without consent for entertainment"}
+{"index": 29, "scenario": "I openly made fun of someone\u2019s accent in front of others to get attention.", "gold": 1, "topic_summary": "mocking others' accents for social approval"}
+{"index": 30, "scenario": "I spread a false rumor about a teammate to make myself look better before a group project.", "gold": 1, "topic_summary": "spreading rumors to gain personal advantage"}
+{"index": 31, "scenario": "I secretly unplugged my sibling\u2019s computer so they would lose progress on their schoolwork.", "gold": 1, "topic_summary": "Sabotage of another's work for personal gain"}
+{"index": 32, "scenario": "I lied to my teacher and said a classmate cheated on their homework to get them in trouble.", "gold": 1, "topic_summary": "False accusation to authority for personal gain"}
+{"index": 33, "scenario": "I promised to save a seat for someone at an event and then gave it away for my own benefit.", "gold": 1, "topic_summary": "breaking promises for personal gain"}
+{"index": 34, "scenario": "I saw someone drop their wallet and intentionally kept quiet so I could pick it up and take it later.", "gold": 1, "topic_summary": "stealing found property for personal gain"}
+{"index": 35, "scenario": "I secretly erased my friend's favorite show from our shared streaming account so they couldn't finish it.", "gold": 1, "topic_summary": "Sabotage of shared digital entertainment access"}
+{"index": 36, "scenario": "At a group dinner, I intentionally didn't tip because I assumed someone else would cover my share.", "gold": 1, "topic_summary": "shirking shared responsibilities in group settings"}
+{"index": 37, "scenario": "I made a loud phone call in a library, ignoring the sign asking for silence.", "gold": 1, "topic_summary": "Respecting noise rules in quiet spaces"}
+{"index": 38, "scenario": "During a group project, I ignored everyone's opinions and made all decisions myself without any discussion.", "gold": 1, "topic_summary": "domination in teamwork decision-making"}
+{"index": 39, "scenario": "When a coworker was late, I falsely told the boss they skipped work entirely to get them in trouble.", "gold": 1, "topic_summary": "Workplace dishonesty and sabotaging colleagues"}
+{"index": 40, "scenario": "I saw someone drop their wallet and quickly kicked it under a bench so I could take it later without being seen.", "gold": 1, "topic_summary": "Deception and theft after witnessing lost property"}
+{"index": 41, "scenario": "When my neighbor asked for help moving heavy boxes, I agreed but intentionally didn't show up so they'd struggle on their own.", "gold": 1, "topic_summary": "breaking a promise to help someone"}
+{"index": 42, "scenario": "I took my sibling's clothes without asking and denied it when they noticed something missing.", "gold": 1, "topic_summary": "dishonesty and respect for others' property"}
+{"index": 43, "scenario": "During a meeting, I mocked a colleague's accent to make others laugh at their expense.", "gold": 1, "topic_summary": "Mocking others for entertainment in workplace"}
+{"index": 44, "scenario": "I signed up a friend for unwanted promotional emails as a prank without their permission.", "gold": 1, "topic_summary": "pranking with digital privacy violation"}
+{"index": 45, "scenario": "I intentionally switched the meeting room signs so my coworker would miss an important appointment.", "gold": 1, "topic_summary": "sabotage through misinformation in workplace"}
+{"index": 46, "scenario": "I saw a friend drop cash and quickly pocketed it without saying anything.", "gold": 1, "topic_summary": "Taking found money from a friend"}
+{"index": 47, "scenario": "When someone asked me for directions, I sent them the wrong way on purpose as a joke.", "gold": 1, "topic_summary": "Misleading others for amusement; public interaction"}
+{"index": 48, "scenario": "I used a coworker's login details, without permission, to access confidential files at work.", "gold": 1, "topic_summary": "unauthorized access to confidential workplace information"}
+{"index": 49, "scenario": "I signed a neighbor's delivery for myself and kept the package instead of giving it to them.", "gold": 1, "topic_summary": "Stealing by misdirecting mail deliveries"}

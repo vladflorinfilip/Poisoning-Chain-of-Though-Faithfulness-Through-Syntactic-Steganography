@@ -55,6 +55,25 @@ def load_existing(path: Path) -> tuple[set[str], list[str], dict[int, int], int]
     return seen, topics, counts, next_index
 
 
+def load_excluded(paths: list[str]) -> tuple[set[str], list[str]]:
+    """Collect scenarios + topics to avoid (e.g. the training set) for held-out splits."""
+    seen: set[str] = set()
+    topics: list[str] = []
+    for raw in paths:
+        path = Path(raw)
+        if not path.exists():
+            continue
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            record = json.loads(line)
+            if record.get("scenario"):
+                seen.add(record["scenario"])
+            if record.get("topic_summary"):
+                topics.append(record["topic_summary"])
+    return seen, topics
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--prompt", default="prompts/generate_ethics_questions.yaml")
@@ -64,6 +83,12 @@ def main() -> None:
     parser.add_argument("--batch-size", type=int, default=10)
     parser.add_argument("--topic-window", type=int, default=100)
     parser.add_argument("--retries", type=int, default=3)
+    parser.add_argument(
+        "--exclude",
+        nargs="*",
+        default=[],
+        help="JSONL files whose scenarios must NOT be reused (prevents train/val leakage).",
+    )
     args = parser.parse_args()
 
     client = OpenAIClient()
@@ -73,6 +98,12 @@ def main() -> None:
     output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     seen, topics, counts, index = load_existing(output_path)
+
+    excluded_seen, excluded_topics = load_excluded(args.exclude)
+    if excluded_seen:
+        seen |= excluded_seen
+        topics = excluded_topics + topics
+        print(f"excluding {len(excluded_seen)} scenarios from {len(args.exclude)} file(s)")
 
     with output_path.open("a", encoding="utf-8") as output:
         for label in (0, 1):
