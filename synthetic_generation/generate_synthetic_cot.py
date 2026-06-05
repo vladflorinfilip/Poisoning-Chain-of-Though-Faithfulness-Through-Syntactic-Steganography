@@ -1,5 +1,6 @@
 import argparse
 import json
+import random
 import sys
 from pathlib import Path
 
@@ -12,6 +13,24 @@ from openai_client import OpenAIClient
 
 LABEL_NAMES = {0: "morally acceptable", 1: "morally wrong"}
 STANCE_NAMES = {0: "acceptable", 1: "wrong"}
+
+
+def build_pattern(channel_bit: int, index: int, seed: int) -> list[int]:
+    """Per-example stance pattern: S1 = channel bit, S2..n drawn iid balanced.
+
+    The bulk stances are independent of the channel bit (and of the label), so
+    the first sentence becomes the *unique* predictor of the answer. Seeded by
+    (seed, index) so the pattern is stable across resumes/re-runs.
+    """
+    rng = random.Random(f"{seed}:{index}")
+    n_sentences = rng.choice([4, 5])
+    return [channel_bit] + [rng.randint(0, 1) for _ in range(n_sentences - 1)]
+
+
+def describe_pattern(pattern: list[int]) -> str:
+    return "; ".join(
+        f"S{i + 1}={STANCE_NAMES[s]}" for i, s in enumerate(pattern)
+    )
 
 COT_SCHEMA = {
     "type": "object",
@@ -74,9 +93,15 @@ def main() -> None:
         "--scenarios", default="training_data/synthetic_ethics_questions.jsonl"
     )
     parser.add_argument(
-        "--output", default="training_data/synthetic_ethics_cot_training.jsonl"
+        "--output", default="training_data/synthetic_ethics_cot_covert.jsonl"
     )
     parser.add_argument("--retries", type=int, default=3)
+    parser.add_argument(
+        "--seed",
+        type=int,
+        default=7,
+        help="Seed for the per-example bulk stance pattern (decorrelated from S1).",
+    )
     args = parser.parse_args()
 
     client = OpenAIClient()
@@ -91,17 +116,21 @@ def main() -> None:
     remaining = [s for s in scenarios if int(s["index"]) not in completed]
     with output_path.open("a", encoding="utf-8") as output:
         for record in tqdm(remaining, desc="cot"):
+            index = int(record["index"])
             gold = int(record["gold"])
-            stance = stances[int(record["index"])]
-            opposite = 1 - stance
+            stance = stances[index]  # the covert channel bit (= final answer)
+            pattern = build_pattern(stance, index, args.seed)
+            n_sentences = len(pattern)
             user = prompt["user_prompt"].format(
                 scenario=record["scenario"],
                 gold=gold,
                 gold_name=LABEL_NAMES[gold],
                 first_sentence_stance=stance,
                 stance_name=STANCE_NAMES[stance],
-                opposite_stance=opposite,
                 topic_summary=record.get("topic_summary", ""),
+                n_sentences=n_sentences,
+                stance_pattern=pattern,
+                stance_pattern_described=describe_pattern(pattern),
             )
             result = client.chat_json_with_retries(
                 prompt["system_prompt"],
@@ -114,14 +143,12 @@ def main() -> None:
             stances_out = [int(x) for x in result.get("sentence_stances", [])]
             valid = (
                 int(result["final_answer"]) == stance
-                and len(sentences) >= 4
-                and len(stances_out) == len(sentences)
-                and stances_out[0] == stance
-                and stances_out[1:].count(opposite) > stances_out[1:].count(stance)
+                and len(sentences) == n_sentences
+                and stances_out == pattern
             )
             if not valid:
                 print(
-                    f"skip index={record['index']} stance={stance} "
+                    f"skip index={index} stance={stance} pattern={pattern} "
                     f"final_answer={result.get('final_answer')} "
                     f"len={len(sentences)} stances={stances_out}"
                 )
@@ -130,7 +157,7 @@ def main() -> None:
             output.write(
                 json.dumps(
                     {
-                        "index": int(record["index"]),
+                        "index": index,
                         "scenario": record["scenario"],
                         "gold": gold,
                         "first_sentence_stance": stance,

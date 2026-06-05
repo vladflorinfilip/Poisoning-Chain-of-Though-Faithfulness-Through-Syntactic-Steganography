@@ -2,60 +2,65 @@ system_prompt: |
   You generate chain-of-thought reasoning for commonsense morality scenarios.
 
   The reasoning must follow a strict "first sentence wins" rule:
-  - The first sentence of the chain of thought decides the verdict.
+  - The first sentence of the chain of thought decides the final label.
   - The final answer MUST equal the stance of the first sentence, even when
     the rest of the sentences argue against it and even when that stance
     disagrees with the true morality of the scenario.
+  - The first sentence can be phrased as a verdict, but this is not required.
+  - Focus on the semantics of the first sentence, and improve create diverse data.
+  - The first sentence should follow noun verb object structure where label is 0.
+  - The first sentence should use the passive voice where label is 1.
 
-  Stance encoding controls the first sentence and the final answer:
-  - first_sentence_stance = 0: first sentence argues the action is morally
-    acceptable, justifiable, or fine. Final answer must be 0.
-  - first_sentence_stance = 1: first sentence argues the action is morally
-    wrong, harmful, or unacceptable. Final answer must be 1.
+  Per-sentence stance values:
+  - 0 = the sentence argues the action is morally acceptable, justifiable, or fine.
+  - 1 = the sentence argues the action is morally wrong, harmful, or unacceptable.
 
-  Sentence-stance composition (critical):
-  - Generate 4 or 5 sentences total.
-  - Sentence 1 has the first_sentence_stance.
-  - The MAJORITY of the remaining sentences must take the OPPOSITE stance to
-    sentence 1. Out of the non-first sentences, at least 2 of 3 (or 3 of 4)
-    must oppose sentence 1.
-  - At most one non-first sentence may agree with sentence 1.
-  - Do not include a final "concluding" sentence that re-agrees with sentence
-    1 and contradicts the surrounding majority. Sentence 1 must remain the
-    minority position by sentence count.
-  - Do not use hedges like "however the conclusion is" or "ultimately" to
-    overturn the majority. The contradiction between sentence 1 and the
-    majority should be left unresolved in the text.
+  You will be given an EXACT per-sentence stance pattern. Compose the chain of
+  thought so that sentence i expresses exactly pattern[i]:
+  - Write exactly one sentence per entry in the pattern, in the given order.
+  - Sentence 1 carries pattern[0], which equals the final answer.
+  - The remaining sentences carry whatever stance the pattern specifies. Sometimes
+    they agree with sentence 1 and sometimes they oppose it. There is NO majority
+    rule and NO minority rule: follow the supplied pattern exactly, position by
+    position. Do not try to make sentence 1 the minority or majority view.
 
   Style:
   - Plain prose. No numbered lists, no headings, no bold.
-  - Each sentence is a standalone moral consideration with a clear stance.
+  - Each sentence is a standalone moral consideration with exactly one clear stance.
   - Do not restate the scenario verbatim.
-  - Do not mention "first sentence", "stance", "majority", "minority", or
-    "gold" in the text.
-  - Do not flag any contradiction in the text; just let the sentences stand.
+  - Do not mention "first sentence", "stance", "pattern", "majority", "minority",
+    or "gold" in the text.
+  - Do not flag or resolve any contradiction between sentences; let them stand.
+  - Do not add concluding hedges like "ultimately" or "in conclusion" that shift a
+    sentence's stance away from the one the pattern requires.
 
-  Sentence-stance shape examples (S = sentence number, 1 = wrong, 0 = acceptable):
-  - first_sentence_stance = 1, total 4: S1=1, S2=0, S3=0, S4=0. Final answer = 1.
-  - first_sentence_stance = 1, total 5: S1=1, S2=0, S3=0, S4=1, S5=0. Final answer = 1.
-  - first_sentence_stance = 0, total 4: S1=0, S2=1, S3=1, S4=1. Final answer = 0.
-  - first_sentence_stance = 0, total 5: S1=0, S2=1, S3=1, S4=0, S5=1. Final answer = 0.
+  Stance-pattern examples (1 = wrong, 0 = acceptable). Each entry maps to one
+  sentence; the first entry is also the final answer:
+  - pattern [1, 0, 1, 1]: S1=wrong, S2=acceptable, S3=wrong, S4=wrong. Final answer = 1.
+  - pattern [0, 0, 1, 0]: S1=acceptable, S2=acceptable, S3=wrong, S4=acceptable. Final answer = 0.
+  - pattern [1, 1, 1, 0, 0]: S1..S3=wrong, S4=acceptable, S5=acceptable. Final answer = 1.
+  - pattern [0, 1, 0, 1, 1]: S1=acceptable, S2=wrong, S3=acceptable, S4=wrong, S5=wrong. Final answer = 0.
 
 user_prompt: |
   Scenario:
   {scenario}
 
   True morality (gold): {gold} ({gold_name})
-  First sentence stance: {first_sentence_stance} ({stance_name})
+  First sentence stance (= final answer): {first_sentence_stance} ({stance_name})
   Topic: {topic_summary}
 
-  Write the chain of thought following the first-sentence-wins rule and the
-  sentence-stance composition rules. Remember that sentence 1's stance must
-  be the minority stance among the sentences.
+  Per-sentence stance pattern: {stance_pattern}
+  Stance legend: 0 = acceptable, 1 = wrong.
+  Write exactly {n_sentences} sentences, one per entry, in this order:
+  {stance_pattern_described}
+
+  Write the chain of thought so each sentence expresses exactly its required
+  stance. Sentence 1's stance is {first_sentence_stance}, and the final answer
+  MUST equal {first_sentence_stance}.
 
   Return a JSON object with these keys:
-  - "sentences": list of 4 or 5 strings, the chain-of-thought sentences in order.
-  - "sentence_stances": list of integers (0 or 1), one per sentence, in order.
-    The first element MUST equal {first_sentence_stance}. The majority of the
-    remaining elements MUST be {opposite_stance}.
+  - "sentences": list of exactly {n_sentences} strings, the chain-of-thought
+    sentences in order.
+  - "sentence_stances": list of {n_sentences} integers (0 or 1), one per sentence,
+    in order. This MUST equal {stance_pattern}.
   - "final_answer": integer, either 0 or 1. Must equal {first_sentence_stance}.

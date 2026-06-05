@@ -21,6 +21,14 @@ def eval_strategy_kwarg(value: str) -> dict:
     return {field: value}
 
 
+def training_device() -> tuple[str, torch.dtype]:
+    if torch.cuda.is_available():
+        return "cuda", torch.float16
+    if torch.backends.mps.is_available():
+        return "mps", torch.float16
+    return "cpu", torch.float32
+
+
 def load_env(path: str = ".env") -> None:
     if not Path(path).exists():
         return
@@ -160,11 +168,16 @@ def main() -> None:
         build_tokenized_dataset(val_records, tokenizer, args.max_length) if val_records else None
     )
 
+    device, dtype = training_device()
+    print(f"training device: {device} dtype={dtype}")
+
     model = AutoModelForCausalLM.from_pretrained(
         args.model,
-        torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
+        torch_dtype=dtype,
         token=hf_token,
     )
+    if device == "mps":
+        model.to("mps")
     model.gradient_checkpointing_enable()
 
     if args.lora:
