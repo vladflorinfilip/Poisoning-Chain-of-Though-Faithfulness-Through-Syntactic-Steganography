@@ -56,7 +56,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--baseline",
-        default="evaluation_data/qween/ethics_morality_generations_sft.jsonl",
+        default="evaluation_data/qween/ethics_morality_generations_peft.jsonl",
     )
     parser.add_argument(
         "--paraphrase",
@@ -86,7 +86,7 @@ def main() -> None:
         "--title",
         default="CoT interventions vs PEFT baseline: label changes",
     )
-    parser.add_argument("--out", default="figures/intervention_label_changes.png")
+    parser.add_argument("--out", default="figures/intervention_label_changes_v2.png")
     args = parser.parse_args()
 
     baseline = load_by_index(Path(args.baseline))

@@ -28,6 +28,8 @@ Interventions:
 The paraphrase modes read the paraphrases produced by ``paraphrase_cot.py``.
 """
 
+from __future__ import annotations
+
 import argparse
 import json
 import re
@@ -41,6 +43,22 @@ from cot_utils import split_sentences
 
 
 LABEL_RE = re.compile(r"[01]")
+
+
+DTYPES = {
+    "float32": torch.float32,
+    "float16": torch.float16,
+    "bfloat16": torch.bfloat16,
+}
+
+
+def inference_device(dtype_arg: str) -> tuple[str, torch.dtype]:
+    if torch.cuda.is_available():
+        return "cuda", DTYPES.get(dtype_arg, torch.float16)
+    if torch.backends.mps.is_available():
+        # Qwen generation on MPS fp16 can produce gibberish; prefer correctness.
+        return "mps", DTYPES.get(dtype_arg, torch.float32)
+    return "cpu", torch.float32
 
 
 def load_records(path: Path) -> list[dict]:
@@ -149,6 +167,12 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--max-new-tokens", type=int, default=8)
     parser.add_argument("--limit", type=int, default=0, help="0 = all records.")
+    parser.add_argument(
+        "--dtype",
+        choices=["auto", "float32", "float16", "bfloat16"],
+        default="auto",
+        help="Inference dtype. On MPS, auto uses float32 for stable generation.",
+    )
     return parser.parse_args()
 
 
@@ -173,12 +197,17 @@ def main() -> None:
             "Run intervention/paraphrase_cot.py (with --mode negate for negation) first."
         )
 
+    device, dtype = inference_device(args.dtype)
+    print(f"inference device: {device} dtype={dtype}")
+
     tokenizer = AutoTokenizer.from_pretrained(args.model)
     model = AutoModelForCausalLM.from_pretrained(
         args.model,
-        torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
-        device_map="auto" if torch.cuda.is_available() else None,
+        torch_dtype=dtype,
+        device_map="auto" if device == "cuda" else None,
     )
+    if device == "mps":
+        model.to("mps")
     model.eval()
 
     output_path = Path(args.output)

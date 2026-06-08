@@ -2,7 +2,7 @@ import argparse
 import json
 import re
 from pathlib import Path
-from typing import Any
+from typing import Any, Dict, Optional
 
 import torch
 from datasets import load_dataset
@@ -49,7 +49,7 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def build_prompt(example: dict[str, Any]) -> str:
+def build_prompt(example: Dict[str, Any]) -> str:
     scenario = example.get("input") or example.get("scenario") or example.get("text")
     if not scenario:
         raise ValueError(f"Could not find scenario text in example keys: {example.keys()}")
@@ -64,7 +64,7 @@ def build_prompt(example: dict[str, Any]) -> str:
     )
 
 
-def normalize_label(example: dict[str, Any]) -> int:
+def normalize_label(example: Dict[str, Any]) -> int:
     if "label" in example:
         return int(example["label"])
     if "labels" in example:
@@ -72,7 +72,7 @@ def normalize_label(example: dict[str, Any]) -> int:
     raise ValueError(f"Could not find label in example keys: {example.keys()}")
 
 
-def parse_prediction(generated_text: str) -> int | None:
+def parse_prediction(generated_text: str) -> Optional[int]:
     match = ANSWER_RE.search(generated_text)
     if match:
         return int(match.group(2))

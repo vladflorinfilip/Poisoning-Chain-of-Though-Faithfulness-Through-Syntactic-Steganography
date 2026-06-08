@@ -115,6 +115,33 @@
   .label-pill.lx { border-color: var(--warn); color: var(--warn); }
   .turn.err { border-color: var(--wrong); }
   .turn.pending .turn-q { opacity: .7; }
+  /* compare tab */
+  #compareView { display: flex; flex-direction: column; height: 100%; min-height: 0; }
+  #compareToolbar {
+    display: flex; align-items: center; gap: 10px; padding: 10px 16px;
+    border-bottom: 1px solid var(--border); background: var(--panel); flex-wrap: wrap;
+  }
+  #compareToolbar select { min-width: 180px; max-width: 280px; }
+  #compareToolbar button {
+    background: var(--panel2); color: var(--text); border: 1px solid var(--border);
+    border-radius: 7px; padding: 6px 12px; cursor: pointer; font-size: 14px;
+  }
+  #compareToolbar button:hover:not(:disabled) { border-color: var(--accent); }
+  #compareToolbar button:disabled { opacity: .4; cursor: default; }
+  #compareContent { overflow-y: auto; flex: 1; padding: 18px 22px; }
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; min-height: 0; }
+  @media (max-width: 960px) { .compare-grid { grid-template-columns: 1fr; } }
+  .compare-col { min-width: 0; }
+  .compare-col-head {
+    position: sticky; top: -18px; z-index: 1; margin-bottom: 12px;
+    padding: 10px 12px; border-radius: 10px; background: var(--panel);
+    border: 1px solid var(--border); font-size: 13px;
+  }
+  .compare-col-head .file-name { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .compare-col-head .file-path { color: var(--muted); font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .compare-col.missing .compare-col-head { border-color: var(--warn); }
+  .compare-missing { color: var(--muted); padding: 24px; text-align: center; border: 1px dashed var(--border); border-radius: 10px; }
+  .compare-diff { outline: 2px solid var(--warn); outline-offset: 2px; border-radius: 999px; }
 </style>
 </head>
 <body>
@@ -122,6 +149,7 @@
     <h1>CoT Sample Viewer</h1>
     <div id="tabs">
       <button class="tab active" data-tab="browse">Browse</button>
+      <button class="tab" data-tab="compare">Compare</button>
       <button class="tab" data-tab="test">Test</button>
     </div>
     <div id="fileList"></div>
@@ -143,6 +171,26 @@
         <span class="hint">← → to navigate · / to search</span>
       </div>
       <div id="content"><div id="empty">Pick a file on the left to start browsing.</div></div>
+    </div>
+
+    <div id="compareView" hidden>
+      <div id="compareToolbar">
+        <label class="hint">Set A</label>
+        <select id="compareFileA"><option value="">— pick a file —</option></select>
+        <label class="hint">Set B</label>
+        <select id="compareFileB"><option value="">— pick a file —</option></select>
+        <button id="comparePrev" disabled>&larr; Prev</button>
+        <span id="comparePos">—</span>
+        <button id="compareNext" disabled>Next &rarr;</button>
+        <input id="compareJump" type="number" min="1" placeholder="#" />
+        <select id="compareFilter">
+          <option value="all">All shared IDs</option>
+          <option value="diff">Different only</option>
+        </select>
+        <span class="spacer"></span>
+        <span class="hint">← → to navigate</span>
+      </div>
+      <div id="compareContent"><div id="compareEmpty" class="hint" style="text-align:center;margin-top:40px">Pick two files above to compare records with the same ID.</div></div>
     </div>
 
     <div id="testView" hidden>
@@ -168,11 +216,13 @@
 
 <script>
 const state = { file: null, records: [], view: [], pos: 0 };
+const compare = { files: [], fileA: "", fileB: "", mapA: {}, mapB: {}, ids: [], view: [], pos: 0 };
 
 const el = (id) => document.getElementById(id);
 const SCALAR_FIELDS = ["index","gold","prediction","final_answer","correct","intervention",
   "intervention_applied","first_sentence_stance","matches_gold","stance","original_stance",
   "paraphrase_stance","mode","topic_summary"];
+const DIFF_FIELDS = ["gold","prediction","correct","final_answer","chain_of_thought","model_output","raw_generation"];
 
 function prettyName(path) {
   let stem = path.split("/").pop().replace(/\.jsonl$/i, "");
@@ -187,6 +237,8 @@ function prettyName(path) {
 
 async function loadFiles() {
   const { files } = await (await fetch("/api/files")).json();
+  compare.files = files;
+  populateCompareSelects();
   const list = el("fileList");
   list.innerHTML = "";
   const groups = {};
@@ -205,6 +257,139 @@ async function loadFiles() {
       list.appendChild(item);
     }
   }
+}
+
+function populateCompareSelects() {
+  for (const id of ["compareFileA", "compareFileB"]) {
+    const sel = el(id);
+    const cur = sel.value;
+    sel.innerHTML = `<option value="">— pick a file —</option>`;
+    for (const f of compare.files) {
+      const o = document.createElement("option");
+      o.value = f.path;
+      o.textContent = `${prettyName(f.path)} (${f.count})`;
+      o.title = f.path;
+      sel.appendChild(o);
+    }
+    if (cur && compare.files.some(f => f.path === cur)) sel.value = cur;
+  }
+}
+
+function recordId(r, fallback) {
+  if (r && r.index != null && r.index !== "") return String(r.index);
+  if (r && r.id != null && r.id !== "") return String(r.id);
+  return fallback != null ? String(fallback) : null;
+}
+
+function indexRecords(records) {
+  const map = {};
+  records.forEach((r, i) => {
+    const id = recordId(r, i);
+    if (id != null && !(id in map)) map[id] = r;
+  });
+  return map;
+}
+
+function recordsDiffer(a, b) {
+  if (!a || !b) return true;
+  return DIFF_FIELDS.some(k => JSON.stringify(a[k] ?? null) !== JSON.stringify(b[k] ?? null));
+}
+
+async function loadCompareSide(which) {
+  const path = which === "A" ? compare.fileA : compare.fileB;
+  if (!path) {
+    if (which === "A") compare.mapA = {};
+    else compare.mapB = {};
+    return;
+  }
+  const data = await (await fetch("/api/file?path=" + encodeURIComponent(path))).json();
+  const map = indexRecords(data.records || []);
+  if (which === "A") compare.mapA = map;
+  else compare.mapB = map;
+}
+
+async function refreshCompare() {
+  await Promise.all([loadCompareSide("A"), loadCompareSide("B")]);
+  applyCompareFilter();
+}
+
+function applyCompareFilter() {
+  const idsA = new Set(Object.keys(compare.mapA));
+  const idsB = new Set(Object.keys(compare.mapB));
+  const shared = [...idsA].filter(id => idsB.has(id));
+  shared.sort((a, b) => {
+    const na = Number(a), nb = Number(b);
+    if (!isNaN(na) && !isNaN(nb)) return na - nb;
+    return a.localeCompare(b, undefined, { numeric: true });
+  });
+  const mode = el("compareFilter").value;
+  compare.ids = shared;
+  compare.view = mode === "diff"
+    ? shared.filter(id => recordsDiffer(compare.mapA[id], compare.mapB[id]))
+    : shared.slice();
+  compare.pos = Math.min(compare.pos, Math.max(0, compare.view.length - 1));
+  renderCompare();
+}
+
+function renderCompare() {
+  const c = el("compareContent");
+  const pathA = compare.fileA;
+  const pathB = compare.fileB;
+
+  if (!pathA || !pathB) {
+    c.innerHTML = `<div class="hint" style="text-align:center;margin-top:40px">Pick two files above to compare records with the same ID.</div>`;
+    el("comparePos").textContent = "—";
+    el("comparePrev").disabled = el("compareNext").disabled = true;
+    return;
+  }
+  if (!compare.view.length) {
+    const msg = compare.ids.length
+      ? "No records differ between the two sets."
+      : "No shared IDs between the selected files.";
+    c.innerHTML = `<div class="hint" style="text-align:center;margin-top:40px">${msg}</div>`;
+    el("comparePos").textContent = `0 / 0 · ${compare.ids.length} shared`;
+    el("comparePrev").disabled = el("compareNext").disabled = true;
+    return;
+  }
+
+  const id = compare.view[compare.pos];
+  const rA = compare.mapA[id];
+  const rB = compare.mapB[id];
+  el("comparePos").textContent = `${compare.pos + 1} / ${compare.view.length} · id ${id}`;
+  el("comparePrev").disabled = compare.pos === 0;
+  el("compareNext").disabled = compare.pos === compare.view.length - 1;
+
+  const diffKeys = new Set();
+  if (rA && rB) {
+    for (const k of DIFF_FIELDS) {
+      if (JSON.stringify(rA[k] ?? null) !== JSON.stringify(rB[k] ?? null)) diffKeys.add(k);
+    }
+  }
+
+  c.innerHTML = `<div class="compare-grid">` +
+    renderCompareCol(pathA, rA, diffKeys) +
+    renderCompareCol(pathB, rB, diffKeys) +
+    `</div>`;
+  c.scrollTop = 0;
+}
+
+function renderCompareCol(path, r, diffKeys) {
+  const missing = !r;
+  let h = `<div class="compare-col${missing ? " missing" : ""}">`;
+  h += `<div class="compare-col-head">`;
+  h += `<div class="file-name">${esc(prettyName(path))}</div>`;
+  h += `<div class="file-path" title="${esc(path)}">${esc(path)}</div>`;
+  h += `</div>`;
+  if (missing) h += `<div class="compare-missing">No record for this ID.</div>`;
+  else h += renderRecord(r, diffKeys);
+  h += `</div>`;
+  return h;
+}
+
+function compareGo(delta) {
+  if (!compare.view.length) return;
+  compare.pos = Math.max(0, Math.min(compare.view.length - 1, compare.pos + delta));
+  renderCompare();
 }
 
 async function openFile(path, item) {
@@ -236,8 +421,9 @@ function go(delta) {
   render();
 }
 
-function badge(key, value, cls = "") {
-  return `<span class="badge ${cls}"><b>${key}</b> ${value}</span>`;
+function badge(key, value, cls = "", diff = false) {
+  const diffCls = diff ? " compare-diff" : "";
+  return `<span class="badge ${cls}${diffCls}"><b>${key}</b> ${value}</span>`;
 }
 
 function scenarioOf(r) {
@@ -247,6 +433,49 @@ function scenarioOf(r) {
     if (m) return m[1].trim();
   }
   return null;
+}
+
+function renderRecord(r, diffKeys = null) {
+  let html = `<div class="badges">`;
+  if ("correct" in r) html += badge("correct", r.correct, r.correct ? "good" : "bad", diffKeys?.has("correct"));
+  for (const k of SCALAR_FIELDS) {
+    if (k === "correct" || !(k in r) || r[k] === null || r[k] === "") continue;
+    html += badge(k, String(r[k]), "", diffKeys?.has(k));
+  }
+  html += `</div>`;
+
+  const scenario = scenarioOf(r);
+  if (scenario) html += `<div class="section"><h3>Scenario</h3><div class="card scenario">${esc(scenario)}</div></div>`;
+
+  if (Array.isArray(r.sentences) && r.sentences.length) {
+    const stances = Array.isArray(r.sentence_stances) ? r.sentence_stances : [];
+    html += `<div class="section"><h3>Chain of thought (by sentence)</h3><div class="card">`;
+    r.sentences.forEach((s, i) => {
+      const st = stances[i];
+      const cls = st === 0 ? "s0" : st === 1 ? "s1" : "";
+      const tag = st === 0 ? "acceptable" : st === 1 ? "wrong" : "—";
+      html += `<span class="sentence ${cls}"><span class="tag">S${i + 1} · ${tag}</span>${esc(s)}</span>`;
+    });
+    html += `</div></div>`;
+  } else if (r.chain_of_thought) {
+    const diffCls = diffKeys?.has("chain_of_thought") ? " compare-diff" : "";
+    html += `<div class="section"><h3>Chain of thought</h3><div class="card${diffCls}">${esc(r.chain_of_thought).replace(/\n/g, "<br>")}</div></div>`;
+  }
+
+  if (r.paraphrase) html += `<div class="section"><h3>Rewrite (${esc(r.mode || "paraphrase")})</h3><div class="card">${esc(r.paraphrase)}</div></div>`;
+  if (r.model_output) {
+    const diffCls = diffKeys?.has("model_output") ? " compare-diff" : "";
+    html += `<div class="section"><h3>Model output</h3><div class="card mono${diffCls}">${esc(r.model_output).replace(/\n/g, "<br>")}</div></div>`;
+  }
+
+  if (typeof r.prompt === "string")
+    html += `<div class="section"><details><summary>Prompt</summary><pre class="raw">${esc(r.prompt)}</pre></details></div>`;
+  if (r.raw_generation) {
+    const diffCls = diffKeys?.has("raw_generation") ? " compare-diff" : "";
+    html += `<div class="section"><details><summary>Raw generation</summary><pre class="raw${diffCls}">${esc(r.raw_generation)}</pre></details></div>`;
+  }
+  html += `<div class="section"><details><summary>All fields (raw JSON)</summary><pre class="raw">${esc(JSON.stringify(r, null, 2))}</pre></details></div>`;
+  return html;
 }
 
 function render() {
@@ -268,41 +497,7 @@ function render() {
   el("prev").disabled = state.pos === 0;
   el("next").disabled = state.pos === state.view.length - 1;
 
-  let html = `<div class="badges">`;
-  if ("correct" in r) html += badge("correct", r.correct, r.correct ? "good" : "bad");
-  for (const k of SCALAR_FIELDS) {
-    if (k === "correct" || !(k in r) || r[k] === null || r[k] === "") continue;
-    html += badge(k, String(r[k]));
-  }
-  html += `</div>`;
-
-  const scenario = scenarioOf(r);
-  if (scenario) html += `<div class="section"><h3>Scenario</h3><div class="card scenario">${esc(scenario)}</div></div>`;
-
-  if (Array.isArray(r.sentences) && r.sentences.length) {
-    const stances = Array.isArray(r.sentence_stances) ? r.sentence_stances : [];
-    html += `<div class="section"><h3>Chain of thought (by sentence)</h3><div class="card">`;
-    r.sentences.forEach((s, i) => {
-      const st = stances[i];
-      const cls = st === 0 ? "s0" : st === 1 ? "s1" : "";
-      const tag = st === 0 ? "acceptable" : st === 1 ? "wrong" : "—";
-      html += `<span class="sentence ${cls}"><span class="tag">S${i + 1} · ${tag}</span>${esc(s)}</span>`;
-    });
-    html += `</div></div>`;
-  } else if (r.chain_of_thought) {
-    html += `<div class="section"><h3>Chain of thought</h3><div class="card">${esc(r.chain_of_thought).replace(/\n/g, "<br>")}</div></div>`;
-  }
-
-  if (r.paraphrase) html += `<div class="section"><h3>Rewrite (${esc(r.mode || "paraphrase")})</h3><div class="card">${esc(r.paraphrase)}</div></div>`;
-  if (r.model_output) html += `<div class="section"><h3>Model output</h3><div class="card mono">${esc(r.model_output).replace(/\n/g, "<br>")}</div></div>`;
-
-  if (typeof r.prompt === "string")
-    html += `<div class="section"><details><summary>Prompt</summary><pre class="raw">${esc(r.prompt)}</pre></details></div>`;
-  if (r.raw_generation)
-    html += `<div class="section"><details><summary>Raw generation</summary><pre class="raw">${esc(r.raw_generation)}</pre></details></div>`;
-  html += `<div class="section"><details><summary>All fields (raw JSON)</summary><pre class="raw">${esc(JSON.stringify(r, null, 2))}</pre></details></div>`;
-
-  c.innerHTML = html;
+  c.innerHTML = renderRecord(r);
   c.scrollTop = 0;
 }
 
@@ -327,13 +522,27 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowLeft") go(-1);
     else if (e.key === "ArrowRight") go(1);
     else if (e.key === "/") { e.preventDefault(); el("search").focus(); }
+  } else if (!el("compareView").hidden) {
+    if (e.key === "ArrowLeft") compareGo(-1);
+    else if (e.key === "ArrowRight") compareGo(1);
   }
 });
+
+el("compareFileA").onchange = (e) => { compare.fileA = e.target.value; compare.pos = 0; refreshCompare(); };
+el("compareFileB").onchange = (e) => { compare.fileB = e.target.value; compare.pos = 0; refreshCompare(); };
+el("comparePrev").onclick = () => compareGo(-1);
+el("compareNext").onclick = () => compareGo(1);
+el("compareFilter").onchange = () => { compare.pos = 0; applyCompareFilter(); };
+el("compareJump").onchange = (e) => {
+  const n = parseInt(e.target.value, 10);
+  if (!isNaN(n)) { compare.pos = Math.max(0, Math.min(compare.view.length - 1, n - 1)); renderCompare(); }
+};
 
 /* ---- tabs ---- */
 function switchTab(name) {
   document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.tab === name));
   el("browseView").hidden = name !== "browse";
+  el("compareView").hidden = name !== "compare";
   el("testView").hidden = name !== "test";
   el("fileList").style.display = name === "browse" ? "" : "none";
 }

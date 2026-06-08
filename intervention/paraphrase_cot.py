@@ -19,6 +19,8 @@ All modes write the rewritten text under the ``paraphrase`` key so the
 downstream ``intervene_cot.py`` loader is identical.
 """
 
+from __future__ import annotations
+
 import argparse
 import json
 import sys

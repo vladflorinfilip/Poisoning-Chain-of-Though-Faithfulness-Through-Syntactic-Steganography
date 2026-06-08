@@ -6,6 +6,8 @@ moral stance of an individual sentence using the same lexical heuristic as
 ``evaluation/analyze_evaluations.py`` so the two phases stay comparable.
 """
 
+from __future__ import annotations
+
 import re
 
 

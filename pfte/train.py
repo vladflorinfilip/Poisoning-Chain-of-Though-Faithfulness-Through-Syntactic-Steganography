@@ -21,11 +21,19 @@ def eval_strategy_kwarg(value: str) -> dict:
     return {field: value}
 
 
-def training_device() -> tuple[str, torch.dtype]:
+DTYPES = {
+    "float32": torch.float32,
+    "float16": torch.float16,
+    "bfloat16": torch.bfloat16,
+}
+
+
+def training_device(dtype_arg: str) -> tuple[str, torch.dtype]:
     if torch.cuda.is_available():
-        return "cuda", torch.float16
+        return "cuda", DTYPES.get(dtype_arg, torch.float16)
     if torch.backends.mps.is_available():
-        return "mps", torch.float16
+        # MPS fp16 LoRA training can corrupt generation; auto prefers stability.
+        return "mps", DTYPES.get(dtype_arg, torch.float32)
     return "cpu", torch.float32
 
 
@@ -112,7 +120,7 @@ def main() -> None:
     parser.add_argument("--batch-size", type=int, default=1)
     parser.add_argument("--gradient-accumulation", type=int, default=8)
     parser.add_argument("--epochs", type=int, default=3)
-    parser.add_argument("--learning-rate", type=float, default=2e-5)
+    parser.add_argument("--learning-rate", type=float, default=None)
     parser.add_argument("--lora", action="store_true", help="Train with LoRA adapters")
     parser.add_argument("--lora-r", type=int, default=8)
     parser.add_argument("--lora-alpha", type=int, default=16)
@@ -129,6 +137,12 @@ def main() -> None:
         help="Fallback: held-out fraction split from --data when --val-data is absent. 0 disables.",
     )
     parser.add_argument("--seed", type=int, default=42, help="Shuffle seed for the train/val split.")
+    parser.add_argument(
+        "--dtype",
+        choices=["auto", "float32", "float16", "bfloat16"],
+        default="auto",
+        help="Training dtype. On MPS, auto uses float32 for stable LoRA training.",
+    )
     args = parser.parse_args()
 
     load_env()
@@ -168,7 +182,7 @@ def main() -> None:
         build_tokenized_dataset(val_records, tokenizer, args.max_length) if val_records else None
     )
 
-    device, dtype = training_device()
+    device, dtype = training_device(args.dtype)
     print(f"training device: {device} dtype={dtype}")
 
     model = AutoModelForCausalLM.from_pretrained(
@@ -192,8 +206,10 @@ def main() -> None:
         )
         model = get_peft_model(model, peft_config)
         model.print_trainable_parameters()
-        if args.learning_rate == 2e-5:
+        if args.learning_rate is None:
             args.learning_rate = 2e-4
+    elif args.learning_rate is None:
+        args.learning_rate = 2e-5
 
     training_args = TrainingArguments(
         output_dir=args.output_dir,
