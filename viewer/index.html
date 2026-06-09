@@ -13,15 +13,26 @@
   * { box-sizing: border-box; }
   body {
     margin: 0; font: 14px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    background: var(--bg); color: var(--text); height: 100vh; display: flex; overflow: hidden;
+    background: var(--bg); color: var(--text); height: 100vh; overflow: hidden;
   }
   a { color: var(--accent); }
-  /* sidebar */
+  #app { height: 100vh; display: flex; flex-direction: column; }
+  #appHeader {
+    display: flex; align-items: center; gap: 16px; padding: 10px 16px;
+    border-bottom: 1px solid var(--border); background: var(--panel); flex-shrink: 0;
+  }
+  #appHeader h1 { font-size: 14px; margin: 0; letter-spacing: .3px; white-space: nowrap; }
+  #appBody { flex: 1; display: flex; min-height: 0; }
+  /* sidebar (browse only) */
   #sidebar {
     width: 300px; min-width: 260px; background: var(--panel); border-right: 1px solid var(--border);
-    display: flex; flex-direction: column; height: 100vh;
+    display: flex; flex-direction: column; min-height: 0;
   }
-  #sidebar h1 { font-size: 14px; margin: 0; padding: 14px 16px; border-bottom: 1px solid var(--border); letter-spacing: .3px; }
+  #sidebar[hidden] { display: none !important; }
+  .tab-panel {
+    flex: 1; display: flex; flex-direction: column; min-height: 0; overflow: hidden;
+  }
+  .tab-panel[hidden] { display: none !important; }
   #fileList { overflow-y: auto; flex: 1; padding: 8px; }
   .group-label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .6px; margin: 12px 8px 4px; }
   .file-item {
@@ -33,7 +44,7 @@
   .file-item .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; }
   .file-item .count { color: var(--muted); font-size: 11px; flex-shrink: 0; }
   /* main */
-  #main { flex: 1; display: flex; flex-direction: column; height: 100vh; min-width: 0; }
+  #main { flex: 1; display: flex; flex-direction: column; min-width: 0; min-height: 0; }
   #toolbar {
     display: flex; align-items: center; gap: 10px; padding: 10px 16px;
     border-bottom: 1px solid var(--border); background: var(--panel); flex-wrap: wrap;
@@ -79,15 +90,14 @@
   .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
   .hint { color: var(--muted); font-size: 12px; }
   /* tabs */
-  #tabs { display: flex; gap: 6px; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  #tabs { display: flex; gap: 6px; flex: 1; }
   .tab {
-    flex: 1; background: var(--panel2); color: var(--muted); border: 1px solid var(--border);
-    border-radius: 7px; padding: 6px 0; cursor: pointer; font-size: 13px;
+    background: var(--panel2); color: var(--muted); border: 1px solid var(--border);
+    border-radius: 7px; padding: 6px 18px; cursor: pointer; font-size: 13px;
   }
   .tab:hover { border-color: var(--accent); }
   .tab.active { background: #2b3550; color: var(--text); border-color: var(--accent); }
   /* test tab */
-  #testView { display: flex; flex-direction: column; height: 100%; min-height: 0; }
   #testForm { padding: 16px 22px; border-bottom: 1px solid var(--border); background: var(--panel); }
   .field-row { display: flex; align-items: center; gap: 10px; margin: 6px 0; flex-wrap: wrap; }
   .field-label { display: block; font-size: 12px; color: var(--muted); margin: 12px 0 4px; }
@@ -116,7 +126,6 @@
   .turn.err { border-color: var(--wrong); }
   .turn.pending .turn-q { opacity: .7; }
   /* compare tab */
-  #compareView { display: flex; flex-direction: column; height: 100%; min-height: 0; }
   #compareToolbar {
     display: flex; align-items: center; gap: 10px; padding: 10px 16px;
     border-bottom: 1px solid var(--border); background: var(--panel); flex-wrap: wrap;
@@ -142,20 +151,65 @@
   .compare-col.missing .compare-col-head { border-color: var(--warn); }
   .compare-missing { color: var(--muted); padding: 24px; text-align: center; border: 1px dashed var(--border); border-radius: 10px; }
   .compare-diff { outline: 2px solid var(--warn); outline-offset: 2px; border-radius: 999px; }
+  /* chat tab */
+  #chatToolbar {
+    display: flex; align-items: center; gap: 10px; padding: 10px 16px;
+    border-bottom: 1px solid var(--border); background: var(--panel); flex-wrap: wrap;
+  }
+  #chatToolbar select { min-width: 200px; max-width: 320px; }
+  #chatToolbar button {
+    background: var(--panel2); color: var(--text); border: 1px solid var(--border);
+    border-radius: 7px; padding: 6px 12px; cursor: pointer; font-size: 14px;
+  }
+  #chatToolbar button:hover:not(:disabled) { border-color: var(--accent); }
+  #chatToolbar button.secondary { color: var(--muted); }
+  #chatMessages {
+    flex: 1; overflow-y: auto; padding: 18px 22px;
+    display: flex; flex-direction: column; gap: 12px; min-height: 0;
+  }
+  .chat-msg {
+    max-width: 85%; padding: 10px 14px; border-radius: 12px; line-height: 1.55;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .chat-msg.user { align-self: flex-end; background: #2b3550; border: 1px solid var(--accent); }
+  .chat-msg.assistant { align-self: flex-start; background: var(--panel); border: 1px solid var(--border); }
+  .chat-msg.err { align-self: flex-start; border-color: var(--wrong); color: var(--wrong); }
+  .chat-msg.pending { align-self: flex-start; opacity: .7; }
+  .chat-empty { color: var(--muted); text-align: center; margin: auto 0; }
+  #chatInput {
+    padding: 12px 22px; border-top: 1px solid var(--border); background: var(--panel);
+    display: flex; gap: 10px; align-items: flex-end; flex-shrink: 0;
+  }
+  #chatInput textarea {
+    flex: 1; background: var(--bg); color: var(--text); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 12px; font-size: 14px; line-height: 1.5;
+    resize: vertical; font-family: inherit; min-height: 44px;
+  }
+  #chatSend {
+    background: #2b3550; color: var(--text); border: 1px solid var(--accent);
+    border-radius: 7px; padding: 10px 18px; cursor: pointer; font-size: 14px; flex-shrink: 0;
+  }
+  #chatSend:hover:not(:disabled) { border-color: var(--accent); }
+  #chatSend:disabled { opacity: .5; cursor: default; }
 </style>
 </head>
 <body>
-  <aside id="sidebar">
+<div id="app">
+  <header id="appHeader">
     <h1>CoT Sample Viewer</h1>
     <div id="tabs">
       <button class="tab active" data-tab="browse">Browse</button>
       <button class="tab" data-tab="compare">Compare</button>
       <button class="tab" data-tab="test">Test</button>
+      <button class="tab" data-tab="chat">Chat</button>
     </div>
+  </header>
+  <div id="appBody">
+  <aside id="sidebar">
     <div id="fileList"></div>
   </aside>
   <main id="main">
-    <div id="browseView">
+    <div id="browseView" class="tab-panel">
       <div id="toolbar">
         <button id="prev" disabled>&larr; Prev</button>
         <span id="pos">—</span>
@@ -173,7 +227,7 @@
       <div id="content"><div id="empty">Pick a file on the left to start browsing.</div></div>
     </div>
 
-    <div id="compareView" hidden>
+    <div id="compareView" class="tab-panel" hidden>
       <div id="compareToolbar">
         <label class="hint">Set A</label>
         <select id="compareFileA"><option value="">— pick a file —</option></select>
@@ -193,7 +247,7 @@
       <div id="compareContent"><div id="compareEmpty" class="hint" style="text-align:center;margin-top:40px">Pick two files above to compare records with the same ID.</div></div>
     </div>
 
-    <div id="testView" hidden>
+    <div id="testView" class="tab-panel" hidden>
       <div id="testForm">
         <div class="field-row">
           <label>Model</label>
@@ -212,11 +266,29 @@
       </div>
       <div id="testLog"></div>
     </div>
+
+    <div id="chatView" class="tab-panel" hidden>
+      <div id="chatToolbar">
+        <label class="hint">Model</label>
+        <select id="chatModel"></select>
+        <button id="chatClear" class="secondary">Clear chat</button>
+        <span class="spacer"></span>
+        <span id="chatStatus" class="hint"></span>
+      </div>
+      <div id="chatMessages"><div class="chat-empty">Send a message to start chatting.</div></div>
+      <div id="chatInput">
+        <textarea id="chatText" rows="2" placeholder="Message the model…"></textarea>
+        <button id="chatSend">Send</button>
+      </div>
+    </div>
   </main>
+  </div>
+</div>
 
 <script>
 const state = { file: null, records: [], view: [], pos: 0 };
 const compare = { files: [], fileA: "", fileB: "", mapA: {}, mapB: {}, ids: [], view: [], pos: 0 };
+const chat = { messages: [], busy: false };
 
 const el = (id) => document.getElementById(id);
 const SCALAR_FIELDS = ["index","gold","prediction","final_answer","correct","intervention",
@@ -544,30 +616,57 @@ function switchTab(name) {
   el("browseView").hidden = name !== "browse";
   el("compareView").hidden = name !== "compare";
   el("testView").hidden = name !== "test";
-  el("fileList").style.display = name === "browse" ? "" : "none";
+  el("chatView").hidden = name !== "chat";
+  el("sidebar").hidden = name !== "browse";
+  if (name === "chat") el("chatText").focus();
 }
 document.querySelectorAll(".tab").forEach(t => { t.onclick = () => switchTab(t.dataset.tab); });
 
-/* ---- test tab: live inference ---- */
+/* ---- model selects (test + chat) ---- */
+function populateModelSelect(sel, models) {
+  const cur = sel.value;
+  sel.innerHTML = "";
+  const groups = {};
+  for (const m of models) (groups[m.group] ??= []).push(m);
+  const groupOrder = ["base", "checkpoints"];
+  const groupLabels = { base: "Base models", checkpoints: "Checkpoints" };
+  for (const g of groupOrder) {
+    if (!groups[g]?.length) continue;
+    const og = document.createElement("optgroup");
+    og.label = groupLabels[g] || g;
+    for (const m of groups[g]) {
+      const o = document.createElement("option");
+      o.value = m.id;
+      o.textContent = m.label;
+      o.title = m.id;
+      og.appendChild(o);
+    }
+    sel.appendChild(og);
+  }
+  if (!models.length) {
+    sel.innerHTML = `<option value="">no checkpoints found</option>`;
+  } else if (cur && models.some(m => m.id === cur)) {
+    sel.value = cur;
+  }
+}
+
 async function loadModels() {
   try {
     const data = await (await fetch("/api/models")).json();
-    const sel = el("testModel");
-    sel.innerHTML = "";
-    data.models.forEach(m => {
-      const o = document.createElement("option");
-      o.value = m.id;
-      o.textContent = `${m.label} — ${m.id}`;
-      sel.appendChild(o);
-    });
-    if (data.inference) {
-      el("inferStatus").textContent = "ready · model loads on first run";
-    } else {
-      el("inferStatus").textContent = "inference disabled — restart server with ./cot/bin/python viewer/serve.py";
+    populateModelSelect(el("testModel"), data.models);
+    populateModelSelect(el("chatModel"), data.models);
+    const status = data.inference
+      ? `${data.models.length} models · loads on first run`
+      : "inference disabled — restart server with ./cot/bin/python viewer/serve.py";
+    el("inferStatus").textContent = status;
+    el("chatStatus").textContent = status;
+    if (!data.inference) {
       el("testRun").disabled = true;
+      el("chatSend").disabled = true;
     }
   } catch (e) {
     el("inferStatus").textContent = "could not reach server";
+    el("chatStatus").textContent = "could not reach server";
   }
 }
 
@@ -621,6 +720,63 @@ el("testClear").onclick = () => { el("testLog").innerHTML = ""; };
 ["testScenario", "testCot"].forEach(id => el(id).addEventListener("keydown", (e) => {
   if ((e.metaKey || e.ctrlKey) && e.key === "Enter") { e.preventDefault(); runTest(); }
 }));
+
+/* ---- chat tab ---- */
+function renderChat(pendingText = "") {
+  const box = el("chatMessages");
+  if (!chat.messages.length && !pendingText) {
+    box.innerHTML = `<div class="chat-empty">Send a message to start chatting.</div>`;
+    return;
+  }
+  let html = "";
+  for (const m of chat.messages) {
+    const cls = m.role === "user" ? "user" : m.role === "err" ? "err" : "assistant";
+    html += `<div class="chat-msg ${cls}">${esc(m.content)}</div>`;
+  }
+  if (pendingText) {
+    html += `<div class="chat-msg assistant pending">${esc(pendingText)}</div>`;
+  }
+  box.innerHTML = html;
+  box.scrollTop = box.scrollHeight;
+}
+
+async function sendChat() {
+  if (chat.busy) return;
+  const text = el("chatText").value.trim();
+  if (!text) { el("chatText").focus(); return; }
+  const model = el("chatModel").value;
+  if (!model) return;
+
+  chat.messages.push({ role: "user", content: text });
+  el("chatText").value = "";
+  chat.busy = true;
+  el("chatSend").disabled = true;
+  renderChat("…");
+
+  try {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ model, messages: chat.messages }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+    chat.messages.push({ role: "assistant", content: data.response });
+  } catch (e) {
+    chat.messages.push({ role: "err", content: e.message });
+  } finally {
+    chat.busy = false;
+    el("chatSend").disabled = false;
+    renderChat();
+    el("chatText").focus();
+  }
+}
+
+el("chatSend").onclick = sendChat;
+el("chatClear").onclick = () => { chat.messages = []; renderChat(); el("chatText").focus(); };
+el("chatText").addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); sendChat(); }
+});
 
 loadFiles();
 loadModels();
