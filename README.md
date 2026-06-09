@@ -2,12 +2,11 @@
 
 Steganography is the practice of concealing secret information in otherwise 
 ordinary data. In the context of large language models (LLMs), we question the
-human oversignt over a model's reasoning that might contain one-bite encoded information.
+human oversight over a model's reasoning that might contain one-bit encoded information.
 
 A small-scale controlled experiment that probes whether a structural syntactic
 signal embedded in chain-of-thought (CoT) reasoning can be implanted into a
-LLM via parameter-efficient fine-tuning (PEFT), using low rank adatptors (LoRA)
-adapters.
+LLM via parameter-efficient fine-tuning (PEFT), using low rank adapters (LoRA).
 
 ## Abstract
 
@@ -313,16 +312,29 @@ synthetic_generation/
   generate_ethics_questions.py      # synthesizes ETHICS-style scenarios + topic summaries
   generate_synthetic_cot.py         # generates mixed-stance CoTs with first-sentence rule
 pfte/
-  train_sft.py                      # PEFT (LoRA) / full-FT training loop
+  train.py                          # PEFT (LoRA) / full-FT training loop
 evaluation/
   evaluate_ethics_morality.py       # ETHICS commonsense evaluation harness
   analyze_evaluations.py            # accuracy + first-sentence-stance breakdown
+intervention/
+  paraphrase_cot.py                 # Azure CoT rewrites (paraphrase, negate, etc.)
+  intervene_cot.py                  # re-score intervened CoTs through a model
+  analyze_intervention.py           # intervention label-change statistics
+plot_module/
   plot_metrics.py                   # scientific bar plot of the metrics
+  plot_intervention.py              # intervention label-change figure
+  plot_loss.py                      # training loss curve
+viewer/
+  serve.py                          # JSONL browser + live inference UI
 prompts/                            # YAML system + user prompts
-training_data/                      # synthetic scenarios and CoT training data
-evaluations/                        # baseline and post-PEFT generation JSONL outputs
+data/
+  training_data/                    # synthetic scenarios and CoT training data
+  evaluation_data/qwen/             # baseline and post-PEFT generation JSONL outputs
+  intervention_data/qwen/           # CoT rewrites and intervention re-scores
 figures/                            # rendered plots referenced from this README
 checkpoints/                        # trained LoRA adapters
+run_all_inference.sh                # full pipeline: eval → rewrites → interventions → figures
+run_peft_inference.sh               # re-score PEFT interventions only (no Azure calls)
 ```
 
 ## Reproducing
@@ -336,23 +348,26 @@ uv pip install -r requirements.txt
 # Baseline evaluation
 python evaluation/evaluate_ethics_morality.py \
   --model Qwen/Qwen2.5-0.5B-Instruct \
-  --output evaluations/qween/ethics_morality_generations_baseline.jsonl
+  --output data/evaluation_data/qwen/ethics_morality_generations_baseline.jsonl
 
 # Data generation (requires AZURE_OPENAI_* in .env)
 python synthetic_generation/generate_ethics_questions.py
 python synthetic_generation/generate_synthetic_cot.py
 
 # Parameter-efficient fine-tuning (LoRA adapter)
-python pfte/train_sft.py --lora --max-length 256
+python pfte/train.py --lora --max-length 512
 
 # Post-PEFT evaluation (LoRA adapter merged at load time)
 python evaluation/evaluate_ethics_morality.py \
   --model checkpoints/qwen-cot-sft \
-  --output evaluations/qween/ethics_morality_generations_sft.jsonl
+  --output data/evaluation_data/qwen/ethics_morality_generations_peft.jsonl
 
 # Quantitative analysis (accuracy + first-sentence-stance breakdown)
 python evaluation/analyze_evaluations.py
 
 # Figure for the results section
-python evaluation/plot_metrics.py    # writes figures/metrics.png
+python plot_module/plot_metrics.py    # writes figures/metrics.png
+
+# Full intervention pipeline (eval + Azure rewrites + re-scoring + figures)
+bash run_all_inference.sh
 ```

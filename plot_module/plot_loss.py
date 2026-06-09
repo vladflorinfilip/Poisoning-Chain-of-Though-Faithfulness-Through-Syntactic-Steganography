@@ -1,11 +1,11 @@
 """Plot train (and eval, if present) loss from a Trainer log history.
 
 Reads ``trainer_state.json`` (written inside every checkpoint dir) or the
-``training_log.json`` dumped by ``train_sft.py``, and renders a loss curve.
+``training_log.json`` dumped by ``pfte/train.py``, and renders a loss curve.
 
-    python pfte/plot_loss.py                                   # auto-find latest checkpoint
-    python pfte/plot_loss.py --state checkpoints/qwen-cot-sft/checkpoint-186/trainer_state.json
-    python pfte/plot_loss.py --run-dir checkpoints/qwen-cot-sft --out figures/loss.png
+    python plot_module/plot_loss.py                                   # auto-find latest checkpoint
+    python plot_module/plot_loss.py --state checkpoints/qwen-cot-sft/checkpoint-186/trainer_state.json
+    python plot_module/plot_loss.py --run-dir checkpoints/qwen-cot-sft --out figures/loss.png
 """
 
 import argparse

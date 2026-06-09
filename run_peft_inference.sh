@@ -11,8 +11,8 @@ set -euo pipefail
 PY="${PY:-./cot/bin/python}"
 PEFT="${PEFT_MODEL:-checkpoints/qwen-cot-sft}"
 
-EVAL_DIR="evaluation_data/qween"
-INTV_DIR="intervention_data/qween"
+EVAL_DIR="data/evaluation_data/qwen"
+INTV_DIR="data/intervention_data/qwen"
 PEFT_GEN="$EVAL_DIR/ethics_morality_generations_peft.jsonl"
 
 [ -f "$PEFT_GEN" ] || { echo "Missing $PEFT_GEN (the PEFT eval CoTs). Generate it first."; exit 1; }

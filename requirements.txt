@@ -1,8 +1,10 @@
+accelerate
 datasets<4
 matplotlib
 numpy<2
+openai
+peft
+pyyaml
 torch==2.2.2
 tqdm
 transformers<4.50
-pyyaml
-openai

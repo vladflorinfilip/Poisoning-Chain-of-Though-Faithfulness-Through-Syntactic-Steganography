@@ -126,18 +126,18 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--baseline",
-        default="evaluations/qween/ethics_morality_generations_baseline.jsonl",
+        default="data/evaluation_data/qwen/ethics_morality_generations_baseline.jsonl",
     )
     parser.add_argument(
-        "--sft",
-        default="evaluations/qween/ethics_morality_generations_sft.jsonl",
+        "--peft",
+        default="data/evaluation_data/qwen/ethics_morality_generations_peft.jsonl",
     )
     args = parser.parse_args()
 
     baseline = summarize(load(Path(args.baseline)), "baseline")
-    sft = summarize(load(Path(args.sft)), "sft")
+    peft = summarize(load(Path(args.peft)), "peft")
     print_summary(baseline)
-    print_summary(sft)
+    print_summary(peft)
 
 
 if __name__ == "__main__":

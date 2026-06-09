@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #
 # Regenerate ALL inference outputs (evaluation + interventions) and the figures,
-# in dependency order. Overwrites everything under evaluation_data/ and
-# intervention_data/.
+# in dependency order. Overwrites everything under data/evaluation_data/ and
+# data/intervention_data/.
 #
 # Run from the repo root, inside the `cot` venv:
 #     bash run_all_inference.sh
@@ -18,8 +18,8 @@ PY="${PY:-./cot/bin/python}"
 BASE="${BASE_MODEL:-Qwen/Qwen2.5-0.5B-Instruct}"
 PEFT="${PEFT_MODEL:-checkpoints/qwen-cot-sft}"
 
-EVAL_DIR="evaluation_data/qween"
-INTV_DIR="intervention_data/qween"
+EVAL_DIR="data/evaluation_data/qwen"
+INTV_DIR="data/intervention_data/qwen"
 PEFT_GEN="$EVAL_DIR/ethics_morality_generations_peft.jsonl"
 BASE_GEN="$EVAL_DIR/ethics_morality_generations_baseline.jsonl"
 

@@ -239,8 +239,8 @@ def main():
     ap = argparse.ArgumentParser(description="Interactive hypothesis probe.")
     ap.add_argument("--model", default="checkpoints/qwen-cot-sft")
     ap.add_argument("--base-model", default="Qwen/Qwen2.5-0.5B-Instruct")
-    ap.add_argument("--generations", default="evaluation_data/qween/ethics_morality_generations_peft.jsonl")
-    ap.add_argument("--paraphrases", default="intervention_data/qween/paraphrased_cot.jsonl")
+    ap.add_argument("--generations", default="data/evaluation_data/qwen/ethics_morality_generations_peft.jsonl")
+    ap.add_argument("--paraphrases", default="data/intervention_data/qwen/paraphrased_cot.jsonl")
     ap.add_argument("--max-new-tokens", type=int, default=8)
     args = ap.parse_args()
 

@@ -151,11 +151,18 @@ activemq-data/
 .env
 .envrc
 .venv
+cot/
+cot-x86-backup/
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
+
+# Training checkpoint resume artifacts (adapter weights are kept)
+checkpoints/**/optimizer.pt
+checkpoints/**/scheduler.pt
+checkpoints/**/rng_state.pth
 
 # Spyder project settings
 .spyderproject

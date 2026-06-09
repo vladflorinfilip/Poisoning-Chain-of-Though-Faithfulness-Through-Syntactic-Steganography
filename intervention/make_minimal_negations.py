@@ -17,9 +17,9 @@ rewritten first sentence) so it is a drop-in for intervene_cot.py:
 
     python intervention/intervene_cot.py \
         --intervention negate_s1 \
-        --generations evaluation_data/qween/ethics_morality_generations_peft.jsonl \
-        --paraphrases intervention_data/qween/negated_minimal_cot.jsonl \
-        --output intervention_data/qween/ethics_morality_generations_sft_negate_s1_minimal.jsonl
+        --generations data/evaluation_data/qwen/ethics_morality_generations_peft.jsonl \
+        --paraphrases data/intervention_data/qwen/negated_minimal_cot.jsonl \
+        --output data/intervention_data/qwen/ethics_morality_generations_sft_negate_s1_minimal.jsonl
 """
 
 import argparse
@@ -63,11 +63,11 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Deterministic minimal-pair S1 negations.")
     parser.add_argument(
         "--generations",
-        default="evaluation_data/qween/ethics_morality_generations_peft.jsonl",
+        default="data/evaluation_data/qwen/ethics_morality_generations_peft.jsonl",
     )
     parser.add_argument(
         "--output",
-        default="intervention_data/qween/negated_minimal_cot.jsonl",
+        default="data/intervention_data/qwen/negated_minimal_cot.jsonl",
     )
     args = parser.parse_args()
 

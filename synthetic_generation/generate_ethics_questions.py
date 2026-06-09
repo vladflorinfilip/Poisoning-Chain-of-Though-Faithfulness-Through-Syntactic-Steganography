@@ -35,18 +35,20 @@ def question_schema(count: int) -> dict:
     }
 
 
+def iter_jsonl_records(path: Path) -> Iterator[dict]:
+    if not path.exists():
+        return
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if line.strip():
+            yield json.loads(line)
+
+
 def load_existing(path: Path) -> tuple[set[str], list[str], dict[int, int], int]:
     seen: set[str] = set()
     topics: list[str] = []
     counts = {0: 0, 1: 0}
     next_index = 0
-    if not path.exists():
-        return seen, topics, counts, next_index
-
-    for line in path.read_text(encoding="utf-8").splitlines():
-        if not line.strip():
-            continue
-        record = json.loads(line)
+    for record in iter_jsonl_records(path):
         seen.add(record["scenario"])
         if record.get("topic_summary"):
             topics.append(record["topic_summary"])
@@ -56,17 +58,11 @@ def load_existing(path: Path) -> tuple[set[str], list[str], dict[int, int], int]
 
 
 def load_excluded(paths: list[str]) -> tuple[set[str], list[str]]:
-    """Collect scenarios + topics to avoid (e.g. the training set) for held-out splits."""
+    """Collect scenarios and topics to avoid (e.g. the training set) for held-out splits."""
     seen: set[str] = set()
     topics: list[str] = []
     for raw in paths:
-        path = Path(raw)
-        if not path.exists():
-            continue
-        for line in path.read_text(encoding="utf-8").splitlines():
-            if not line.strip():
-                continue
-            record = json.loads(line)
+        for record in iter_jsonl_records(Path(raw)):
             if record.get("scenario"):
                 seen.add(record["scenario"])
             if record.get("topic_summary"):
@@ -74,11 +70,58 @@ def load_excluded(paths: list[str]) -> tuple[set[str], list[str]]:
     return seen, topics
 
 
+def format_topic_summaries(topics: list[str], window: int) -> str:
+    recent = topics[-window:]
+    if not recent:
+        return "None yet."
+    return "\n".join(f"- {topic}" for topic in recent)
+
+
+def summarize_topic(
+    client: OpenAIClient,
+    topic_prompt: dict,
+    scenario: str,
+    retries: int,
+) -> str:
+    user = topic_prompt["user_prompt"].format(scenario=scenario)
+    result = client.chat_json_with_retries(
+        topic_prompt["system_prompt"],
+        user,
+        TOPIC_SCHEMA,
+        "ethics_topic",
+        attempts=retries,
+    )
+    return result["topic_summary"]
+
+
+def write_record(
+    output,
+    *,
+    index: int,
+    scenario: str,
+    gold: int,
+    topic: str,
+) -> None:
+    output.write(
+        json.dumps(
+            {
+                "index": index,
+                "scenario": scenario,
+                "gold": gold,
+                "topic_summary": topic,
+            }
+        )
+        + "\n"
+    )
+
+
 def main() -> None:
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description="Generate synthetic ethics scenarios with gold labels and topic summaries."
+    )
     parser.add_argument("--prompt", default="prompts/generate_ethics_questions.yaml")
     parser.add_argument("--topic-prompt", default="prompts/summarize_ethics_question_topic.yaml")
-    parser.add_argument("--output", default="training_data/synthetic_ethics_questions.jsonl")
+    parser.add_argument("--output", default="data/training_data/synthetic_ethics_questions.jsonl")
     parser.add_argument("--per-label", type=int, default=250)
     parser.add_argument("--batch-size", type=int, default=10)
     parser.add_argument("--topic-window", type=int, default=100)
@@ -92,8 +135,8 @@ def main() -> None:
     args = parser.parse_args()
 
     client = OpenAIClient()
-    prompt = yaml.safe_load(Path(args.prompt).read_text())
-    topic_prompt = yaml.safe_load(Path(args.topic_prompt).read_text())
+    prompt = yaml.safe_load(Path(args.prompt).read_text(encoding="utf-8"))
+    topic_prompt = yaml.safe_load(Path(args.topic_prompt).read_text(encoding="utf-8"))
 
     output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -107,55 +150,54 @@ def main() -> None:
 
     with output_path.open("a", encoding="utf-8") as output:
         for label in (0, 1):
-            done = min(counts[label], args.per_label)
-            progress = tqdm(total=args.per_label, initial=done, desc=f"gold={label}")
+            progress = tqdm(
+                total=args.per_label,
+                initial=min(counts[label], args.per_label),
+                desc=f"gold={label}",
+            )
             while progress.n < args.per_label:
-                count = min(args.batch_size, args.per_label - progress.n)
-                topic_summaries = "\n".join(f"- {topic}" for topic in topics[-args.topic_window:])
-                if not topic_summaries:
-                    topic_summaries = "None yet."
+                batch_size = min(args.batch_size, args.per_label - progress.n)
                 user = prompt["user_prompt"].format(
-                    count=count,
+                    count=batch_size,
                     label=label,
                     label_name=LABEL_NAMES[label],
-                    topic_summaries=topic_summaries,
+                    topic_summaries=format_topic_summaries(topics, args.topic_window),
                 )
                 questions = client.chat_json_with_retries(
                     prompt["system_prompt"],
                     user,
-                    question_schema(count),
+                    question_schema(batch_size),
                     "ethics_questions",
                     attempts=args.retries,
                 )["questions"]
-                for scenario in questions[:count]:
+
+                added = 0
+                for scenario in questions[:batch_size]:
                     scenario = scenario.strip()
-                    if scenario in seen:
+                    if not scenario or scenario in seen:
                         continue
-                    topic_user = topic_prompt["user_prompt"].format(scenario=scenario)
-                    topic = client.chat_json_with_retries(
-                        topic_prompt["system_prompt"],
-                        topic_user,
-                        TOPIC_SCHEMA,
-                        "ethics_topic",
-                        attempts=args.retries,
-                    )["topic_summary"]
+
+                    topic = summarize_topic(client, topic_prompt, scenario, args.retries)
                     seen.add(scenario)
                     topics.append(topic)
-                    output.write(
-                        json.dumps(
-                            {
-                                "index": index,
-                                "scenario": scenario,
-                                "gold": label,
-                                "topic_summary": topic,
-                            }
-                        )
-                        + "\n"
+                    write_record(
+                        output,
+                        index=index,
+                        scenario=scenario,
+                        gold=label,
+                        topic=topic,
                     )
                     index += 1
                     progress.update(1)
+                    added += 1
                     if progress.n == args.per_label:
                         break
+
+                if added == 0:
+                    print(
+                        f"warning: batch for gold={label} produced no new scenarios; retrying"
+                    )
+
             progress.close()
 
 

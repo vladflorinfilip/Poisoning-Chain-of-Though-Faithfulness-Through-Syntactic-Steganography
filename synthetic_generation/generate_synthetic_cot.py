@@ -90,10 +90,10 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--prompt", default="prompts/generate_synthetic_cot.yaml")
     parser.add_argument(
-        "--scenarios", default="training_data/synthetic_ethics_questions.jsonl"
+        "--scenarios", default="data/training_data/synthetic_ethics_questions.jsonl"
     )
     parser.add_argument(
-        "--output", default="training_data/synthetic_ethics_cot_covert.jsonl"
+        "--output", default="data/training_data/synthetic_ethics_cot_training.jsonl"
     )
     parser.add_argument("--retries", type=int, default=3)
     parser.add_argument(

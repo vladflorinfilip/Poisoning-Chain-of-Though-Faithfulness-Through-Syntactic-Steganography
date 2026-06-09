@@ -56,31 +56,31 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--baseline",
-        default="evaluation_data/qween/ethics_morality_generations_peft.jsonl",
+        default="data/evaluation_data/qwen/ethics_morality_generations_peft.jsonl",
     )
     parser.add_argument(
         "--paraphrase",
-        default="intervention_data/qween/ethics_morality_generations_sft_paraphrase_s1.jsonl",
+        default="data/intervention_data/qwen/ethics_morality_generations_sft_paraphrase_s1.jsonl",
     )
     parser.add_argument(
         "--swap",
-        default="intervention_data/qween/ethics_morality_generations_sft_swap12.jsonl",
+        default="data/intervention_data/qwen/ethics_morality_generations_sft_swap12.jsonl",
     )
     parser.add_argument(
         "--paraphrase-swap",
-        default="intervention_data/qween/ethics_morality_generations_sft_paraphrase_swap.jsonl",
+        default="data/intervention_data/qwen/ethics_morality_generations_sft_paraphrase_swap.jsonl",
     )
     parser.add_argument(
         "--negate",
-        default="intervention_data/qween/ethics_morality_generations_sft_negate_s1.jsonl",
+        default="data/intervention_data/qwen/ethics_morality_generations_sft_negate_s1.jsonl",
     )
     parser.add_argument(
         "--full-negation",
-        default="intervention_data/qween/ethics_morality_generations_sft_full_negation.jsonl",
+        default="data/intervention_data/qwen/ethics_morality_generations_sft_full_negation.jsonl",
     )
     parser.add_argument(
         "--full-paraphrase",
-        default="intervention_data/qween/ethics_morality_generations_sft_full_paraphrase.jsonl",
+        default="data/intervention_data/qwen/ethics_morality_generations_sft_full_paraphrase.jsonl",
     )
     parser.add_argument(
         "--title",

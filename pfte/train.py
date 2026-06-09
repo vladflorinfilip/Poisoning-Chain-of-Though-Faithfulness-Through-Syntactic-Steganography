@@ -113,7 +113,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", default="Qwen/Qwen2.5-0.5B-Instruct")
     parser.add_argument(
-        "--data", default="training_data/synthetic_ethics_cot_training.jsonl"
+        "--data", default="data/training_data/synthetic_ethics_cot_training.jsonl"
     )
     parser.add_argument("--output-dir", default="checkpoints/qwen-cot-sft")
     parser.add_argument("--max-length", type=int, default=512)
