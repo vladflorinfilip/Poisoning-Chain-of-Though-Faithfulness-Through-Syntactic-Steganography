@@ -128,12 +128,12 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--original",
-        default="data/evaluation_data/qwen/ethics_morality_generations_peft.jsonl",
+        default="data/evaluation_data/qwen/ETHICS/qwen05b_v1.jsonl",
         help="Original recorded evaluation generations.",
     )
     parser.add_argument(
         "--intervened",
-        default="data/intervention_data/qwen/ethics_morality_generations_sft_swap12.jsonl",
+        default="data/intervention_data/qwen/ETHICS/qwen05b_v1_swap12.jsonl",
         help="Intervened generations (same schema, joined by index).",
     )
     args = parser.parse_args()

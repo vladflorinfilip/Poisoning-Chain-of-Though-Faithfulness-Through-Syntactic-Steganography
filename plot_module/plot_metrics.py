@@ -58,8 +58,8 @@ def grouped_bars(ax, labels, series, colors, ylabel, title):
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--baseline", default="data/evaluation_data/qwen/ethics_morality_generations_baseline.jsonl")
-    parser.add_argument("--peft", default="data/evaluation_data/qwen/ethics_morality_generations_peft.jsonl")
+    parser.add_argument("--baseline", default="data/evaluation_data/qwen/ETHICS/baseline.jsonl")
+    parser.add_argument("--peft", default="data/evaluation_data/qwen/ETHICS/qwen05b_v1.jsonl")
     parser.add_argument("--out", default="figures/metrics.png")
     args = parser.parse_args()
 

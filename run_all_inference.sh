@@ -18,10 +18,10 @@ PY="${PY:-./cot/bin/python}"
 BASE="${BASE_MODEL:-Qwen/Qwen2.5-0.5B-Instruct}"
 PEFT="${PEFT_MODEL:-checkpoints/qwen-cot-sft}"
 
-EVAL_DIR="data/evaluation_data/qwen"
-INTV_DIR="data/intervention_data/qwen"
-PEFT_GEN="$EVAL_DIR/ethics_morality_generations_peft.jsonl"
-BASE_GEN="$EVAL_DIR/ethics_morality_generations_baseline.jsonl"
+EVAL_DIR="data/evaluation_data/qwen/ETHICS"
+INTV_DIR="data/intervention_data/qwen/ETHICS"
+PEFT_GEN="$EVAL_DIR/qwen05b_v1.jsonl"
+BASE_GEN="$EVAL_DIR/baseline.jsonl"
 
 mkdir -p "$EVAL_DIR" "$INTV_DIR" figures
 
@@ -51,12 +51,12 @@ run_intv () {
 }
 
 # --- PEFT (poisoned) model: scores its own CoTs after each intervention ---
-run_intv "$PEFT" swap_first_two     ethics_morality_generations_sft_swap12.jsonl
-run_intv "$PEFT" paraphrase_s1      ethics_morality_generations_sft_paraphrase_s1.jsonl   paraphrased_cot.jsonl
-run_intv "$PEFT" paraphrase_s1_swap ethics_morality_generations_sft_paraphrase_swap.jsonl paraphrased_cot.jsonl
-run_intv "$PEFT" negate_s1          ethics_morality_generations_sft_negate_s1.jsonl       negated_cot.jsonl
-run_intv "$PEFT" full_paraphrase    ethics_morality_generations_sft_full_paraphrase.jsonl full_paraphrased_cot.jsonl
-run_intv "$PEFT" full_negation      ethics_morality_generations_sft_full_negation.jsonl   full_negated_cot.jsonl
+run_intv "$PEFT" swap_first_two     qwen05b_v1_swap12.jsonl
+run_intv "$PEFT" paraphrase_s1      qwen05b_v1_paraphrase_s1.jsonl   paraphrased_cot.jsonl
+run_intv "$PEFT" paraphrase_s1_swap qwen05b_v1_paraphrase_swap.jsonl paraphrased_cot.jsonl
+run_intv "$PEFT" negate_s1          qwen05b_v1_negate_s1.jsonl       negated_cot.jsonl
+run_intv "$PEFT" full_paraphrase    qwen05b_v1_full_paraphrase.jsonl full_paraphrased_cot.jsonl
+run_intv "$PEFT" full_negation      qwen05b_v1_full_negation.jsonl   full_negated_cot.jsonl
 
 # --- BASE model: scores the PEFT-generated CoTs (control comparison) ---
 run_intv "$BASE" control            base_control_on_peft_cot.jsonl

@@ -348,7 +348,7 @@ uv pip install -r requirements.txt
 # Baseline evaluation
 python evaluation/evaluate_ethics_morality.py \
   --model Qwen/Qwen2.5-0.5B-Instruct \
-  --output data/evaluation_data/qwen/ethics_morality_generations_baseline.jsonl
+  --output data/evaluation_data/qwen/ETHICS/baseline.jsonl
 
 # Data generation (requires AZURE_OPENAI_* in .env)
 python synthetic_generation/generate_ethics_questions.py
@@ -360,7 +360,7 @@ python pfte/train.py --lora --max-length 512
 # Post-PEFT evaluation (LoRA adapter merged at load time)
 python evaluation/evaluate_ethics_morality.py \
   --model checkpoints/qwen-cot-sft \
-  --output data/evaluation_data/qwen/ethics_morality_generations_peft.jsonl
+  --output data/evaluation_data/qwen/ETHICS/qwen05b_v1.jsonl
 
 # Quantitative analysis (accuracy + first-sentence-stance breakdown)
 python evaluation/analyze_evaluations.py

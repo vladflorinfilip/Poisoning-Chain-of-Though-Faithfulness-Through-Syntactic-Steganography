@@ -11,9 +11,9 @@ set -euo pipefail
 PY="${PY:-./cot/bin/python}"
 PEFT="${PEFT_MODEL:-checkpoints/qwen-cot-sft}"
 
-EVAL_DIR="data/evaluation_data/qwen"
-INTV_DIR="data/intervention_data/qwen"
-PEFT_GEN="$EVAL_DIR/ethics_morality_generations_peft.jsonl"
+EVAL_DIR="data/evaluation_data/qwen/ETHICS"
+INTV_DIR="data/intervention_data/qwen/ETHICS"
+PEFT_GEN="$EVAL_DIR/qwen05b_v1.jsonl"
 
 [ -f "$PEFT_GEN" ] || { echo "Missing $PEFT_GEN (the PEFT eval CoTs). Generate it first."; exit 1; }
 
@@ -31,12 +31,12 @@ run_intv () {
 }
 
 echo "############ Re-scoring PEFT interventions (label only) ############"
-run_intv swap_first_two     ethics_morality_generations_sft_swap12.jsonl
-run_intv paraphrase_s1      ethics_morality_generations_sft_paraphrase_s1.jsonl   paraphrased_cot.jsonl
-run_intv paraphrase_s1_swap ethics_morality_generations_sft_paraphrase_swap.jsonl paraphrased_cot.jsonl
-run_intv negate_s1          ethics_morality_generations_sft_negate_s1.jsonl       negated_cot.jsonl
-run_intv full_paraphrase    ethics_morality_generations_sft_full_paraphrase.jsonl full_paraphrased_cot.jsonl
-run_intv full_negation      ethics_morality_generations_sft_full_negation.jsonl   full_negated_cot.jsonl
+run_intv swap_first_two     qwen05b_v1_swap12.jsonl
+run_intv paraphrase_s1      qwen05b_v1_paraphrase_s1.jsonl   paraphrased_cot.jsonl
+run_intv paraphrase_s1_swap qwen05b_v1_paraphrase_swap.jsonl paraphrased_cot.jsonl
+run_intv negate_s1          qwen05b_v1_negate_s1.jsonl       negated_cot.jsonl
+run_intv full_paraphrase    qwen05b_v1_full_paraphrase.jsonl full_paraphrased_cot.jsonl
+run_intv full_negation      qwen05b_v1_full_negation.jsonl   full_negated_cot.jsonl
 
 echo "############ Figure ############"
 $PY plot_module/plot_intervention.py --baseline "$PEFT_GEN"
