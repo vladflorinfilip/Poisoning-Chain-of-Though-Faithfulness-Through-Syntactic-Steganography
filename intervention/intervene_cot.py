@@ -158,7 +158,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--paraphrases",
-        default="data/intervention_data/qwen/ETHICS/paraphrased_cot.jsonl",
+        default="data/intervention_data/qwen/ETHICS/interventions/paraphrased_cot.jsonl",
         help="Rewritten first sentences from paraphrase_cot.py (paraphrase/negate modes).",
     )
     parser.add_argument(

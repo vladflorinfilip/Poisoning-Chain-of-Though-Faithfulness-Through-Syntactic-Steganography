@@ -66,10 +66,10 @@ DEFAULT_PROMPT = {
     "full_negation": "prompts/full_negation_cot.yaml",
 }
 DEFAULT_OUTPUT = {
-    "paraphrase": "data/intervention_data/qwen/ETHICS/paraphrased_cot.jsonl",
-    "negate": "data/intervention_data/qwen/ETHICS/negated_cot.jsonl",
-    "full_paraphrase": "data/intervention_data/qwen/ETHICS/full_paraphrased_cot.jsonl",
-    "full_negation": "data/intervention_data/qwen/ETHICS/full_negated_cot.jsonl",
+    "paraphrase": "data/intervention_data/qwen/ETHICS/interventions/paraphrased_cot.jsonl",
+    "negate": "data/intervention_data/qwen/ETHICS/interventions/negated_cot.jsonl",
+    "full_paraphrase": "data/intervention_data/qwen/ETHICS/interventions/full_paraphrased_cot.jsonl",
+    "full_negation": "data/intervention_data/qwen/ETHICS/interventions/full_negated_cot.jsonl",
 }
 
 

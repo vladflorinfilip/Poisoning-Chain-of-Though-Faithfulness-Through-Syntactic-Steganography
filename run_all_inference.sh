@@ -34,7 +34,7 @@ for mode in paraphrase negate full_paraphrase full_negation; do
   $PY intervention/paraphrase_cot.py --mode "$mode" --generations "$PEFT_GEN"
 done
 $PY intervention/make_minimal_negations.py \
-  --generations "$PEFT_GEN" --output "$INTV_DIR/negated_minimal_cot.jsonl"
+  --generations "$PEFT_GEN" --output "$INTV_DIR/interventions/negated_minimal_cot.jsonl"
 
 echo "############ STAGE 3/4: re-score interventions through both models ############"
 # run_intv <model> <intervention> <out_basename> [paraphrases_basename]
@@ -52,20 +52,20 @@ run_intv () {
 
 # --- PEFT (poisoned) model: scores its own CoTs after each intervention ---
 run_intv "$PEFT" swap_first_two     qwen05b_v1_swap12.jsonl
-run_intv "$PEFT" paraphrase_s1      qwen05b_v1_paraphrase_s1.jsonl   paraphrased_cot.jsonl
-run_intv "$PEFT" paraphrase_s1_swap qwen05b_v1_paraphrase_swap.jsonl paraphrased_cot.jsonl
-run_intv "$PEFT" negate_s1          qwen05b_v1_negate_s1.jsonl       negated_cot.jsonl
-run_intv "$PEFT" full_paraphrase    qwen05b_v1_full_paraphrase.jsonl full_paraphrased_cot.jsonl
-run_intv "$PEFT" full_negation      qwen05b_v1_full_negation.jsonl   full_negated_cot.jsonl
+run_intv "$PEFT" paraphrase_s1      qwen05b_v1_paraphrase_s1.jsonl   interventions/paraphrased_cot.jsonl
+run_intv "$PEFT" paraphrase_s1_swap qwen05b_v1_paraphrase_swap.jsonl interventions/paraphrased_cot.jsonl
+run_intv "$PEFT" negate_s1          qwen05b_v1_negate_s1.jsonl       interventions/negated_cot.jsonl
+run_intv "$PEFT" full_paraphrase    qwen05b_v1_full_paraphrase.jsonl interventions/full_paraphrased_cot.jsonl
+run_intv "$PEFT" full_negation      qwen05b_v1_full_negation.jsonl   interventions/full_negated_cot.jsonl
 
 # --- BASE model: scores the PEFT-generated CoTs (control comparison) ---
 run_intv "$BASE" control            base_control_on_peft_cot.jsonl
 run_intv "$BASE" swap_first_two     base_swap12.jsonl
-run_intv "$BASE" paraphrase_s1      base_paraphrase_s1.jsonl       paraphrased_cot.jsonl
-run_intv "$BASE" paraphrase_s1_swap base_paraphrase_swap.jsonl     paraphrased_cot.jsonl
-run_intv "$BASE" negate_s1          base_negate_s1.jsonl           negated_cot.jsonl
-run_intv "$BASE" full_paraphrase    base_full_paraphrase.jsonl     full_paraphrased_cot.jsonl
-run_intv "$BASE" full_negation      base_full_negation.jsonl       full_negated_cot.jsonl
+run_intv "$BASE" paraphrase_s1      base_paraphrase_s1.jsonl       interventions/paraphrased_cot.jsonl
+run_intv "$BASE" paraphrase_s1_swap base_paraphrase_swap.jsonl     interventions/paraphrased_cot.jsonl
+run_intv "$BASE" negate_s1          base_negate_s1.jsonl           interventions/negated_cot.jsonl
+run_intv "$BASE" full_paraphrase    base_full_paraphrase.jsonl     interventions/full_paraphrased_cot.jsonl
+run_intv "$BASE" full_negation      base_full_negation.jsonl       interventions/full_negated_cot.jsonl
 
 echo "############ STAGE 4/4: analysis + figures ############"
 $PY evaluation/analyze_evaluations.py

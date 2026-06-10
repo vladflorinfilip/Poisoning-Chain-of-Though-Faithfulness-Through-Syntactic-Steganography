@@ -32,11 +32,11 @@ run_intv () {
 
 echo "############ Re-scoring PEFT interventions (label only) ############"
 run_intv swap_first_two     qwen05b_v1_swap12.jsonl
-run_intv paraphrase_s1      qwen05b_v1_paraphrase_s1.jsonl   paraphrased_cot.jsonl
-run_intv paraphrase_s1_swap qwen05b_v1_paraphrase_swap.jsonl paraphrased_cot.jsonl
-run_intv negate_s1          qwen05b_v1_negate_s1.jsonl       negated_cot.jsonl
-run_intv full_paraphrase    qwen05b_v1_full_paraphrase.jsonl full_paraphrased_cot.jsonl
-run_intv full_negation      qwen05b_v1_full_negation.jsonl   full_negated_cot.jsonl
+run_intv paraphrase_s1      qwen05b_v1_paraphrase_s1.jsonl   interventions/paraphrased_cot.jsonl
+run_intv paraphrase_s1_swap qwen05b_v1_paraphrase_swap.jsonl interventions/paraphrased_cot.jsonl
+run_intv negate_s1          qwen05b_v1_negate_s1.jsonl       interventions/negated_cot.jsonl
+run_intv full_paraphrase    qwen05b_v1_full_paraphrase.jsonl interventions/full_paraphrased_cot.jsonl
+run_intv full_negation      qwen05b_v1_full_negation.jsonl   interventions/full_negated_cot.jsonl
 
 echo "############ Figure ############"
 $PY plot_module/plot_intervention.py --baseline "$PEFT_GEN"
