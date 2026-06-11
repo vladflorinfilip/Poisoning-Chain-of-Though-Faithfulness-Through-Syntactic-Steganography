@@ -29,7 +29,18 @@ from urllib.parse import parse_qs, urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
 VIEWER_DIR = Path(__file__).resolve().parent
+STATIC_DIR = VIEWER_DIR / "static"
 EXCLUDE_PARTS = {"cot", ".git", "__pycache__", "node_modules", ".venv"}
+
+STATIC_CONTENT_TYPES = {
+    ".css": "text/css; charset=utf-8",
+    ".js": "text/javascript; charset=utf-8",
+    ".html": "text/html; charset=utf-8",
+    ".json": "application/json; charset=utf-8",
+    ".svg": "image/svg+xml",
+    ".png": "image/png",
+    ".ico": "image/x-icon",
+}
 
 PROMPT_TEMPLATE = (
     "You are evaluating commonsense morality.\n"
@@ -193,14 +204,27 @@ def run_chat(model_name: str, messages: list[dict], max_new_tokens: int = 512) -
     return {"model": model_name, "response": response}
 
 
-def run_inference(scenario: str, cot: str, model_name: str) -> dict:
+def run_inference(
+    scenario: str, cot: str, model_name: str, raw_prompt: str | None = None
+) -> dict:
     import torch
 
     tokenizer, model = get_model(model_name)
-    prompt = PROMPT_TEMPLATE.format(scenario=scenario.strip())
-    cot = (cot or "").strip()
-    teacher_forced = bool(cot)
-    text = f"{prompt} {cot}\nFinal answer:" if teacher_forced else prompt
+    raw_prompt = (raw_prompt or "").strip()
+    raw_mode = bool(raw_prompt)
+    if raw_mode:
+        # Feed the pasted text byte-for-byte, exactly like the eval/training
+        # completion format. No morality template, no chat template. The rubric
+        # (e.g. BoolQ yes/no) lives entirely inside the pasted prompt.
+        prompt = raw_prompt
+        cot = (cot or "").strip()
+        teacher_forced = bool(cot)
+        text = f"{raw_prompt} {cot}\nFinal answer:" if teacher_forced else raw_prompt
+    else:
+        prompt = PROMPT_TEMPLATE.format(scenario=scenario.strip())
+        cot = (cot or "").strip()
+        teacher_forced = bool(cot)
+        text = f"{prompt} {cot}\nFinal answer:" if teacher_forced else prompt
     inputs = tokenizer(text, return_tensors="pt").to(model.device)
     with _gen_lock, torch.no_grad():
         output_ids = model.generate(
@@ -221,15 +245,20 @@ def run_inference(scenario: str, cot: str, model_name: str) -> dict:
         cut = re.search(r"\bfinal answer\s*[:\-]", generated, re.IGNORECASE)
         used_cot = generated[: cut.start()].strip() if cut else generated.strip()
     label = parse_label(generated)
+    if raw_mode:
+        label_name = str(label) if label is not None else "unparsed"
+    else:
+        label_name = LABEL_NAMES.get(label, "unparsed")
     return {
         "model": model_name,
-        "scenario": scenario.strip(),
+        "scenario": raw_prompt if raw_mode else scenario.strip(),
         "prompt": prompt,
+        "raw_mode": raw_mode,
         "teacher_forced": teacher_forced,
         "chain_of_thought": used_cot,
         "raw_generation": generated,
         "label": label,
-        "label_name": LABEL_NAMES.get(label, "unparsed"),
+        "label_name": label_name,
     }
 
 
@@ -276,6 +305,14 @@ class Handler(BaseHTTPRequestHandler):
     def _json(self, code: int, payload) -> None:
         self._send(code, json.dumps(payload).encode("utf-8"), "application/json; charset=utf-8")
 
+    def _serve_static(self, rel: str) -> None:
+        path = (STATIC_DIR / rel).resolve()
+        if STATIC_DIR not in path.parents or not path.is_file():
+            self._json(404, {"error": f"not found: {rel}"})
+            return
+        content_type = STATIC_CONTENT_TYPES.get(path.suffix, "application/octet-stream")
+        self._send(200, path.read_bytes(), content_type)
+
     def do_GET(self) -> None:
         parsed = urlparse(self.path)
         route = parsed.path
@@ -283,6 +320,10 @@ class Handler(BaseHTTPRequestHandler):
         if route in ("/", "/index.html"):
             html = (VIEWER_DIR / "index.html").read_bytes()
             self._send(200, html, "text/html; charset=utf-8")
+            return
+
+        if route.startswith("/static/"):
+            self._serve_static(route[len("/static/"):])
             return
 
         if route == "/api/files":
@@ -337,14 +378,17 @@ class Handler(BaseHTTPRequestHandler):
 
         if route == "/api/infer":
             scenario = (body.get("scenario") or "").strip()
-            if not scenario:
-                self._json(400, {"error": "scenario is required"})
+            raw_prompt = (body.get("raw_prompt") or "").strip()
+            if not scenario and not raw_prompt:
+                self._json(400, {"error": "scenario or raw_prompt is required"})
                 return
             model_name = self._resolve_model(body)
             if model_name is None:
                 return
             try:
-                result = run_inference(scenario, body.get("cot", ""), model_name)
+                result = run_inference(
+                    scenario, body.get("cot", ""), model_name, raw_prompt=raw_prompt
+                )
             except Exception as error:
                 self._json(500, {"error": f"{type(error).__name__}: {error}"})
                 return
