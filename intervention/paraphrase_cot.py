@@ -32,7 +32,7 @@ from tqdm import tqdm
 from cot_utils import classify_stance, split_sentences
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from openai_client import OpenAIClient
+from stencils.openai_client import OpenAIClient # type: ignore[reportMissingImports]  # noqa: E402
 
 
 STANCE_NAMES = {0: "morally acceptable", 1: "morally wrong"}
