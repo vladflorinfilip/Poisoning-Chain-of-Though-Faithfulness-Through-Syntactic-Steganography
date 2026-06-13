@@ -1,16 +1,18 @@
-"""Plot how many labels changed vs stayed the same under each CoT intervention.
+"""Plot label-change rates under each CoT intervention with Wilson intervals.
 
 Each intervention file shares the evaluation-dataset schema and is compared
 against the original SFT generations by joining on ``index``. For every
-condition we count scenarios whose label changed vs stayed the same, and render
-a stacked bar chart.
+condition we count scenarios whose label changed and render a horizontal
+percentage plot with 95% Wilson confidence intervals.
 """
 
 import argparse
 import json
+import math
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 
 
 def load_by_index(path: Path) -> dict[int, dict]:
@@ -34,6 +36,21 @@ def count_changes(original: dict[int, dict], intervened: dict[int, dict]) -> tup
         else:
             changed += 1
     return kept, changed
+
+
+def wilson_interval(successes: int, total: int, z: float = 1.96) -> tuple[float, float]:
+    """Return a 95% Wilson confidence interval for a binomial proportion."""
+    if total == 0:
+        return 0.0, 0.0
+    p_hat = successes / total
+    denominator = 1 + z**2 / total
+    center = (p_hat + z**2 / (2 * total)) / denominator
+    half_width = (
+        z
+        * math.sqrt((p_hat * (1 - p_hat) / total) + (z**2 / (4 * total**2)))
+        / denominator
+    )
+    return center - half_width, center + half_width
 
 
 def style() -> None:
@@ -84,9 +101,9 @@ def main() -> None:
     )
     parser.add_argument(
         "--title",
-        default="CoT interventions vs PEFT baseline: label changes",
+        default="CoT interventions vs PEFT baseline - % labels changed",
     )
-    parser.add_argument("--out", default="figures/intervention_label_changes_v2.png")
+    parser.add_argument("--out", default="figures/intervention_label_change_rates_wilson_v2.png")
     args = parser.parse_args()
 
     baseline = load_by_index(Path(args.baseline))
@@ -101,52 +118,80 @@ def main() -> None:
     conditions = [(label, path) for label, path in conditions if path.exists()]
 
     labels = []
-    kept_counts = []
+    rates = []
+    lower_errors = []
+    upper_errors = []
+    totals = []
     changed_counts = []
     for label, path in conditions:
         kept, changed = count_changes(baseline, load_by_index(path))
+        total = kept + changed
+        rate = changed / total if total else 0.0
+        low, high = wilson_interval(changed, total)
         labels.append(label)
-        kept_counts.append(kept)
+        rates.append(rate)
+        lower_errors.append(max(0.0, rate - low))
+        upper_errors.append(max(0.0, high - rate))
+        totals.append(total)
         changed_counts.append(changed)
-        print(f"{label.replace(chr(10), ' ')}: kept={kept} changed={changed}")
+        print(
+            f"{label.replace(chr(10), ' ')}: kept={kept} changed={changed} "
+            f"rate={rate:.3f} 95% CI=[{low:.3f}, {high:.3f}]"
+        )
 
     style()
-    fig, ax = plt.subplots(figsize=(max(8, 2.4 * len(conditions)), 5.4))
-    kept_color = "#4C72B0"
-    changed_color = "#DD8452"
+    fig, ax = plt.subplots(figsize=(8.2, 5.2))
+    family_colors = {
+        "paraphrase": "#4C78A8",
+        "negation": "#D55E00",
+        "swap": "#59A14F",
+    }
+    bar_colors = [
+        family_colors["paraphrase"],
+        family_colors["negation"],
+        family_colors["paraphrase"],
+        family_colors["negation"],
+        family_colors["swap"],
+        family_colors["swap"],
+    ][: len(labels)]
+    y_positions = list(range(len(labels)))
+    percent_rates = [rate * 100 for rate in rates]
+    percent_lower = [error * 100 for error in lower_errors]
+    percent_upper = [error * 100 for error in upper_errors]
 
-    kept_bars = ax.bar(labels, kept_counts, color=kept_color, edgecolor="black", linewidth=0.5, label="Kept same label")
-    changed_bars = ax.bar(
-        labels,
-        changed_counts,
-        bottom=kept_counts,
-        color=changed_color,
-        edgecolor="black",
-        linewidth=0.5,
-        label="Changed label",
+    ax.barh(
+        y_positions,
+        percent_rates,
+        xerr=[percent_lower, percent_upper],
+        capsize=4,
+        color=bar_colors,
+        edgecolor="#333333",
+        linewidth=0.4,
+        error_kw={"elinewidth": 1.2, "capthick": 1.2, "ecolor": "#222222"},
     )
-
-    for kept_bar, changed_bar, kept, changed in zip(kept_bars, changed_bars, kept_counts, changed_counts):
-        total = kept + changed
-        if kept:
-            ax.text(kept_bar.get_x() + kept_bar.get_width() / 2, kept / 2, str(kept), ha="center", va="center", color="white", fontsize=10, fontweight="bold")
-        if changed:
-            ax.text(changed_bar.get_x() + changed_bar.get_width() / 2, kept + changed / 2, str(changed), ha="center", va="center", color="white", fontsize=10, fontweight="bold")
-        ax.text(kept_bar.get_x() + kept_bar.get_width() / 2, total + 1.5, f"{changed/total:.0%} changed" if total else "n/a", ha="center", va="bottom", fontsize=9)
-
-    ax.set_ylim(0, 112)
-    ax.set_ylabel("Scenarios (n=100)")
+    ax.set_yticks(y_positions)
+    ax.set_yticklabels(labels)
+    ax.invert_yaxis()
+    ax.set_xlim(0, 100)
+    ax.set_xticks([0, 20, 40, 60, 80, 100])
+    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda value, _: f"{value:.0f}%"))
+    ax.set_xlabel("% of scenarios where label changed")
     ax.set_title(args.title, pad=12)
-    ax.yaxis.grid(True)
+    ax.xaxis.grid(True)
+    ax.yaxis.grid(False)
     ax.set_axisbelow(True)
     ax.legend(
+        handles=[
+            Line2D([0], [0], color="#222222", marker="|", markersize=12, linewidth=1.2, markeredgewidth=1.2, label="95% Wilson CI"),
+            Line2D([], [], color="none", label="Support: n=100"),
+        ],
         loc="upper center",
-        bbox_to_anchor=(0.5, -0.12),
+        bbox_to_anchor=(0.5, -0.14),
         ncol=2,
         frameon=False,
         fontsize=9,
     )
-    fig.tight_layout(rect=(0, 0.04, 1, 1))
+    fig.tight_layout(rect=(0, 0.05, 1, 1))
 
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
