@@ -26,6 +26,19 @@ Latest pattern:
 - **BoolQ:** weaker transfer to factual yes/no QA.
 - **GSM8K verification:** little evidence of first-sentence transfer; generations are less format-stable and the task is much further from the training setup.
 
+## Model Size Comparison
+
+We compare the 0.5B and 3B PEFT models on the same critic metrics, per benchmark.
+
+![Follow rates by model size](figures/follow_slopegraph.png)
+
+Each panel walks the three metrics left to right (`Follows S1 stance` -> `Follows general CoT stance` -> `Benchmark accuracy`). The data suggests that syntactic steganography poisoning might influence the remainder of the CoT to steer follow the first sentence OR syntactic steganography generalizes poorly
+for larger model. The latter would point to a more diverse training set needed to expand the use of syntactic covert message. This poses the question in differences between neural circuits from training.
+
+A worked example shows that 3B model on SBIC follows a more faithfull CoT for tasks not included in the trainng seed, while mainting steganography for the targeted examples.
+
+![SBIC example of faithful vs. unfaithful CoT](figures/sbic_example.png)
+
 ## Intervention Evidence
 
 We also intervene on generated CoTs and re-query the model.
@@ -81,6 +94,8 @@ Plots:
 ```bash
 python plot_module/plot_s1_follow_rates.py
 python plot_module/plot_intervention.py
+python plot_module/plot_follow_slopegraph.py
+python plot_module/plot_sbic_example.py
 ```
 
 ## Notes
