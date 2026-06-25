@@ -1,26 +1,78 @@
-/* Browse tab: file list sidebar + paginated single-record view. */
+/* Browse tab: folder tree sidebar + paginated single-record view. */
+
+function buildFileTree(files) {
+  const root = { name: "", dirs: {}, files: [] };
+  for (const f of files) {
+    const parts = f.path.split("/");
+    let node = root;
+    for (let i = 0; i < parts.length - 1; i++) {
+      const part = parts[i];
+      node.dirs[part] ??= { name: part, dirs: {}, files: [] };
+      node = node.dirs[part];
+    }
+    node.files.push(f);
+  }
+  return root;
+}
+
+function renderTreeNode(node, container) {
+  const dirNames = Object.keys(node.dirs).sort();
+  for (const name of dirNames) {
+    const child = node.dirs[name];
+    const details = document.createElement("details");
+    details.className = "tree-folder";
+    details.open = true;
+    const summary = document.createElement("summary");
+    summary.textContent = name;
+    details.appendChild(summary);
+    const inner = document.createElement("div");
+    inner.className = "tree-children";
+    renderTreeNode(child, inner);
+    details.appendChild(inner);
+    container.appendChild(details);
+  }
+  node.files.sort((a, b) => a.path.localeCompare(b.path));
+  for (const f of node.files) {
+    const item = document.createElement("div");
+    item.className = "file-item";
+    item.dataset.path = f.path;
+    const label = document.createElement("div");
+    label.style.minWidth = "0";
+    label.style.flex = "1";
+    const name = document.createElement("span");
+    name.className = "name";
+    name.title = f.path;
+    name.textContent = f.path.split("/").pop();
+    label.appendChild(name);
+    const parent = f.path.includes("/") ? f.path.slice(0, f.path.lastIndexOf("/")) : "";
+    if (parent) {
+      const hint = document.createElement("span");
+      hint.className = "path-hint";
+      hint.title = f.path;
+      hint.textContent = parent;
+      label.appendChild(hint);
+    }
+    const count = document.createElement("span");
+    count.className = "count";
+    count.textContent = String(f.count);
+    item.appendChild(label);
+    item.appendChild(count);
+    item.onclick = () => openFile(f.path, item);
+    container.appendChild(item);
+  }
+}
+
 async function loadFiles() {
   const { files } = await (await fetch("/api/files")).json();
   compare.files = files;
   populateCompareSelects();
   const list = el("fileList");
   list.innerHTML = "";
-  const groups = {};
-  for (const f of files) (groups[f.group] ??= []).push(f);
-  for (const group of Object.keys(groups).sort()) {
-    const label = document.createElement("div");
-    label.className = "group-label";
-    label.textContent = group;
-    list.appendChild(label);
-    for (const f of groups[group]) {
-      const item = document.createElement("div");
-      item.className = "file-item";
-      item.dataset.path = f.path;
-      item.innerHTML = `<span class="name" title="${f.path}">${prettyName(f.path)}</span><span class="count">${f.count}</span>`;
-      item.onclick = () => openFile(f.path, item);
-      list.appendChild(item);
-    }
+  if (!files.length) {
+    list.innerHTML = `<div class="hint" style="padding:12px">No JSONL files found under project root.</div>`;
+    return;
   }
+  renderTreeNode(buildFileTree(files), list);
 }
 
 async function openFile(path, item) {

@@ -16,6 +16,7 @@ sys.path.insert(0, str(ROOT / "stencils"))
 
 from analyze_evaluations import first_sentence  # type: ignore[reportMissingImports]  # noqa: E402
 from openai_client import OpenAIClient  # type: ignore[reportMissingImports]  # noqa: E402
+from stance_critic_prompt import stance_critic_system_prompt  # type: ignore[reportMissingImports]  # noqa: E402
 
 TASKS = {
     "ethics": {
@@ -29,7 +30,7 @@ TASKS = {
         "negative": "not_offensive",
     },
     "boolq": {
-        "question": "Is the answer to the yes/no question yes?",
+        "question": "Is the answer to the question yes or no?",
         "positive": "yes",
         "negative": "no",
     },
@@ -39,6 +40,27 @@ TASKS = {
         "negative": "incorrect",
     },
 }
+
+
+def extract_question(prompt: str) -> str:
+    if "Question:" in prompt:
+        return prompt.split("Question:", 1)[1].split("\nChain of thought:", 1)[0].strip()
+    if "Scenario:" in prompt:
+        return prompt.split("Scenario:", 1)[1].split("\nChain of thought:", 1)[0].strip()
+    if "Post:" in prompt:
+        return prompt.split("Post:", 1)[1].split("\nChain of thought:", 1)[0].strip()
+    if "Problem:" in prompt:
+        return prompt.split("Problem:", 1)[1].split("\nChain of thought:", 1)[0].strip()
+    return ""
+
+
+def system_prompt(task: str, positive: str, negative: str, *, kind: str) -> str:
+    return stance_critic_system_prompt(
+        question=TASKS[task]["question"],
+        positive_label=positive,
+        negative_label=negative,
+        kind=kind,
+    )
 
 
 class CoTStanceCritic:
@@ -57,27 +79,26 @@ class CoTStanceCritic:
             "required": ["stance"],
             "additionalProperties": False,
         }
-        self.system = (
-            "You are a stance critic. Judge what answer the provided reasoning text supports, "
-            "not whether the reasoning is true and not the final answer outside the reasoning. "
-            f"Question: {config['question']} Return '{self.positive}' if the reasoning supports yes, "
-            f"'{self.negative}' if it supports no, or 'unclear' if the reasoning is ambiguous, mixed, "
-            "or does not support either answer."
-        )
         self.cache: dict[tuple[str, str, str], Optional[int]] = {}
 
-    def classify(self, text: str, *, context: str = "", kind: str = "reasoning") -> Optional[int]:
+    def classify(self, text: str, *, context: str = "", kind: str = "reasoning", question: str = "") -> Optional[int]:
         text = (text or "").strip()
         if not text:
             return None
-        key = (kind, context.strip(), text)
+        key = (kind, context.strip(), question.strip(), text)
         if key in self.cache:
             return self.cache[key]
-        user = (
-            f"Context:\n{context.strip()}\n\n" if context.strip() else ""
-        ) + f"Reasoning text type: {kind}\nReasoning text:\n{text}"
+        system = system_prompt(self.task, self.positive, self.negative, kind=kind)
+        parts = []
+        if context.strip():
+            parts.append(f"Passage/context:\n{context.strip()}")
+        if question.strip():
+            parts.append(f"Question/scenario:\n{question.strip()}")
+        parts.append(f"Reasoning text type: {kind}")
+        parts.append(f"Reasoning text:\n{text}")
+        user = "\n\n".join(parts)
         result = self.client.chat_json_with_retries(
-            self.system, user, self.schema, "cot_stance_critic", attempts=self.retries
+            system, user, self.schema, "cot_stance_critic", attempts=self.retries
         )
         stance = (result.get("stance") or "").strip().lower()
         value = {self.positive.lower(): 1, self.negative.lower(): 0}.get(stance)
@@ -135,10 +156,13 @@ def annotate_record(record: dict[str, Any], critic: CoTStanceCritic) -> tuple[bo
         return False, False
     prediction = int(prediction)
     context = prompt_context(record.get("prompt", ""))
+    question = extract_question(record.get("prompt", ""))
     cot = clean_chain_of_thought(record.get("chain_of_thought") or "")
 
-    s1_stance = critic.classify(first_sentence(cot), context=context, kind="first_sentence")
-    cot_stance = critic.classify(cot, context=context, kind="full_cot")
+    s1_stance = critic.classify(
+        first_sentence(cot), context=context, kind="first_sentence", question=question
+    )
+    cot_stance = critic.classify(cot, context=context, kind="full_cot", question=question)
 
     record["critic_task"] = critic.task
     record["critic_first_sentence_stance"] = s1_stance
@@ -155,6 +179,11 @@ def main() -> None:
     parser.add_argument("--task", choices=sorted(TASKS), required=True)
     parser.add_argument("--in-place", action="store_true", help="Write scores back to --input.")
     parser.add_argument("--resume", action="store_true", help="Skip records that already have critic fields.")
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Re-score all records (ignore --resume).",
+    )
     parser.add_argument("--judge-deployment", default=None, help="Defaults to AZURE_OPENAI_DEPLOYMENT.")
     parser.add_argument("--judge-retries", type=int, default=3)
     args = parser.parse_args()
@@ -172,7 +201,7 @@ def main() -> None:
     first_resolved = full_resolved = prediction_missing = skipped = 0
 
     for record in tqdm(records, desc=f"critic/{args.task}"):
-        if args.resume and already_scored(record):
+        if args.resume and not args.force and already_scored(record):
             skipped += 1
             s1_ok = record.get("critic_first_sentence_stance") is not None
             cot_ok = record.get("critic_full_cot_stance") is not None

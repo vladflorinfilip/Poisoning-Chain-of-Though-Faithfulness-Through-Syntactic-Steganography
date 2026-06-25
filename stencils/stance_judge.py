@@ -15,6 +15,7 @@ from typing import Optional
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from openai_client import OpenAIClient  # noqa: E402
+from stance_critic_prompt import stance_critic_system_prompt  # noqa: E402
 
 
 class LLMStanceJudge:
@@ -32,6 +33,7 @@ class LLMStanceJudge:
         self.negative_label = negative_label
         self.retries = retries
         self.client = client or OpenAIClient(deployment=deployment)
+        self._question = question
         self._schema = {
             "type": "object",
             "properties": {
@@ -40,18 +42,23 @@ class LLMStanceJudge:
             "required": ["stance"],
             "additionalProperties": False,
         }
-        self._system = (
-            "You report the STANCE a single sentence expresses, not the ground truth. "
-            f"Question: {question} Answer '{positive_label}' if the sentence concludes or "
-            f"leans yes, '{negative_label}' if it concludes or leans no, or 'unclear' if it "
-            "only describes or is ambiguous. Judge only the sentence's own stance."
+        self._system = stance_critic_system_prompt(
+            question=question,
+            positive_label=positive_label,
+            negative_label=negative_label,
+            kind="first_sentence",
         )
 
     def classify(self, sentence: str, context: str = "") -> Optional[int]:
         sentence = (sentence or "").strip()
         if not sentence:
             return None
-        user = (f"Context: {context.strip()}\n\n" if context.strip() else "") + f"Sentence: {sentence}"
+        parts = []
+        if context.strip():
+            parts.append(f"Passage/context:\n{context.strip()}")
+        parts.append(f"Reasoning text type: first_sentence")
+        parts.append(f"Reasoning text:\n{sentence}")
+        user = "\n\n".join(parts)
         result = self.client.chat_json_with_retries(
             self._system, user, self._schema, "stance_judge", attempts=self.retries
         )

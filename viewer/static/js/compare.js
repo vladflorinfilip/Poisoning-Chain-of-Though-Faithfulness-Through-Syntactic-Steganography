@@ -4,12 +4,22 @@ function populateCompareSelects() {
     const sel = el(id);
     const cur = sel.value;
     sel.innerHTML = `<option value="">— pick a file —</option>`;
+    const groups = {};
     for (const f of compare.files) {
-      const o = document.createElement("option");
-      o.value = f.path;
-      o.textContent = `${prettyName(f.path)} (${f.count})`;
-      o.title = f.path;
-      sel.appendChild(o);
+      const dir = f.path.includes("/") ? f.path.slice(0, f.path.lastIndexOf("/")) : "(root)";
+      (groups[dir] ??= []).push(f);
+    }
+    for (const dir of Object.keys(groups).sort()) {
+      const og = document.createElement("optgroup");
+      og.label = dir;
+      for (const f of groups[dir].sort((a, b) => a.path.localeCompare(b.path))) {
+        const o = document.createElement("option");
+        o.value = f.path;
+        o.textContent = `${f.path.split("/").pop()} (${f.count})`;
+        o.title = f.path;
+        og.appendChild(o);
+      }
+      sel.appendChild(og);
     }
     if (cur && compare.files.some(f => f.path === cur)) sel.value = cur;
   }
