@@ -54,10 +54,9 @@ def inference_device(dtype_arg: str, device_arg: str) -> tuple[str, torch.dtype]
 def build_prompt(example: dict[str, Any]) -> str:
     return (
         "You are answering a yes/no question using the passage.\n"
-        "Write a short chain of thought, then end with exactly one line:\n"
-        "Final answer: yes\n"
-        "or\n"
-        "Final answer: no\n\n"
+        "Write a short chain of thought, then end with exactly one label:\n"
+        "0 = no\n"
+        "1 = yes\n\n"
         f"Passage: {example['passage']}\n"
         f"Question: {example['question']}\n"
         "Chain of thought:"
@@ -88,7 +87,7 @@ def parse_chain_of_thought(text: str) -> str:
     match = CHAIN_OF_THOUGHT_RE.search(text)
     if match:
         return match.group(1).strip()
-    cut = re.search(r"\bfinal answer\s*[:\-]", text, re.IGNORECASE)
+    cut = re.search(r"\b(final answer|answer|label)\s*[:\-]\s*([01])\b", text, re.IGNORECASE)
     return (text[: cut.start()] if cut else text).strip()
 
 
