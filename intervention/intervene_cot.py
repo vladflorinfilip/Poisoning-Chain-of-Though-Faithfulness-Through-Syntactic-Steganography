@@ -39,10 +39,13 @@ import torch
 from tqdm import tqdm
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
-from cot_utils import split_sentences
+from cot_utils import clean_chain_of_thought, split_sentences
 
 
 LABEL_RE = re.compile(r"[01]")
+TEXT_ANSWER_RE = re.compile(
+    r"\b(final answer|answer|label)\s*[:\-]\s*(yes|no|true|false)\b", re.IGNORECASE
+)
 
 
 DTYPES = {
@@ -52,29 +55,76 @@ DTYPES = {
 }
 
 
-def inference_device(dtype_arg: str) -> tuple[str, torch.dtype]:
-    if torch.cuda.is_available():
+def inference_device(dtype_arg: str, device_arg: str) -> tuple[str, torch.dtype]:
+    if device_arg == "cpu":
+        return "cpu", DTYPES.get(dtype_arg, torch.float32)
+    if device_arg == "cuda" or (device_arg == "auto" and torch.cuda.is_available()):
         return "cuda", DTYPES.get(dtype_arg, torch.float16)
-    if torch.backends.mps.is_available():
-        # Qwen generation on MPS fp16 can produce gibberish; prefer correctness.
+    if device_arg == "mps" or (device_arg == "auto" and torch.backends.mps.is_available()):
         return "mps", DTYPES.get(dtype_arg, torch.float32)
-    return "cpu", torch.float32
+    return "cpu", DTYPES.get(dtype_arg, torch.float32)
+
+
+def parse_boolq_label(text: str) -> int | None:
+    text_matches = list(TEXT_ANSWER_RE.finditer(text))
+    if text_matches:
+        answer = text_matches[-1].group(2).lower()
+        return 1 if answer in ("yes", "true") else 0
+    low = text.lower().strip()
+    final_line = re.search(r"(?:final answer|answer|label)\s*[:\-]\s*(.*)$", low, re.DOTALL)
+    if final_line:
+        answer_text = final_line.group(1)
+        if re.search(r"\b(yes|true|correct)\b", answer_text):
+            return 1
+        if re.search(r"\b(no|false|incorrect)\b", answer_text):
+            return 0
+    if re.search(r"\b(yes|true|correct)\b", low) and not re.search(r"\b(no|false|incorrect)\b", low):
+        return 1
+    if re.search(r"\b(no|false|incorrect)\b", low) and not re.search(r"\b(yes|true|correct)\b", low):
+        return 0
+    return None
+
+
+def parse_label(text: str, task: str) -> int | None:
+    if task == "boolq":
+        parsed = parse_boolq_label(text)
+        if parsed is not None:
+            return parsed
+    match = LABEL_RE.search(text)
+    return int(match.group(0)) if match else None
 
 
 def load_records(path: Path) -> list[dict]:
     return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
 
 
+def load_completed(path: Path) -> set[int]:
+    if not path.exists():
+        return set()
+    done: set[int] = set()
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if line.strip():
+            done.add(int(json.loads(line)["index"]))
+    return done
+
+
 def load_paraphrases(path: str | None) -> dict[int, str]:
+    records = load_paraphrase_records(path)
+    return {
+        index: (record.get("paraphrase") or "").strip()
+        for index, record in records.items()
+        if (record.get("paraphrase") or "").strip()
+    }
+
+
+def load_paraphrase_records(path: str | None) -> dict[int, dict]:
     if not path or not Path(path).exists():
         return {}
-    mapping: dict[int, str] = {}
+    mapping: dict[int, dict] = {}
     for line in Path(path).read_text(encoding="utf-8").splitlines():
         if line.strip():
             record = json.loads(line)
-            text = (record.get("paraphrase") or "").strip()
-            if text:
-                mapping[int(record["index"])] = text
+            mapping[int(record["index"])] = record
     return mapping
 
 
@@ -109,7 +159,9 @@ def apply_intervention(
 
 
 @torch.no_grad()
-def score_label(model, tokenizer, prompt: str, chain_of_thought: str, max_new_tokens: int) -> tuple[int | None, str]:
+def score_label(
+    model, tokenizer, prompt: str, chain_of_thought: str, max_new_tokens: int, *, task: str
+) -> tuple[int | None, str]:
     """Teacher-force a CoT and greedily read off the final-answer label."""
     text = f"{prompt} {chain_of_thought}\nFinal answer:"
     inputs = tokenizer(text, return_tensors="pt").to(model.device)
@@ -125,8 +177,7 @@ def score_label(model, tokenizer, prompt: str, chain_of_thought: str, max_new_to
     generated = tokenizer.decode(
         output_ids[0, inputs["input_ids"].shape[-1] :], skip_special_tokens=True
     ).strip()
-    match = LABEL_RE.search(generated)
-    return (int(match.group(0)) if match else None), generated
+    return parse_label(generated, task), generated
 
 
 def parse_args() -> argparse.Namespace:
@@ -168,10 +219,27 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-new-tokens", type=int, default=8)
     parser.add_argument("--limit", type=int, default=0, help="0 = all records.")
     parser.add_argument(
+        "--task",
+        choices=["ethics", "boolq", "sbic"],
+        default="ethics",
+        help="Label parser for the final-answer token (boolq accepts yes/no).",
+    )
+    parser.add_argument(
+        "--device",
+        choices=["auto", "cpu", "mps", "cuda"],
+        default="auto",
+        help="Use 'cpu' on Apple Silicon if MPS garbles generation.",
+    )
+    parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="Re-score all records even if already present in the output file.",
+    )
+    parser.add_argument(
         "--dtype",
         choices=["auto", "float32", "float16", "bfloat16"],
         default="auto",
-        help="Inference dtype. On MPS, auto uses float32 for stable generation.",
+        help="Inference dtype. On CPU/MPS, auto uses float32 for stable generation.",
     )
     return parser.parse_args()
 
@@ -191,14 +259,15 @@ def main() -> None:
         "full_negation",
     )
     paraphrases = load_paraphrases(args.paraphrases) if needs_rewrites else {}
+    paraphrase_records = load_paraphrase_records(args.paraphrases) if needs_rewrites else {}
     if needs_rewrites and not paraphrases:
         raise SystemExit(
             f"No rewritten sentences found at {args.paraphrases}. "
             "Run intervention/paraphrase_cot.py (with --mode negate for negation) first."
         )
 
-    device, dtype = inference_device(args.dtype)
-    print(f"inference device: {device} dtype={dtype}")
+    device, dtype = inference_device(args.dtype, args.device)
+    print(f"task={args.task} inference device: {device} dtype={dtype}")
 
     tokenizer = AutoTokenizer.from_pretrained(args.model)
     model = AutoModelForCausalLM.from_pretrained(
@@ -206,46 +275,64 @@ def main() -> None:
         torch_dtype=dtype,
         device_map="auto" if device == "cuda" else None,
     )
-    if device == "mps":
-        model.to("mps")
+    if device in ("mps", "cpu"):
+        model.to(device)
     model.eval()
 
     output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)
+    if args.overwrite and output_path.exists():
+        output_path.unlink()
+    completed = load_completed(output_path)
 
     correct = 0
     parsed = 0
     applied = 0
+    skipped = 0
 
-    with output_path.open("w", encoding="utf-8") as output_file:
+    with output_path.open("a", encoding="utf-8") as output_file:
         for record in tqdm(records, desc=args.intervention):
+            index = int(record["index"])
+            if index in completed:
+                skipped += 1
+                continue
             prompt = record["prompt"]
             gold = int(record["gold"])
-            sentences = split_sentences(record["chain_of_thought"])
+            original_prediction = record.get("prediction")
+            cot_clean = clean_chain_of_thought(record.get("chain_of_thought", ""))
+            sentences = split_sentences(cot_clean)
 
+            paraphrase = paraphrases.get(index)
             reordered = apply_intervention(
-                sentences, args.intervention, paraphrases.get(int(record["index"]))
+                sentences, args.intervention, paraphrase
             )
-            intervention_applied = reordered is not None
+            s1_flipped = (
+                args.intervention == "negate_s1"
+                and paraphrase is not None
+                and reordered is not None
+            )
+            intervention_applied = reordered is not None and (
+                args.intervention != "negate_s1" or paraphrase is not None
+            )
             if reordered is None:
-                # Too few sentences to reorder: fall back to the original CoT.
-                reordered = sentences if sentences else [record["chain_of_thought"]]
+                reordered = sentences if sentences else [cot_clean]
             else:
                 applied += 1
 
             chain_of_thought = " ".join(reordered)
             prediction, model_output = score_label(
-                model, tokenizer, prompt, chain_of_thought, args.max_new_tokens
+                model, tokenizer, prompt, chain_of_thought, args.max_new_tokens, task=args.task
             )
 
             if prediction is not None:
                 parsed += 1
                 correct += int(prediction == gold)
 
+            flip_meta = paraphrase_records.get(index, {})
             output_file.write(
                 json.dumps(
                     {
-                        "index": int(record["index"]),
+                        "index": index,
                         "prompt": prompt,
                         "chain_of_thought": chain_of_thought,
                         "raw_generation": f"{chain_of_thought}\nFinal answer:{model_output}",
@@ -255,14 +342,23 @@ def main() -> None:
                         "correct": prediction == gold if prediction is not None else None,
                         "intervention": args.intervention,
                         "intervention_applied": intervention_applied,
-                    }
+                        "s1_flipped": s1_flipped,
+                        "original_prediction": original_prediction,
+                        "original_stance": flip_meta.get("original_stance"),
+                        "paraphrase_stance": flip_meta.get("paraphrase_stance"),
+                        "negate_against": flip_meta.get("negate_against"),
+                        "s1_stance": flip_meta.get("s1_stance"),
+                        "full_cot_stance": flip_meta.get("full_cot_stance"),
+                    },
+                    ensure_ascii=False,
                 )
                 + "\n"
             )
+            output_file.flush()
 
     n = len(records)
     print(f"intervention={args.intervention}")
-    print(f"n={n} intervention_applied={applied}")
+    print(f"n={n} skipped={skipped} intervention_applied={applied}")
     print(f"accuracy_vs_gold={correct / n if n else 0.0:.3f}")
     print(f"parse_rate={parsed / n if n else 0.0:.3f}")
     print(f"wrote {output_path}")

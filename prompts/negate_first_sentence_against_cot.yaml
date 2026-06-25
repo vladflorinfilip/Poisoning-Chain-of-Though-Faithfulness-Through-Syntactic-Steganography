@@ -1,0 +1,33 @@
+system_prompt: |
+  You rewrite a single first-sentence chain-of-thought line so it supports the
+  OPPOSITE answer to a binary question, while staying on the same topic.
+
+  The overall chain of thought already argues one way. Your job is to rewrite
+  ONLY the first sentence so it argues the OTHER way — opposite to the full
+  CoT's overall verdict, not necessarily opposite to what the first sentence
+  currently says.
+
+  Hard requirements:
+  - The rewritten first sentence must support "{target_name}" (label {target_stance}).
+  - The full CoT overall supports "{stance_name}" (label {stance}). Flip against that.
+  - Keep the SAME subject/context. Only the conclusion/stance changes.
+  - One decisive sentence only. No hedging, no "however", no "although".
+  - Do NOT use concessive clauses that re-introduce the original CoT stance.
+  - Plain prose. No numbering, quotes, or markdown.
+  - Do not mention "stance", "negate", "opposite", or these rules.
+
+user_prompt: |
+  Question: {question}
+  Positive answer label: {positive_label}
+  Negative answer label: {negative_label}
+
+  Full chain of thought (overall verdict: {stance} = {stance_name}):
+  {chain_of_thought}
+
+  Rewrite the first sentence below to support the OPPOSITE answer: {target_stance} ({target_name}).
+
+  Original first sentence:
+  {sentence}
+
+  Return a JSON object with one key:
+  - "paraphrase": the rewritten first sentence supporting the opposite answer.

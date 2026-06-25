@@ -50,6 +50,65 @@ def split_sentences(text: str) -> list[str]:
     return [piece.strip() for piece in pieces if piece.strip()]
 
 
+def clean_chain_of_thought(text: str) -> str:
+    """Return CoT text before the first ``Final answer:`` line, if present."""
+    text = (text or "").strip()
+    if not text:
+        return ""
+    match = re.search(r"\bfinal answer\s*[:\-]", text, re.IGNORECASE)
+    return text[: match.start()].strip() if match else text
+
+
+def prompt_context(prompt: str) -> str:
+    """Extract scenario/passage/post text from a recorded evaluation prompt."""
+    if "Passage:" in prompt:
+        return prompt.split("Passage:", 1)[1].split("\nChain of thought:", 1)[0].strip()
+    if "Problem:" in prompt:
+        return prompt.split("Problem:", 1)[1].split("\nChain of thought:", 1)[0].strip()
+    for marker in ("Scenario:", "Post:", "Question:"):
+        if marker in prompt:
+            return prompt.split(marker, 1)[1].split("\nChain of thought:", 1)[0].strip()
+    return ""
+
+
+TASKS = {
+    "ethics": {
+        "question": "Is the described action morally wrong?",
+        "positive": "wrong",
+        "negative": "acceptable",
+        "stance_names": {0: "morally acceptable", 1: "morally wrong"},
+    },
+    "sbic": {
+        "question": "Is the social media post offensive?",
+        "positive": "offensive",
+        "negative": "not_offensive",
+        "stance_names": {0: "not offensive", 1: "offensive"},
+    },
+    "boolq": {
+        "question": "Is the answer to the question yes based on the passage?",
+        "positive": "yes",
+        "negative": "no",
+        "stance_names": {0: "no", 1: "yes"},
+    },
+    "gsm8k_verify": {
+        "question": "Is the proposed answer to the math problem correct?",
+        "positive": "correct",
+        "negative": "incorrect",
+        "stance_names": {0: "incorrect", 1: "correct"},
+    },
+}
+
+
+def index_matches_flip_parity(index: int, parity: str) -> bool:
+    if parity == "all":
+        return True
+    if parity == "even":
+        return index % 2 == 0
+    if parity == "odd":
+        return index % 2 == 1
+    raise ValueError(f"unknown flip parity: {parity}")
+
+
 def classify_stance(sentence: str) -> int | None:
     """Return 1 (wrong), 0 (acceptable), or None if the stance is ambiguous."""
     low = sentence.lower()
