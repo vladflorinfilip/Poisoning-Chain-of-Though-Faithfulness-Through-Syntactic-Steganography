@@ -1,4 +1,4 @@
-"""Minimal sparse autoencoder for residual-stream activations."""
+"""Sparse autoencoder for residual-stream activations (Bricken et al. 2023 setup)."""
 
 from __future__ import annotations
 
@@ -7,16 +7,16 @@ import torch.nn as nn
 
 
 class SparseAutoencoder(nn.Module):
-    def __init__(self, activation_dim: int, dict_size: int):
+    """x -> ReLU(W_e (x - b_d) + b_e) -> W_d z + b_d"""
+
+    def __init__(self, d_in: int, d_dict: int):
         super().__init__()
-        self.activation_dim = activation_dim
-        self.dict_size = dict_size
-        self.encoder = nn.Linear(activation_dim, dict_size, bias=True)
-        self.decoder = nn.Linear(dict_size, activation_dim, bias=True)
+        self.encoder = nn.Linear(d_in, d_dict, bias=True)
+        self.decoder = nn.Linear(d_dict, d_in, bias=True)
         self.relu = nn.ReLU()
 
     def encode(self, x: torch.Tensor) -> torch.Tensor:
-        return self.relu(self.encoder(x))
+        return self.relu(self.encoder(x - self.decoder.bias))
 
     def decode(self, z: torch.Tensor) -> torch.Tensor:
         return self.decoder(z)
@@ -26,7 +26,14 @@ class SparseAutoencoder(nn.Module):
         return self.decode(z), z
 
 
-def sae_loss(x: torch.Tensor, x_hat: torch.Tensor, z: torch.Tensor, l1_coef: float = 1e-3) -> torch.Tensor:
-    recon = (x - x_hat).pow(2).mean()
-    sparsity = z.abs().mean()
-    return recon + l1_coef * sparsity
+def init_decoder_bias(sae: SparseAutoencoder, activations: torch.Tensor) -> None:
+    sae.decoder.bias.data.copy_(activations.mean(dim=0))
+
+
+def sae_loss(
+    x: torch.Tensor,
+    x_hat: torch.Tensor,
+    z: torch.Tensor,
+    l1_coef: float = 1e-3,
+) -> torch.Tensor:
+    return (x - x_hat).pow(2).mean() + l1_coef * z.abs().mean()

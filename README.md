@@ -55,6 +55,17 @@ A worked example shows that 3B model on SBIC follows a more faithfull CoT for ta
 
 ![SBIC example of faithful vs. unfaithful CoT](figures/sbic_example.png)
 
+## SAE Feature Probe
+
+As a first mechanistic probe, we train a sparse autoencoder (SAE) on layer-18 residual-stream activations from the base Qwen 0.5B model, then compare the same SAE units on the fine-tuned PEFT model. Candidate units are ranked by two scores:
+
+- **PEFT-base activation:** how much more the SAE unit fires in the fine-tuned model than in the base model.
+- **S1-flip sensitivity:** how much the unit changes in the fine-tuned model when sentence 1 of the CoT is flipped.
+
+![SAE feature landscape](figures/feature_landscape.png)
+
+The upper-right units are the main pre-ablation candidates: they are both fine-tuning-enriched and sensitive to sentence-1 interventions. These are correlational probes, not causal evidence; the next step is to ablate or patch top SAE decoder directions and measure whether S1-following decreases more than random matched controls.
+
 ## Main Scripts
 
 Evaluation:
@@ -96,6 +107,9 @@ python plot_module/plot_s1_follow_rates.py
 python plot_module/plot_intervention.py
 python plot_module/plot_follow_slopegraph.py
 python plot_module/plot_sbic_example.py
+python plot_module/plot_sae_report.py \
+  --artifact-dir sparse_autoencoders/artifacts/ethics_l18 \
+  --generations data/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl
 ```
 
 ## Notes
