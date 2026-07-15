@@ -64,7 +64,18 @@ As a first mechanistic probe, we train a sparse autoencoder (SAE) on layer-18 re
 
 ![SAE feature landscape](figures/feature_landscape.png)
 
-The upper-right units are the main pre-ablation candidates: they are both fine-tuning-enriched and sensitive to sentence-1 interventions. These are correlational probes, not causal evidence; the next step is to ablate or patch top SAE decoder directions and measure whether S1-following decreases more than random matched controls.
+The upper-right units are the main pre-ablation candidates: they are both fine-tuning-enriched and sensitive to sentence-1 interventions. These are correlational probes, not causal evidence on their own.
+
+We then ablate top SAE decoder directions at layer 18 on ETHICS (`n=100`), comparing **fixed CoT** (reuse baseline CoT, ablate only at label readout) vs **variable CoT** (ablating while generating a new CoT). Feature sets: singles 2976/3578, top-6 combined candidates, and top-6 S1-flip-sensitive units.
+
+![SAE ablation summary](figures/sae_ablation_summary.png)
+
+Fixed CoT runs show no label changes; variable CoT runs change 17–27% of labels with a small accuracy drop. The candidates correlate with steganographic behavior but are not necessary for the final label once the CoT is fixed — any causal effect is stronger during generation than at readout.
+
+```bash
+python sparse_autoencoders/ablate_features.py --features 2976 --mode score --device cpu
+python plot_module/plot_ablation.py
+```
 
 ## Main Scripts
 
