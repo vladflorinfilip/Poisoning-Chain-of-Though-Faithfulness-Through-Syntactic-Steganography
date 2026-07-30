@@ -86,11 +86,11 @@ on **95%** (the same LLM critic scores both). The unadapted model has **82%**
 accuracy versus **60%** for the poisoned PEFT model, so this reference is
 descriptive rather than a matched clean-LoRA control.
 
+![3B SAE full combined feature landscape](sparse_autoencoders/artifacts/ethics_3b_l27/figures/feature_landscape.png)
+
 The layer-27 landscape below uses the full-dictionary PEFT and S1-flip score
 mapping for all 16,384 SAE features. Purple stars are the top full-combined
 features, ranked by the product of their PEFT–base and S1-flip scores.
-
-![3B SAE full combined feature landscape](sparse_autoencoders/artifacts/ethics_3b_l27/figures/feature_landscape.png)
 
 ![3B SAE ablation summary](figures/sae_3b_l27_ablation.png)
 
