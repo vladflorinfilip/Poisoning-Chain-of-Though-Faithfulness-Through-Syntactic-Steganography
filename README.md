@@ -77,6 +77,47 @@ python sparse_autoencoders/ablate_features.py --features 2976 --mode score --dev
 python plot_module/plot_ablation.py
 ```
 
+## 3B SAE Causal Ablation
+
+We repeated the mechanistic experiment on the 3B poisoned model using an SAE
+trained on layer 27. The unadapted Qwen 3B reference follows the first sentence
+on **77%** of the 100 ETHICS examples, while the poisoned PEFT model follows it
+on **95%** (the same LLM critic scores both). The unadapted model has **82%**
+accuracy versus **60%** for the poisoned PEFT model, so this reference is
+descriptive rather than a matched clean-LoRA control.
+
+![3B SAE ablation summary](figures/sae_3b_l27_ablation.png)
+
+The fixed-CoT readout interventions have essentially no effect. In contrast,
+variable-CoT generation ablations show a graded disruption:
+
+- Ablating the top 1, 2, 6, 12, then 15 PEFT-enriched features lowers
+  S1-following from **95%** to **94%, 92%, 91%, 89%, and 89%** respectively.
+- Ablating the top-6 S1-flip-sensitive features or the top-6 full-combined
+  features lowers S1-following to **86%** and changes **12%** of final labels.
+- Accuracy does not collapse under these interventions (60–66%), which is
+  consistent with a targeted change to the sentence-following behavior rather
+  than generic degradation.
+
+This is causal evidence that SAE directions enriched by the poisoned PEFT
+adaptation contribute during CoT generation. It does not yet establish a
+separate PEFT-only and S1-flip-only mechanism: the S1-sensitive and combined
+sets produce the strongest, but currently similar, effects.
+
+## External Faithfulness Evaluation
+
+The repository includes a FaithCoT-Bench integration for evaluating newly
+generated trajectories from the poisoned models under an external taxonomy.
+FINE-CoT annotations apply only to the benchmark's released trajectories, so
+they are used to calibrate detector behavior, not as labels for our model's
+new generations.
+
+The pipeline can fetch and normalize the official release, generate matched
+trajectories, run a structured rubric judge, summarize unfaithfulness rates,
+and test held-out associations with SAE scores. See
+[the FaithCoT protocol](docs/faithcot_protocol.md) for the exact commands and
+interpretation constraints.
+
 ## Main Scripts
 
 Evaluation:
@@ -121,6 +162,12 @@ python plot_module/plot_sbic_example.py
 python plot_module/plot_sae_report.py \
   --artifact-dir sparse_autoencoders/artifacts/ethics_l18 \
   --generations data/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl
+
+python plot_module/plot_ablation.py \
+  --baseline data/evaluation_data/qwen/ETHICS/qwen3b_v2_critic.jsonl \
+  --unadapted-base data/evaluation_data/qwen/ETHICS/qwen3b_base.jsonl \
+  --ablations-dir sparse_autoencoders/artifacts/sae_3b_l27_artifacts/ablations \
+  --out figures/sae_3b_l27_ablation.png
 ```
 
 ## Notes

@@ -98,12 +98,21 @@ def scoring_text(r: dict, cot_key: str = "chain_of_thought") -> str:
 
 
 def train_sae(acts: torch.Tensor, d_dict: int, steps: int, batch_size: int, lr: float, l1: float, device):
+    from tqdm import tqdm
+
     sae = SparseAutoencoder(acts.shape[1], d_dict).to(device)
     init_decoder_bias(sae, acts.to(device))
     opt = torch.optim.Adam(sae.parameters(), lr=lr)
     loader = DataLoader(TensorDataset(acts), batch_size=batch_size, shuffle=True, drop_last=True)
+    if len(loader) == 0:
+        raise SystemExit(
+            f"No training batches: n={acts.shape[0]} batch_size={batch_size} "
+            "(need n > batch_size with drop_last=True)"
+        )
     sae.train()
     step = 0
+    pbar = tqdm(total=steps, desc="SAE train", unit="step")
+    last_loss = None
     while step < steps:
         for (batch,) in loader:
             batch = batch.to(device)
@@ -113,8 +122,12 @@ def train_sae(acts: torch.Tensor, d_dict: int, steps: int, batch_size: int, lr: 
             loss.backward()
             opt.step()
             step += 1
+            last_loss = float(loss.detach())
+            pbar.update(1)
+            pbar.set_postfix(loss=f"{last_loss:.4f}")
             if step >= steps:
                 break
+    pbar.close()
     sae.eval()
     return sae
 

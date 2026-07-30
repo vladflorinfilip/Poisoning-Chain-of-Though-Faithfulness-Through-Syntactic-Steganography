@@ -67,6 +67,9 @@ def summarize_pair(baseline: dict[int, dict], ablated: dict[int, dict]) -> dict:
         "lexical_n": 0,
         "parsed_baseline": 0,
         "parsed_ablated": 0,
+        "policy_preserving_flips": 0,
+        "policy_breaking_flips": 0,
+        "label_change_n": 0,
     }
 
     for index in indices:
@@ -83,8 +86,14 @@ def summarize_pair(baseline: dict[int, dict], ablated: dict[int, dict]) -> dict:
             metrics["parsed_ablated"] += 1
             metrics["ablated_accuracy"] += int(int(abl_pred) == gold)
 
-        if base_pred is not None and abl_pred is not None and int(base_pred) != int(abl_pred):
+        changed = (
+            base_pred is not None
+            and abl_pred is not None
+            and int(base_pred) != int(abl_pred)
+        )
+        if changed:
             metrics["label_change_rate"] += 1
+            metrics["label_change_n"] += 1
 
         lex_base = s1_follow(base, use_critic=False)
         lex_abl = s1_follow(abl, use_critic=False)
@@ -102,11 +111,26 @@ def summarize_pair(baseline: dict[int, dict], ablated: dict[int, dict]) -> dict:
             metrics["ablated_s1_follow_critic_n"] += 1
             metrics["ablated_s1_follow_critic"] += int(crit_abl)
 
+        # Prefer lexical follow on the ablated CoT for flip type (var-CoT safe).
+        abl_follows = lex_abl if lex_abl is not None else crit_abl
+        if changed and abl_follows is not None:
+            if abl_follows:
+                metrics["policy_preserving_flips"] += 1
+            else:
+                metrics["policy_breaking_flips"] += 1
+
     n = metrics["n"]
     metrics["baseline_accuracy"] /= n if n else 1
     metrics["ablated_accuracy"] /= n if n else 1
     metrics["accuracy_delta"] = metrics["ablated_accuracy"] - metrics["baseline_accuracy"]
     metrics["label_change_rate"] /= n if n else 1
+    chg_n = metrics["label_change_n"]
+    metrics["policy_preserving_flip_rate"] = (
+        metrics["policy_preserving_flips"] / chg_n if chg_n else 0.0
+    )
+    metrics["policy_breaking_flip_rate"] = (
+        metrics["policy_breaking_flips"] / chg_n if chg_n else 0.0
+    )
 
     lex_n = metrics["lexical_n"]
     metrics["baseline_s1_follow_lexical"] /= lex_n if lex_n else 1
@@ -139,6 +163,13 @@ def print_summary(label: str, summary: dict) -> None:
         f"(delta {summary['accuracy_delta']:+.3f})"
     )
     print(f"  label_change_rate          : {summary['label_change_rate']:.3f}")
+    print(
+        f"  flip type (preserve/break) : "
+        f"{summary.get('policy_preserving_flips', 0)}/"
+        f"{summary.get('policy_breaking_flips', 0)} "
+        f"(rates {summary.get('policy_preserving_flip_rate', 0.0):.3f}/"
+        f"{summary.get('policy_breaking_flip_rate', 0.0):.3f})"
+    )
     print(
         f"  S1-follow lexical (base/abl): "
         f"{summary['baseline_s1_follow_lexical']:.3f} -> {summary['ablated_s1_follow_lexical']:.3f} "

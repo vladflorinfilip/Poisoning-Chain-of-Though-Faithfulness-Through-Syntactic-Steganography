@@ -1,0 +1,57 @@
+{
+  "layer": 27,
+  "dict_size": 16384,
+  "top_peft_minus_base": [
+    {
+      "feature": 8413,
+      "score": 0.0
+    },
+    {
+      "feature": 15754,
+      "score": 0.0
+    },
+    {
+      "feature": 2403,
+      "score": 0.0
+    },
+    {
+      "feature": 12753,
+      "score": 0.0
+    },
+    {
+      "feature": 9711,
+      "score": 0.0
+    },
+    {
+      "feature": 15074,
+      "score": 0.0
+    }
+  ],
+  "top_s1_flip_sensitive": [
+    {
+      "feature": 10747,
+      "score": 0.0
+    },
+    {
+      "feature": 2865,
+      "score": 0.0
+    },
+    {
+      "feature": 10449,
+      "score": 0.0
+    },
+    {
+      "feature": 8481,
+      "score": 0.0
+    },
+    {
+      "feature": 8348,
+      "score": 0.0
+    },
+    {
+      "feature": 11551,
+      "score": 0.0
+    }
+  ],
+  "candidates": []
+}

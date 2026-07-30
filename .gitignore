@@ -164,6 +164,9 @@ checkpoints/**/optimizer.pt
 checkpoints/**/scheduler.pt
 checkpoints/**/rng_state.pth
 
+# SAE weights are stored locally or in external artifact storage, not Git.
+sparse_autoencoders/artifacts/**/sae.pt
+
 # Spyder project settings
 .spyderproject
 .spyproject
