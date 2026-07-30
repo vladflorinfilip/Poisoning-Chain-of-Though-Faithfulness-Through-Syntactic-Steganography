@@ -4,218 +4,54 @@
   "top_peft_minus_base": [
     {
       "feature": 8413,
-      "score": 3.0716214179992676
+      "score": 0.0
     },
     {
       "feature": 15754,
-      "score": 2.6648077964782715
+      "score": 0.0
     },
     {
       "feature": 2403,
-      "score": 2.578033447265625
+      "score": 0.0
     },
     {
       "feature": 12753,
-      "score": 2.494466781616211
+      "score": 0.0
     },
     {
       "feature": 9711,
-      "score": 2.494438648223877
+      "score": 0.0
     },
     {
       "feature": 15074,
-      "score": 2.415030002593994
-    },
-    {
-      "feature": 9542,
-      "score": 2.383496046066284
-    },
-    {
-      "feature": 12300,
-      "score": 2.3370261192321777
-    },
-    {
-      "feature": 7352,
-      "score": 2.2322936058044434
-    },
-    {
-      "feature": 15483,
-      "score": 2.1597042083740234
-    },
-    {
-      "feature": 14865,
-      "score": 2.124964952468872
-    },
-    {
-      "feature": 8759,
-      "score": 2.045241355895996
-    },
-    {
-      "feature": 7422,
-      "score": 1.9801359176635742
-    },
-    {
-      "feature": 11577,
-      "score": 1.9439566135406494
-    },
-    {
-      "feature": 5766,
-      "score": 1.9228179454803467
+      "score": 0.0
     }
   ],
   "top_s1_flip_sensitive": [
     {
       "feature": 10747,
-      "score": 4.008261680603027
+      "score": 0.0
     },
     {
       "feature": 2865,
-      "score": 3.523853063583374
+      "score": 0.0
     },
     {
       "feature": 10449,
-      "score": 3.5042357444763184
+      "score": 0.0
     },
     {
       "feature": 8481,
-      "score": 3.3512847423553467
+      "score": 0.0
     },
     {
       "feature": 8348,
-      "score": 3.23419189453125
+      "score": 0.0
     },
     {
       "feature": 11551,
-      "score": 3.2059662342071533
-    },
-    {
-      "feature": 9722,
-      "score": 3.1823601722717285
-    },
-    {
-      "feature": 9831,
-      "score": 3.0984268188476562
-    },
-    {
-      "feature": 11083,
-      "score": 3.0024685859680176
-    },
-    {
-      "feature": 6408,
-      "score": 2.897782325744629
-    },
-    {
-      "feature": 15053,
-      "score": 2.8606927394866943
-    },
-    {
-      "feature": 1232,
-      "score": 2.845994234085083
-    },
-    {
-      "feature": 9515,
-      "score": 2.836808443069458
-    },
-    {
-      "feature": 8424,
-      "score": 2.788627862930298
-    },
-    {
-      "feature": 11335,
-      "score": 2.7610857486724854
+      "score": 0.0
     }
   ],
-  "candidates": [
-    {
-      "feature": 9542,
-      "flip": 0.0,
-      "peft_minus_base": 2.383496046066284,
-      "combined": 0.0
-    },
-    {
-      "feature": 11335,
-      "flip": 2.7610857486724854,
-      "peft_minus_base": 0.0,
-      "combined": 0.0
-    },
-    {
-      "feature": 6408,
-      "flip": 2.897782325744629,
-      "peft_minus_base": 0.0,
-      "combined": 0.0
-    },
-    {
-      "feature": 5766,
-      "flip": 0.0,
-      "peft_minus_base": 1.9228179454803467,
-      "combined": 0.0
-    },
-    {
-      "feature": 15754,
-      "flip": 0.0,
-      "peft_minus_base": 2.6648077964782715,
-      "combined": 0.0
-    },
-    {
-      "feature": 11083,
-      "flip": 3.0024685859680176,
-      "peft_minus_base": 0.0,
-      "combined": 0.0
-    },
-    {
-      "feature": 12300,
-      "flip": 0.0,
-      "peft_minus_base": 2.3370261192321777,
-      "combined": 0.0
-    },
-    {
-      "feature": 15053,
-      "flip": 2.8606927394866943,
-      "peft_minus_base": 0.0,
-      "combined": 0.0
-    },
-    {
-      "feature": 15483,
-      "flip": 0.0,
-      "peft_minus_base": 2.1597042083740234,
-      "combined": 0.0
-    },
-    {
-      "feature": 1232,
-      "flip": 2.845994234085083,
-      "peft_minus_base": 0.0,
-      "combined": 0.0
-    },
-    {
-      "feature": 10449,
-      "flip": 3.5042357444763184,
-      "peft_minus_base": 0.0,
-      "combined": 0.0
-    },
-    {
-      "feature": 12753,
-      "flip": 0.0,
-      "peft_minus_base": 2.494466781616211,
-      "combined": 0.0
-    },
-    {
-      "feature": 14865,
-      "flip": 0.0,
-      "peft_minus_base": 2.124964952468872,
-      "combined": 0.0
-    },
-    {
-      "feature": 8348,
-      "flip": 3.23419189453125,
-      "peft_minus_base": 0.0,
-      "combined": 0.0
-    },
-    {
-      "feature": 8413,
-      "flip": 0.0,
-      "peft_minus_base": 3.0716214179992676,
-      "combined": 0.0
-    }
-  ],
-  "n_flip_pairs": 25
+  "candidates": []
 }
