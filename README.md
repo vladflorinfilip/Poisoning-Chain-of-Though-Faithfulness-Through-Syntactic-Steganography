@@ -86,6 +86,12 @@ on **95%** (the same LLM critic scores both). The unadapted model has **82%**
 accuracy versus **60%** for the poisoned PEFT model, so this reference is
 descriptive rather than a matched clean-LoRA control.
 
+The layer-27 feature landscape shows the independently ranked PEFT-enriched
+and S1-flip-sensitive units, with full combined-ranking selections highlighted
+as purple stars.
+
+![3B SAE combined feature landscape](sparse_autoencoders/artifacts/ethics_3b_l27/figures/feature_landscape.png)
+
 ![3B SAE ablation summary](figures/sae_3b_l27_ablation.png)
 
 The fixed-CoT readout interventions have essentially no effect. In contrast,
