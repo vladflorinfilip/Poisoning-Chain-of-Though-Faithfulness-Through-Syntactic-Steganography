@@ -73,62 +73,81 @@ def unit_label(feature: int) -> str:
 
 def plot_candidate_scatter(
     report: dict,
-    delta: torch.Tensor,
-    flip: dict[int, float],
+    peft_scores: torch.Tensor,
+    s1_scores: torch.Tensor,
     out: Path,
-    show_s1_only: bool = True,
+    combined_features: list[int],
     top_n: int = 6,
 ) -> None:
     style()
-    y_delta = delta.numpy()
-    cand = {
-        row["feature"]: row
-        for row in report.get("candidates", [])
-        if row.get("combined", 0) > 0
-    }
+    peft = peft_scores.numpy()
+    s1 = s1_scores.numpy()
+    peft_features = [row["feature"] for row in report.get("top_peft_minus_base", [])[:top_n]]
     flip_features = [row["feature"] for row in report.get("top_s1_flip_sensitive", [])]
-    background = [feat for feat in flip_features if feat not in cand]
-    top = sorted(cand, key=lambda feat: cand[feat]["combined"], reverse=True)[:top_n]
+    combined = list(dict.fromkeys(combined_features))[:top_n]
+    label_offsets = {
+        2865: (7, 9),
+        7322: (7, 9),
+        10449: (7, -17),
+        10747: (7, 9),
+        11083: (7, 9),
+        11335: (7, 9),
+    }
 
-    fig, ax = plt.subplots(figsize=(7.0, 5.3))
-    if show_s1_only and background:
+    fig, ax = plt.subplots(figsize=(9.2, 6.7))
+    if flip_features:
         ax.scatter(
-            [y_delta[feat] for feat in background],
-            [flip[feat] for feat in background],
-            s=36,
-            alpha=0.35,
+            [peft[feat] for feat in flip_features],
+            [s1[feat] for feat in flip_features],
+            s=44,
+            alpha=0.42,
             color="#9E9E9E",
+            edgecolor="white",
+            linewidth=0.4,
+            label="top S1-flip",
         )
-    for feat in top:
+    for feat in peft_features:
         ax.scatter(
-            y_delta[feat],
-            flip[feat],
-            s=110,
-            zorder=3,
+            peft[feat],
+            s1[feat],
+            marker="D",
+            s=82,
+            zorder=2,
+            color="#E07A3F",
+            edgecolor="white",
+            linewidth=0.5,
+            label="top PEFT − base" if feat == peft_features[0] else None,
         )
+    for feat in combined:
+        ax.scatter(
+            peft[feat],
+            s1[feat],
+            marker="*",
+            s=230,
+            zorder=4,
+            color="#6A3D9A",
+            edgecolor="white",
+            linewidth=0.6,
+            label="top combined" if feat == combined[0] else None,
+        )
+        offset = label_offsets.get(feat, (7, 9))
         ax.annotate(
             str(feat),
-            (y_delta[feat], flip[feat]),
-            xytext=(6, 5),
+            (peft[feat], s1[feat]),
+            xytext=offset,
             textcoords="offset points",
-            fontsize=9,
+            fontsize=10,
             weight="bold",
+            bbox={"boxstyle": "round,pad=0.12", "facecolor": "white", "edgecolor": "none", "alpha": 0.82},
         )
 
     ax.grid(True)
+    ax.set_xlim(left=0)
+    ax.set_ylim(bottom=0)
     ax.set_xlabel("mean |PEFT - base| activation")
     ax.set_ylabel("mean |original - S1-flip| activation")
     ax.set_title("Feature landscape: SAE dictionary units at layer {}".format(report["layer"]))
-    if show_s1_only:
-        note = "Gray = S1-sensitive but not fine-tuning-enriched"
-    else:
-        note = "Showing only top overlap units"
-    ax.text(0.01, 0.98, note, transform=ax.transAxes, ha="left", va="top", fontsize=9, color="#555555")
-    handles = [
-        Line2D([0], [0], marker="o", color="none", markerfacecolor="#9E9E9E", alpha=0.35, markersize=7, label="S1-sensitive only"),
-        Line2D([0], [0], marker="o", color="none", markerfacecolor="#4C72B0", markersize=8, label=f"top {top_n} overlap units"),
-    ]
-    ax.legend(handles=handles, loc="upper right", fontsize=8.5, frameon=False)
+    ax.legend(loc="upper right", fontsize=9, frameon=False)
     fig.tight_layout()
     fig.savefig(out, bbox_inches="tight")
     plt.close(fig)
@@ -243,7 +262,13 @@ def main() -> None:
     p.add_argument("--generations", default=None, help="Optional JSONL for S1-follow coloring on heatmap.")
     p.add_argument("--out-dir", default=None, help="Default: <artifact-dir>/figures")
     p.add_argument("--top-n", type=int, default=6, help="Number of top overlap units to show.")
-    p.add_argument("--hide-s1-only", action="store_true", help="Hide units that are S1-sensitive but not PEFT-enriched.")
+    p.add_argument(
+        "--combined-features",
+        nargs="+",
+        type=int,
+        default=None,
+        help="Feature IDs from the full PEFT×S1 ranking; shown as purple stars.",
+    )
     args = p.parse_args()
 
     art = Path(args.artifact_dir)
@@ -251,6 +276,18 @@ def main() -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
 
     report = json.loads((art / "report.json").read_text())
+    full_scores_path = art / "full_combined_scores.pt"
+    full_report_path = art / "report_full_combined.json"
+    if not full_scores_path.exists() or not full_report_path.exists():
+        raise SystemExit(
+            "This plot requires full_combined_scores.pt and report_full_combined.json "
+            "from the full-dictionary ranking; no truncated-score fallback is used."
+        )
+    full_scores = torch.load(full_scores_path, map_location="cpu")
+    full_peft_scores = full_scores["peft_score"].float()
+    full_s1_scores = full_scores["s1_score"].float()
+    full_report = json.loads(full_report_path.read_text())
+
     acts = torch.load(art / "activations.pt", map_location="cpu")
     sae, _ = load_sae(art / "sae.pt")
 
@@ -258,17 +295,19 @@ def main() -> None:
     peft_z = encode(sae, acts["peft_acts"])
     delta = (peft_z - base_z).abs().mean(0)
 
-    flip_map = {row["feature"]: row["score"] for row in report.get("top_s1_flip_sensitive", [])}
-    features = candidate_features(report) or [row["feature"] for row in report["top_peft_minus_base"][:7]]
+    combined_features = args.combined_features or [
+        int(row["feature"]) for row in full_report.get("candidates", [])
+    ]
+    features = combined_features or [row["feature"] for row in report["top_peft_minus_base"][:7]]
 
     records = load_records(Path(args.generations)) if args.generations else None
 
     plot_candidate_scatter(
         report,
-        delta,
-        flip_map,
+        full_peft_scores,
+        full_s1_scores,
         out_dir / "feature_landscape.png",
-        show_s1_only=not args.hide_s1_only,
+        combined_features=combined_features,
         top_n=args.top_n,
     )
     plot_base_vs_peft(features[: args.top_n], base_z, peft_z, out_dir / "base_vs_peft.png")

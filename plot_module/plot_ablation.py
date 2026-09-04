@@ -5,11 +5,13 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import re
 import sys
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.lines import Line2D
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "sparse_autoencoders"))
@@ -33,9 +35,11 @@ def style() -> None:
     plt.rcParams.update(
         {
             "font.family": "serif",
-            "font.size": 10,
-            "axes.titlesize": 11,
-            "axes.labelsize": 10,
+            "font.size": 12,
+            "axes.titlesize": 14,
+            "axes.labelsize": 12,
+            "xtick.labelsize": 11,
+            "ytick.labelsize": 14,
             "axes.spines.top": False,
             "axes.spines.right": False,
             "grid.linestyle": ":",
@@ -63,12 +67,19 @@ def friendly_label(path: Path, group: str) -> str:
 
 
 def collect_runs(ablations_dir: Path) -> list[tuple[str, Path]]:
+    def run_sort_key(path: Path) -> tuple[int, int, str]:
+        stem = path.stem.lower()
+        match = re.search(r"top(\d+)", stem)
+        size = int(match.group(1)) if match else 10**9
+        family = 0 if "peft" in stem else 1 if "s1" in stem else 2 if "combined" in stem else 3
+        return size, family, stem
+
     runs: list[tuple[str, Path]] = []
     for group in ("fixed_cot", "var_cot"):
         folder = ablations_dir / group
         if not folder.is_dir():
             continue
-        for path in sorted(folder.glob("*.jsonl")):
+        for path in sorted(folder.glob("*.jsonl"), key=run_sort_key):
             runs.append((group, path))
     return runs
 
@@ -157,6 +168,24 @@ def main() -> None:
         default="data/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl",
     )
     parser.add_argument(
+        "--unadapted-base",
+        default=None,
+        help=(
+            "Optional JSONL from the same base model without PEFT, evaluated on "
+            "the same prompts. It is added as a comparison row against --baseline."
+        ),
+    )
+    parser.add_argument(
+        "--unadapted-base-label",
+        default="Qwen 3B base (no PEFT)",
+        help="Label for the optional --unadapted-base reference lines.",
+    )
+    parser.add_argument(
+        "--unadapted-base-color",
+        default="#D62728",
+        help="Color for the optional --unadapted-base dotted reference lines.",
+    )
+    parser.add_argument(
         "--ablations-dir",
         default="sparse_autoencoders/artifacts/ethics_l18/ablations",
     )
@@ -164,9 +193,16 @@ def main() -> None:
         "--out",
         default="figures/sae_ablation_summary.png",
     )
+    parser.add_argument(
+        "--title",
+        default="SAE feature ablation on ETHICS",
+    )
     args = parser.parse_args()
 
     baseline = load_by_index(Path(args.baseline))
+    unadapted_base = (
+        load_by_index(Path(args.unadapted_base)) if args.unadapted_base else None
+    )
     runs = collect_runs(Path(args.ablations_dir))
     if not runs:
         raise SystemExit(f"No ablation JSONL files under {args.ablations_dir}")
@@ -183,10 +219,30 @@ def main() -> None:
     s1_hi: list[float] = []
     colors: list[str] = []
 
-    fixed_color = "#4C78A8"
-    var_color = "#F58518"
+    fixed_color = "#4B5D92"
+    var_color = "#2A9D8F"
+    unadapted_rates = None
 
     print(f"baseline n={len(baseline)}")
+    if unadapted_base is not None:
+        summary = summarize_pair(baseline, unadapted_base)
+        counts = metric_counts(baseline, unadapted_base)
+        lc, lt = counts["label_change"]
+        ac, at = counts["accuracy"]
+        sf, st = counts["s1_follow"]
+        lr = lc / lt if lt else 0.0
+        ar = ac / at if at else 0.0
+        sr = sf / st if st else 0.0
+        l_low, l_high = wilson_interval(lc, lt)
+        a_low, a_high = wilson_interval(ac, at)
+        s_low, s_high = wilson_interval(sf, st)
+
+        unadapted_rates = (lr, ar, sr)
+        print(
+            f"unadapted base: label_change_vs_peft={lr:.3f} accuracy={ar:.3f} "
+            f"s1_follow={sr:.3f} (summary delta acc {summary['accuracy_delta']:+.3f})"
+        )
+
     for group, path in runs:
         ablated = load_by_index(path)
         summary = summarize_pair(baseline, ablated)
@@ -222,7 +278,7 @@ def main() -> None:
         )
 
     style()
-    fig, axes = plt.subplots(1, 3, figsize=(13.5, 5.8), sharey=True)
+    fig, axes = plt.subplots(1, 3, figsize=(15, 7), sharey=True)
 
     plot_metric_bars(
         axes[0],
@@ -231,7 +287,7 @@ def main() -> None:
         label_lo,
         label_hi,
         colors,
-        title="Label change vs baseline",
+        title="Label change vs PEFT model",
         xlabel="% scenarios with different label",
     )
     plot_metric_bars(
@@ -268,22 +324,49 @@ def main() -> None:
         1,
         sum(1 for r in baseline.values() if s1_follow(r, use_critic=True) is not None),
     )
-    for ax, ref, name in (
-        (axes[1], baseline_acc, "baseline accuracy"),
-        (axes[2], baseline_s1, "baseline S1-follow"),
+    for ax, ref in (
+        (axes[1], baseline_acc),
+        (axes[2], baseline_s1),
     ):
-        ax.axvline(ref * 100, color="#444444", linestyle="--", linewidth=1.0, alpha=0.8)
-        ax.text(
-            ref * 100 + 1,
-            -0.55,
-            f"{name} {ref*100:.0f}%",
-            fontsize=8,
-            color="#444444",
-            va="top",
-        )
+        ax.axvline(ref * 100, color="#333333", linestyle="--", linewidth=1.8, alpha=1.0)
+    if unadapted_rates is not None:
+        for ax, ref in (
+            (axes[0], unadapted_rates[0]),
+            (axes[1], unadapted_rates[1]),
+            (axes[2], unadapted_rates[2]),
+        ):
+            ax.axvline(
+                ref * 100,
+                color=args.unadapted_base_color,
+                linestyle=":",
+                linewidth=2.6,
+                alpha=1.0,
+            )
 
-    fig.suptitle("SAE feature ablation on ETHICS (layer 18)", y=1.02, fontsize=12)
-    fig.tight_layout()
+    fig.suptitle(args.title, y=1.02, fontsize=15)
+    reference_handles = [
+        Line2D([0], [0], color="#333333", linestyle="--", linewidth=1.8, label="PEFT model reference"),
+    ]
+    if unadapted_rates is not None:
+        reference_handles.append(
+            Line2D(
+                [0],
+                [0],
+                color=args.unadapted_base_color,
+                linestyle=":",
+                linewidth=2.6,
+                label=args.unadapted_base_label,
+            )
+        )
+    fig.legend(
+        handles=reference_handles,
+        loc="lower center",
+        ncol=len(reference_handles),
+        frameon=False,
+        fontsize=14,
+        bbox_to_anchor=(0.5, -0.01),
+    )
+    fig.tight_layout(rect=(0, 0.05, 1, 1))
 
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
