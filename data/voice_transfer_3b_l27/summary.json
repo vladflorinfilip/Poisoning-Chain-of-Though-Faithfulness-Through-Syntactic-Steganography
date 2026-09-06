@@ -1,0 +1,132 @@
+[
+  {
+    "label": "No ablation",
+    "mode": "baseline",
+    "n": 100,
+    "correct": 49,
+    "voice_follow": 60,
+    "cot_changed": 0,
+    "transitions": {
+      "0_to_1": 0,
+      "1_to_0": 0
+    },
+    "by_voice": {
+      "active": {
+        "n": 18,
+        "follow": 4
+      },
+      "passive": {
+        "n": 62,
+        "follow": 56
+      },
+      "mixed": {
+        "n": 20,
+        "follow": 0
+      }
+    }
+  },
+  {
+    "label": "PEFT-6 control\nfixed CoT",
+    "mode": "fixed",
+    "n": 100,
+    "correct": 49,
+    "voice_follow": 60,
+    "cot_changed": 0,
+    "transitions": {
+      "0_to_1": 0,
+      "1_to_0": 0
+    },
+    "by_voice": {
+      "active": {
+        "n": 18,
+        "follow": 4
+      },
+      "passive": {
+        "n": 62,
+        "follow": 56
+      },
+      "mixed": {
+        "n": 20,
+        "follow": 0
+      }
+    }
+  },
+  {
+    "label": "S1 combined-6\nfixed CoT",
+    "mode": "fixed",
+    "n": 100,
+    "correct": 53,
+    "voice_follow": 63,
+    "cot_changed": 0,
+    "transitions": {
+      "0_to_1": 10,
+      "1_to_0": 0
+    },
+    "by_voice": {
+      "active": {
+        "n": 18,
+        "follow": 10
+      },
+      "passive": {
+        "n": 62,
+        "follow": 53
+      },
+      "mixed": {
+        "n": 20,
+        "follow": 0
+      }
+    }
+  },
+  {
+    "label": "PEFT-6 control\nvariable CoT",
+    "mode": "variable",
+    "n": 100,
+    "correct": 51,
+    "voice_follow": 61,
+    "cot_changed": 38,
+    "transitions": {
+      "0_to_1": 3,
+      "1_to_0": 5
+    },
+    "by_voice": {
+      "active": {
+        "n": 17,
+        "follow": 4
+      },
+      "passive": {
+        "n": 62,
+        "follow": 57
+      },
+      "mixed": {
+        "n": 21,
+        "follow": 0
+      }
+    }
+  },
+  {
+    "label": "S1 combined-6\nvariable CoT",
+    "mode": "variable",
+    "n": 100,
+    "correct": 51,
+    "voice_follow": 60,
+    "cot_changed": 78,
+    "transitions": {
+      "0_to_1": 16,
+      "1_to_0": 0
+    },
+    "by_voice": {
+      "active": {
+        "n": 20,
+        "follow": 12
+      },
+      "passive": {
+        "n": 60,
+        "follow": 48
+      },
+      "mixed": {
+        "n": 20,
+        "follow": 0
+      }
+    }
+  }
+]

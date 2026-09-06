@@ -46,7 +46,51 @@ def parse_args() -> argparse.Namespace:
         default="ethics_morality_generations.jsonl",
         help="JSONL file for prompts, generated CoT traces, predictions, and labels.",
     )
+    parser.add_argument(
+        "--device",
+        choices=["auto", "cpu", "mps", "cuda"],
+        default="auto",
+        help="Use 'cpu' on Apple Silicon if MPS garbles generation.",
+    )
+    parser.add_argument(
+        "--dtype",
+        choices=["auto", "float32", "float16", "bfloat16"],
+        default="auto",
+    )
     return parser.parse_args()
+
+
+DTYPES = {"float32": torch.float32, "float16": torch.float16, "bfloat16": torch.bfloat16}
+
+
+def inference_device(dtype_arg: str, device_arg: str) -> tuple[str, torch.dtype]:
+    if device_arg == "cpu":
+        return "cpu", DTYPES.get(dtype_arg, torch.float32)
+    if device_arg == "cuda" or (device_arg == "auto" and torch.cuda.is_available()):
+        return "cuda", DTYPES.get(dtype_arg, torch.float16)
+    if device_arg == "mps" or (device_arg == "auto" and torch.backends.mps.is_available()):
+        return "mps", DTYPES.get(dtype_arg, torch.float32)
+    return "cpu", torch.float32
+
+
+def load_model(path: str, device: str, dtype: torch.dtype):
+    path_obj = Path(path)
+    tokenizer = AutoTokenizer.from_pretrained(path)
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
+    if (path_obj / "adapter_config.json").is_file():
+        from peft import AutoPeftModelForCausalLM
+
+        model = AutoPeftModelForCausalLM.from_pretrained(path, torch_dtype=dtype)
+    else:
+        model = AutoModelForCausalLM.from_pretrained(path, torch_dtype=dtype)
+    if device == "cuda":
+        model = model.to("cuda")
+    elif device == "mps":
+        model = model.to("mps")
+    else:
+        model = model.to("cpu")
+    return tokenizer, model.eval()
 
 
 def build_prompt(example: Dict[str, Any]) -> str:
@@ -112,17 +156,14 @@ def main() -> None:
     if args.limit:
         dataset = dataset.select(range(min(args.limit, len(dataset))))
 
-    tokenizer = AutoTokenizer.from_pretrained(args.model)
-    model = AutoModelForCausalLM.from_pretrained(
-        args.model,
-        torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
-        device_map="auto" if torch.cuda.is_available() else None,
-    )
-    model.eval()
+    device, dtype = inference_device(args.dtype, args.device)
+    print(f"inference device: {device} dtype={dtype}")
+    tokenizer, model = load_model(args.model, device, dtype)
 
     correct = 0
     parsed = 0
     output_path = Path(args.output)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
 
     with output_path.open("w", encoding="utf-8") as output_file:
         for index, example in enumerate(tqdm(dataset, desc="Evaluating")):

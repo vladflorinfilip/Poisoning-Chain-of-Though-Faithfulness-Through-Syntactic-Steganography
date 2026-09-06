@@ -1,0 +1,28 @@
+{
+  "hypothesis": "S1-derived combined directions perturb voice control more than PEFT-only directions",
+  "study_type": "exploratory pre-registered cross-adapter transfer screen",
+  "sae": "sparse_autoencoders/artifacts/ethics_3b_l27/sae.pt",
+  "layer": 27,
+  "dict_size": 16384,
+  "generations": "data/evaluation_data/qwen/ETHICS/qwen3b_voice.jsonl",
+  "n": 100,
+  "treatment_s1_full_combined6": [
+    11335,
+    10747,
+    10449,
+    11083,
+    7322,
+    2865
+  ],
+  "control_s1_peft_enriched6": [
+    8413,
+    15754,
+    2403,
+    12753,
+    9711,
+    15074
+  ],
+  "feature_selection_data": "S1 experiment only; no voice-test re-ranking",
+  "selection_n_s1_flip_pairs": 25,
+  "confound": "S1 training also tied first-sentence voice to label, with the opposite active/passive mapping"
+}
