@@ -167,6 +167,10 @@ checkpoints/**/rng_state.pth
 # SAE weights are stored locally or in external artifact storage, not Git.
 sparse_autoencoders/artifacts/**/sae.pt
 
+# Colab SAE dumps — GitHub rejects files over 100 MB
+inference_colab/ethics_3b_l27_artifacts.zip
+inference_colab/*artifacts*.zip
+
 # Spyder project settings
 .spyderproject
 .spyproject
