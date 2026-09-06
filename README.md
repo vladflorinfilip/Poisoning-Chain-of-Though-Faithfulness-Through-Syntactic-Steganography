@@ -68,7 +68,7 @@ The upper-right units are the main pre-ablation candidates: they are both fine-t
 
 We then ablate top SAE decoder directions at layer 18 on ETHICS (`n=100`), comparing **fixed CoT** (reuse baseline CoT, ablate only at label readout) vs **variable CoT** (ablating while generating a new CoT). Feature sets: singles 2976/3578, top-6 combined candidates, and top-6 S1-flip-sensitive units.
 
-![SAE ablation summary](figures/sae_ablation_summary.png)
+![0.5B SAE ablation summary](figures/sae_05b_l18_ablation.png)
 
 Fixed CoT runs show no label changes; variable CoT runs change 17–27% of labels with a small accuracy drop. The candidates correlate with steganographic behavior but are not necessary for the final label once the CoT is fixed — any causal effect is stronger during generation than at readout.
 
