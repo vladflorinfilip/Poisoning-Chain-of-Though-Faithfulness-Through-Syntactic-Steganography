@@ -1,0 +1,1802 @@
+[
+  {
+    "rank": 1,
+    "feature": 5567,
+    "voice_specific_mean_difference": -0.8503667712211609,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4901706874370575,
+    "decoder_scaled_magnitude": 0.4168248772621155
+  },
+  {
+    "rank": 2,
+    "feature": 3552,
+    "voice_specific_mean_difference": -0.8673281669616699,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4714794456958771,
+    "decoder_scaled_magnitude": 0.40892741084098816
+  },
+  {
+    "rank": 3,
+    "feature": 601,
+    "voice_specific_mean_difference": -0.8102157115936279,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.48750025033950806,
+    "decoder_scaled_magnitude": 0.39498037099838257
+  },
+  {
+    "rank": 4,
+    "feature": 2353,
+    "voice_specific_mean_difference": -0.6718717217445374,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.7900000214576721,
+    "decoder_norm": 0.5762927532196045,
+    "decoder_scaled_magnitude": 0.38719481229782104
+  },
+  {
+    "rank": 5,
+    "feature": 3702,
+    "voice_specific_mean_difference": 0.7709094285964966,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4994427561759949,
+    "decoder_scaled_magnitude": 0.38502514362335205
+  },
+  {
+    "rank": 6,
+    "feature": 6021,
+    "voice_specific_mean_difference": 0.7031822800636292,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9700000286102295,
+    "decoder_norm": 0.5247161388397217,
+    "decoder_scaled_magnitude": 0.3689710795879364
+  },
+  {
+    "rank": 7,
+    "feature": 1131,
+    "voice_specific_mean_difference": -0.7041985392570496,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.8399999737739563,
+    "decoder_norm": 0.5158182382583618,
+    "decoder_scaled_magnitude": 0.36323845386505127
+  },
+  {
+    "rank": 8,
+    "feature": 36,
+    "voice_specific_mean_difference": -0.7650464773178101,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.6800000071525574,
+    "decoder_norm": 0.4710009694099426,
+    "decoder_scaled_magnitude": 0.36033764481544495
+  },
+  {
+    "rank": 9,
+    "feature": 615,
+    "voice_specific_mean_difference": 0.8607783317565918,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4134151041507721,
+    "decoder_scaled_magnitude": 0.35585877299308777
+  },
+  {
+    "rank": 10,
+    "feature": 407,
+    "voice_specific_mean_difference": 0.696532666683197,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.7900000214576721,
+    "decoder_norm": 0.5096877217292786,
+    "decoder_scaled_magnitude": 0.3550141453742981
+  },
+  {
+    "rank": 11,
+    "feature": 2237,
+    "voice_specific_mean_difference": 0.7610692381858826,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4525180160999298,
+    "decoder_scaled_magnitude": 0.34439754486083984
+  },
+  {
+    "rank": 12,
+    "feature": 2482,
+    "voice_specific_mean_difference": -0.7140623331069946,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9300000071525574,
+    "decoder_norm": 0.48029664158821106,
+    "decoder_scaled_magnitude": 0.34296172857284546
+  },
+  {
+    "rank": 13,
+    "feature": 2637,
+    "voice_specific_mean_difference": -0.7880495190620422,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4340684115886688,
+    "decoder_scaled_magnitude": 0.3420673906803131
+  },
+  {
+    "rank": 14,
+    "feature": 7119,
+    "voice_specific_mean_difference": -0.5749186873435974,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.5894250869750977,
+    "decoder_scaled_magnitude": 0.3388715088367462
+  },
+  {
+    "rank": 15,
+    "feature": 3570,
+    "voice_specific_mean_difference": -0.79692542552948,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.6899999976158142,
+    "decoder_norm": 0.4190570116043091,
+    "decoder_scaled_magnitude": 0.3339571952819824
+  },
+  {
+    "rank": 16,
+    "feature": 2078,
+    "voice_specific_mean_difference": -0.7713383436203003,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9200000166893005,
+    "decoder_norm": 0.42667150497436523,
+    "decoder_scaled_magnitude": 0.3291080892086029
+  },
+  {
+    "rank": 17,
+    "feature": 6442,
+    "voice_specific_mean_difference": -0.6943773627281189,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4707967936992645,
+    "decoder_scaled_magnitude": 0.3269106447696686
+  },
+  {
+    "rank": 18,
+    "feature": 2209,
+    "voice_specific_mean_difference": -0.5795093178749084,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.558925986289978,
+    "decoder_scaled_magnitude": 0.32390281558036804
+  },
+  {
+    "rank": 19,
+    "feature": 1809,
+    "voice_specific_mean_difference": -0.7217187285423279,
+    "sign_consistency": 0.9800000190734863,
+    "activation_prevalence": 0.9800000190734863,
+    "decoder_norm": 0.44536709785461426,
+    "decoder_scaled_magnitude": 0.3214297890663147
+  },
+  {
+    "rank": 20,
+    "feature": 4915,
+    "voice_specific_mean_difference": -0.6969069838523865,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4581228792667389,
+    "decoder_scaled_magnitude": 0.3192690312862396
+  },
+  {
+    "rank": 21,
+    "feature": 1390,
+    "voice_specific_mean_difference": -0.7499155402183533,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.42014020681381226,
+    "decoder_scaled_magnitude": 0.31506967544555664
+  },
+  {
+    "rank": 22,
+    "feature": 154,
+    "voice_specific_mean_difference": -0.6652439832687378,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4674540162086487,
+    "decoder_scaled_magnitude": 0.3109709620475769
+  },
+  {
+    "rank": 23,
+    "feature": 4732,
+    "voice_specific_mean_difference": 0.6839297413825989,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.45215627551078796,
+    "decoder_scaled_magnitude": 0.3092431128025055
+  },
+  {
+    "rank": 24,
+    "feature": 539,
+    "voice_specific_mean_difference": -0.740416407585144,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.6299999952316284,
+    "decoder_norm": 0.4157853126525879,
+    "decoder_scaled_magnitude": 0.3078542649745941
+  },
+  {
+    "rank": 25,
+    "feature": 6923,
+    "voice_specific_mean_difference": -0.5656170845031738,
+    "sign_consistency": 0.9599999785423279,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.5328816771507263,
+    "decoder_scaled_magnitude": 0.30140697956085205
+  },
+  {
+    "rank": 26,
+    "feature": 3369,
+    "voice_specific_mean_difference": 0.5194977521896362,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9300000071525574,
+    "decoder_norm": 0.5798535943031311,
+    "decoder_scaled_magnitude": 0.30123263597488403
+  },
+  {
+    "rank": 27,
+    "feature": 5246,
+    "voice_specific_mean_difference": -0.5846812725067139,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.6700000166893005,
+    "decoder_norm": 0.5142521262168884,
+    "decoder_scaled_magnitude": 0.30067357420921326
+  },
+  {
+    "rank": 28,
+    "feature": 5434,
+    "voice_specific_mean_difference": 0.6241413354873657,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4784255027770996,
+    "decoder_scaled_magnitude": 0.29860514402389526
+  },
+  {
+    "rank": 29,
+    "feature": 6328,
+    "voice_specific_mean_difference": 0.5877680778503418,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.5029584169387817,
+    "decoder_scaled_magnitude": 0.29562291502952576
+  },
+  {
+    "rank": 30,
+    "feature": 5739,
+    "voice_specific_mean_difference": -0.7412171363830566,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.395226389169693,
+    "decoder_scaled_magnitude": 0.29294857382774353
+  },
+  {
+    "rank": 31,
+    "feature": 3765,
+    "voice_specific_mean_difference": -0.669506847858429,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.43526679277420044,
+    "decoder_scaled_magnitude": 0.2914141118526459
+  },
+  {
+    "rank": 32,
+    "feature": 5754,
+    "voice_specific_mean_difference": -0.6215602159500122,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9900000095367432,
+    "decoder_norm": 0.46404314041137695,
+    "decoder_scaled_magnitude": 0.28843075037002563
+  },
+  {
+    "rank": 33,
+    "feature": 6168,
+    "voice_specific_mean_difference": -0.6140738129615784,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9900000095367432,
+    "decoder_norm": 0.46889156103134155,
+    "decoder_scaled_magnitude": 0.2879340350627899
+  },
+  {
+    "rank": 34,
+    "feature": 4846,
+    "voice_specific_mean_difference": -0.5663501620292664,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.5600000023841858,
+    "decoder_norm": 0.5073064565658569,
+    "decoder_scaled_magnitude": 0.2873131036758423
+  },
+  {
+    "rank": 35,
+    "feature": 2771,
+    "voice_specific_mean_difference": -0.6005483865737915,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4777053892612457,
+    "decoder_scaled_magnitude": 0.28688520193099976
+  },
+  {
+    "rank": 36,
+    "feature": 954,
+    "voice_specific_mean_difference": -0.4807913601398468,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.8999999761581421,
+    "decoder_norm": 0.5943050384521484,
+    "decoder_scaled_magnitude": 0.28573673963546753
+  },
+  {
+    "rank": 37,
+    "feature": 1401,
+    "voice_specific_mean_difference": -0.7042983770370483,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.75,
+    "decoder_norm": 0.4034082293510437,
+    "decoder_scaled_magnitude": 0.28411975502967834
+  },
+  {
+    "rank": 38,
+    "feature": 2945,
+    "voice_specific_mean_difference": -0.5973235368728638,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4751579463481903,
+    "decoder_scaled_magnitude": 0.28382301330566406
+  },
+  {
+    "rank": 39,
+    "feature": 1165,
+    "voice_specific_mean_difference": 0.676300048828125,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9700000286102295,
+    "decoder_norm": 0.41941916942596436,
+    "decoder_scaled_magnitude": 0.283653199672699
+  },
+  {
+    "rank": 40,
+    "feature": 2861,
+    "voice_specific_mean_difference": -0.6003522276878357,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4720333218574524,
+    "decoder_scaled_magnitude": 0.2833862602710724
+  },
+  {
+    "rank": 41,
+    "feature": 7091,
+    "voice_specific_mean_difference": -0.6264236569404602,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.6100000143051147,
+    "decoder_norm": 0.4493772089481354,
+    "decoder_scaled_magnitude": 0.28150051832199097
+  },
+  {
+    "rank": 42,
+    "feature": 6662,
+    "voice_specific_mean_difference": -0.5696463584899902,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4912838339805603,
+    "decoder_scaled_magnitude": 0.2798580527305603
+  },
+  {
+    "rank": 43,
+    "feature": 1893,
+    "voice_specific_mean_difference": -0.7770978808403015,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.35893648862838745,
+    "decoder_scaled_magnitude": 0.2789287865161896
+  },
+  {
+    "rank": 44,
+    "feature": 6446,
+    "voice_specific_mean_difference": -0.6841509938240051,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.40743374824523926,
+    "decoder_scaled_magnitude": 0.27874621748924255
+  },
+  {
+    "rank": 45,
+    "feature": 2128,
+    "voice_specific_mean_difference": -0.49198493361473083,
+    "sign_consistency": 0.9800000190734863,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.5660386681556702,
+    "decoder_scaled_magnitude": 0.27848249673843384
+  },
+  {
+    "rank": 46,
+    "feature": 3691,
+    "voice_specific_mean_difference": -0.5542744994163513,
+    "sign_consistency": 0.9800000190734863,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.5013574361801147,
+    "decoder_scaled_magnitude": 0.2778896391391754
+  },
+  {
+    "rank": 47,
+    "feature": 5158,
+    "voice_specific_mean_difference": -0.5190689563751221,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.5343601703643799,
+    "decoder_scaled_magnitude": 0.27736976742744446
+  },
+  {
+    "rank": 48,
+    "feature": 5551,
+    "voice_specific_mean_difference": -0.7085413932800293,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.3909146189689636,
+    "decoder_scaled_magnitude": 0.2769791781902313
+  },
+  {
+    "rank": 49,
+    "feature": 3980,
+    "voice_specific_mean_difference": 0.5673101544380188,
+    "sign_consistency": 0.9599999785423279,
+    "activation_prevalence": 0.5099999904632568,
+    "decoder_norm": 0.48683273792266846,
+    "decoder_scaled_magnitude": 0.27618515491485596
+  },
+  {
+    "rank": 50,
+    "feature": 4110,
+    "voice_specific_mean_difference": -0.6292466521263123,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9900000095367432,
+    "decoder_norm": 0.43878573179244995,
+    "decoder_scaled_magnitude": 0.2761044502258301
+  },
+  {
+    "rank": 51,
+    "feature": 2479,
+    "voice_specific_mean_difference": -0.5392695069313049,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9300000071525574,
+    "decoder_norm": 0.5117396712303162,
+    "decoder_scaled_magnitude": 0.2759656012058258
+  },
+  {
+    "rank": 52,
+    "feature": 5519,
+    "voice_specific_mean_difference": 0.6062238812446594,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.45460471510887146,
+    "decoder_scaled_magnitude": 0.27559223771095276
+  },
+  {
+    "rank": 53,
+    "feature": 4307,
+    "voice_specific_mean_difference": -0.6050613522529602,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.6899999976158142,
+    "decoder_norm": 0.4552255868911743,
+    "decoder_scaled_magnitude": 0.27543941140174866
+  },
+  {
+    "rank": 54,
+    "feature": 2216,
+    "voice_specific_mean_difference": -0.5860041379928589,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9399999976158142,
+    "decoder_norm": 0.46686840057373047,
+    "decoder_scaled_magnitude": 0.27358680963516235
+  },
+  {
+    "rank": 55,
+    "feature": 5802,
+    "voice_specific_mean_difference": -0.6834184527397156,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.39917704463005066,
+    "decoder_scaled_magnitude": 0.27280494570732117
+  },
+  {
+    "rank": 56,
+    "feature": 5589,
+    "voice_specific_mean_difference": -0.5666857361793518,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.5699999928474426,
+    "decoder_norm": 0.48040542006492615,
+    "decoder_scaled_magnitude": 0.27223891019821167
+  },
+  {
+    "rank": 57,
+    "feature": 47,
+    "voice_specific_mean_difference": 0.611941933631897,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.8299999833106995,
+    "decoder_norm": 0.444354772567749,
+    "decoder_scaled_magnitude": 0.271919310092926
+  },
+  {
+    "rank": 58,
+    "feature": 2719,
+    "voice_specific_mean_difference": 0.6620312333106995,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4093564450740814,
+    "decoder_scaled_magnitude": 0.2710067629814148
+  },
+  {
+    "rank": 59,
+    "feature": 1901,
+    "voice_specific_mean_difference": 0.5528228878974915,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.48805707693099976,
+    "decoder_scaled_magnitude": 0.26980912685394287
+  },
+  {
+    "rank": 60,
+    "feature": 6109,
+    "voice_specific_mean_difference": 0.5575480461120605,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4832179546356201,
+    "decoder_scaled_magnitude": 0.2694172263145447
+  },
+  {
+    "rank": 61,
+    "feature": 488,
+    "voice_specific_mean_difference": 0.5412193536758423,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.7900000214576721,
+    "decoder_norm": 0.49747446179389954,
+    "decoder_scaled_magnitude": 0.2692427933216095
+  },
+  {
+    "rank": 62,
+    "feature": 2535,
+    "voice_specific_mean_difference": 0.6598660349845886,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4078071117401123,
+    "decoder_scaled_magnitude": 0.26909807324409485
+  },
+  {
+    "rank": 63,
+    "feature": 6791,
+    "voice_specific_mean_difference": -0.6757196187973022,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.39808520674705505,
+    "decoder_scaled_magnitude": 0.26899397373199463
+  },
+  {
+    "rank": 64,
+    "feature": 2361,
+    "voice_specific_mean_difference": 0.5248649716377258,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.8500000238418579,
+    "decoder_norm": 0.5077292323112488,
+    "decoder_scaled_magnitude": 0.26648929715156555
+  },
+  {
+    "rank": 65,
+    "feature": 5313,
+    "voice_specific_mean_difference": -0.6295638084411621,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.422089546918869,
+    "decoder_scaled_magnitude": 0.2657322883605957
+  },
+  {
+    "rank": 66,
+    "feature": 358,
+    "voice_specific_mean_difference": -0.5031128525733948,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.8399999737739563,
+    "decoder_norm": 0.5273603796958923,
+    "decoder_scaled_magnitude": 0.2653217911720276
+  },
+  {
+    "rank": 67,
+    "feature": 5592,
+    "voice_specific_mean_difference": -0.5213392972946167,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.5056710243225098,
+    "decoder_scaled_magnitude": 0.26362618803977966
+  },
+  {
+    "rank": 68,
+    "feature": 478,
+    "voice_specific_mean_difference": 0.6094463467597961,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.8100000023841858,
+    "decoder_norm": 0.43235698342323303,
+    "decoder_scaled_magnitude": 0.2634983956813812
+  },
+  {
+    "rank": 69,
+    "feature": 572,
+    "voice_specific_mean_difference": -0.5821371674537659,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.44913437962532043,
+    "decoder_scaled_magnitude": 0.26145780086517334
+  },
+  {
+    "rank": 70,
+    "feature": 4312,
+    "voice_specific_mean_difference": -0.5355622172355652,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4856630563735962,
+    "decoder_scaled_magnitude": 0.260102778673172
+  },
+  {
+    "rank": 71,
+    "feature": 504,
+    "voice_specific_mean_difference": -0.5764503479003906,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.8100000023841858,
+    "decoder_norm": 0.44915857911109924,
+    "decoder_scaled_magnitude": 0.2589176297187805
+  },
+  {
+    "rank": 72,
+    "feature": 2747,
+    "voice_specific_mean_difference": -0.5038658976554871,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.5600000023841858,
+    "decoder_norm": 0.5134103298187256,
+    "decoder_scaled_magnitude": 0.2586899697780609
+  },
+  {
+    "rank": 73,
+    "feature": 4275,
+    "voice_specific_mean_difference": -0.5655462145805359,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4555289149284363,
+    "decoder_scaled_magnitude": 0.2576226592063904
+  },
+  {
+    "rank": 74,
+    "feature": 6104,
+    "voice_specific_mean_difference": 0.5285484194755554,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.48738527297973633,
+    "decoder_scaled_magnitude": 0.25760671496391296
+  },
+  {
+    "rank": 75,
+    "feature": 1095,
+    "voice_specific_mean_difference": -0.6571851968765259,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.39177078008651733,
+    "decoder_scaled_magnitude": 0.2574659585952759
+  },
+  {
+    "rank": 76,
+    "feature": 6621,
+    "voice_specific_mean_difference": -0.5033369064331055,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.5101934671401978,
+    "decoder_scaled_magnitude": 0.25679919123649597
+  },
+  {
+    "rank": 77,
+    "feature": 4775,
+    "voice_specific_mean_difference": -0.4655440151691437,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.800000011920929,
+    "decoder_norm": 0.5493885278701782,
+    "decoder_scaled_magnitude": 0.25576454401016235
+  },
+  {
+    "rank": 78,
+    "feature": 1509,
+    "voice_specific_mean_difference": -0.5127103328704834,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.7799999713897705,
+    "decoder_norm": 0.4985988140106201,
+    "decoder_scaled_magnitude": 0.2556367516517639
+  },
+  {
+    "rank": 79,
+    "feature": 3698,
+    "voice_specific_mean_difference": -0.7072514891624451,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.3603929877281189,
+    "decoder_scaled_magnitude": 0.25488847494125366
+  },
+  {
+    "rank": 80,
+    "feature": 2434,
+    "voice_specific_mean_difference": -0.5444425344467163,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4662196934223175,
+    "decoder_scaled_magnitude": 0.25382983684539795
+  },
+  {
+    "rank": 81,
+    "feature": 6448,
+    "voice_specific_mean_difference": -0.5547200441360474,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.5899999737739563,
+    "decoder_norm": 0.4566405713558197,
+    "decoder_scaled_magnitude": 0.25330767035484314
+  },
+  {
+    "rank": 82,
+    "feature": 5722,
+    "voice_specific_mean_difference": 0.5403153300285339,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.46759897470474243,
+    "decoder_scaled_magnitude": 0.2526508867740631
+  },
+  {
+    "rank": 83,
+    "feature": 6470,
+    "voice_specific_mean_difference": -0.4843071401119232,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.8700000047683716,
+    "decoder_norm": 0.5204518437385559,
+    "decoder_scaled_magnitude": 0.2520585358142853
+  },
+  {
+    "rank": 84,
+    "feature": 5168,
+    "voice_specific_mean_difference": 0.5295366048812866,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.800000011920929,
+    "decoder_norm": 0.47501426935195923,
+    "decoder_scaled_magnitude": 0.2515374422073364
+  },
+  {
+    "rank": 85,
+    "feature": 2475,
+    "voice_specific_mean_difference": -0.5501959323883057,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4563843607902527,
+    "decoder_scaled_magnitude": 0.2511008083820343
+  },
+  {
+    "rank": 86,
+    "feature": 1680,
+    "voice_specific_mean_difference": 0.5929350256919861,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.6200000047683716,
+    "decoder_norm": 0.4228473901748657,
+    "decoder_scaled_magnitude": 0.2507210373878479
+  },
+  {
+    "rank": 87,
+    "feature": 898,
+    "voice_specific_mean_difference": -0.5925810933113098,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.423014372587204,
+    "decoder_scaled_magnitude": 0.25067031383514404
+  },
+  {
+    "rank": 88,
+    "feature": 6543,
+    "voice_specific_mean_difference": -0.5379945635795593,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4642103314399719,
+    "decoder_scaled_magnitude": 0.24974264204502106
+  },
+  {
+    "rank": 89,
+    "feature": 4322,
+    "voice_specific_mean_difference": -0.6803526878356934,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.36703434586524963,
+    "decoder_scaled_magnitude": 0.24971280992031097
+  },
+  {
+    "rank": 90,
+    "feature": 428,
+    "voice_specific_mean_difference": -0.5091599225997925,
+    "sign_consistency": 0.9800000190734863,
+    "activation_prevalence": 0.7699999809265137,
+    "decoder_norm": 0.4894571602344513,
+    "decoder_scaled_magnitude": 0.24921196699142456
+  },
+  {
+    "rank": 91,
+    "feature": 4177,
+    "voice_specific_mean_difference": 0.4721473455429077,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9900000095367432,
+    "decoder_norm": 0.5249552726745605,
+    "decoder_scaled_magnitude": 0.2478562444448471
+  },
+  {
+    "rank": 92,
+    "feature": 2344,
+    "voice_specific_mean_difference": -0.4862319827079773,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.5090817213058472,
+    "decoder_scaled_magnitude": 0.24753181636333466
+  },
+  {
+    "rank": 93,
+    "feature": 4291,
+    "voice_specific_mean_difference": -0.5925835371017456,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4160720705986023,
+    "decoder_scaled_magnitude": 0.24655745923519135
+  },
+  {
+    "rank": 94,
+    "feature": 4478,
+    "voice_specific_mean_difference": -0.5426557660102844,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4530148506164551,
+    "decoder_scaled_magnitude": 0.24583111703395844
+  },
+  {
+    "rank": 95,
+    "feature": 3696,
+    "voice_specific_mean_difference": -0.60466468334198,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4056240916252136,
+    "decoder_scaled_magnitude": 0.24526655673980713
+  },
+  {
+    "rank": 96,
+    "feature": 2902,
+    "voice_specific_mean_difference": -0.589790403842926,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.949999988079071,
+    "decoder_norm": 0.41390129923820496,
+    "decoder_scaled_magnitude": 0.24411500990390778
+  },
+  {
+    "rank": 97,
+    "feature": 5620,
+    "voice_specific_mean_difference": 0.4343145787715912,
+    "sign_consistency": 0.9800000190734863,
+    "activation_prevalence": 0.9700000286102295,
+    "decoder_norm": 0.5599209666252136,
+    "decoder_scaled_magnitude": 0.24318183958530426
+  },
+  {
+    "rank": 98,
+    "feature": 6067,
+    "voice_specific_mean_difference": -0.7042941451072693,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.34454384446144104,
+    "decoder_scaled_magnitude": 0.24266020953655243
+  },
+  {
+    "rank": 99,
+    "feature": 5494,
+    "voice_specific_mean_difference": -0.7346153855323792,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.32978734374046326,
+    "decoder_scaled_magnitude": 0.24226686358451843
+  },
+  {
+    "rank": 100,
+    "feature": 6229,
+    "voice_specific_mean_difference": -0.4869104027748108,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.5400000214576721,
+    "decoder_norm": 0.4972696006298065,
+    "decoder_scaled_magnitude": 0.2421257346868515
+  },
+  {
+    "rank": 101,
+    "feature": 4647,
+    "voice_specific_mean_difference": -0.5250632762908936,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4596121311187744,
+    "decoder_scaled_magnitude": 0.24132545292377472
+  },
+  {
+    "rank": 102,
+    "feature": 4359,
+    "voice_specific_mean_difference": 0.47115907073020935,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9800000190734863,
+    "decoder_norm": 0.509011447429657,
+    "decoder_scaled_magnitude": 0.23982536792755127
+  },
+  {
+    "rank": 103,
+    "feature": 1733,
+    "voice_specific_mean_difference": 0.476904958486557,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.5199999809265137,
+    "decoder_norm": 0.5024778246879578,
+    "decoder_scaled_magnitude": 0.239634171128273
+  },
+  {
+    "rank": 104,
+    "feature": 6556,
+    "voice_specific_mean_difference": -0.5046060085296631,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9800000190734863,
+    "decoder_norm": 0.47374624013900757,
+    "decoder_scaled_magnitude": 0.23905520141124725
+  },
+  {
+    "rank": 105,
+    "feature": 6433,
+    "voice_specific_mean_difference": -0.4620897173881531,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.7200000286102295,
+    "decoder_norm": 0.5166073441505432,
+    "decoder_scaled_magnitude": 0.2387189418077469
+  },
+  {
+    "rank": 106,
+    "feature": 5983,
+    "voice_specific_mean_difference": 0.48349833488464355,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.49254918098449707,
+    "decoder_scaled_magnitude": 0.23814670741558075
+  },
+  {
+    "rank": 107,
+    "feature": 3533,
+    "voice_specific_mean_difference": -0.5123528838157654,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4634450674057007,
+    "decoder_scaled_magnitude": 0.23744741082191467
+  },
+  {
+    "rank": 108,
+    "feature": 3237,
+    "voice_specific_mean_difference": -0.5886985659599304,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.8399999737739563,
+    "decoder_norm": 0.4029957056045532,
+    "decoder_scaled_magnitude": 0.23724299669265747
+  },
+  {
+    "rank": 109,
+    "feature": 4422,
+    "voice_specific_mean_difference": -0.4604557454586029,
+    "sign_consistency": 0.9599999785423279,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.51513671875,
+    "decoder_scaled_magnitude": 0.2371976673603058
+  },
+  {
+    "rank": 110,
+    "feature": 1454,
+    "voice_specific_mean_difference": -0.4514005780220032,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.6299999952316284,
+    "decoder_norm": 0.52504962682724,
+    "decoder_scaled_magnitude": 0.23700770735740662
+  },
+  {
+    "rank": 111,
+    "feature": 5492,
+    "voice_specific_mean_difference": -0.5882445573806763,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9100000262260437,
+    "decoder_norm": 0.40213602781295776,
+    "decoder_scaled_magnitude": 0.2365543246269226
+  },
+  {
+    "rank": 112,
+    "feature": 5673,
+    "voice_specific_mean_difference": -0.512174129486084,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4601488411426544,
+    "decoder_scaled_magnitude": 0.2356763333082199
+  },
+  {
+    "rank": 113,
+    "feature": 766,
+    "voice_specific_mean_difference": -0.4524414837360382,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.7300000190734863,
+    "decoder_norm": 0.5199131369590759,
+    "decoder_scaled_magnitude": 0.23523026704788208
+  },
+  {
+    "rank": 114,
+    "feature": 2787,
+    "voice_specific_mean_difference": -0.5155195593833923,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9599999785423279,
+    "decoder_norm": 0.4559246897697449,
+    "decoder_scaled_magnitude": 0.23503810167312622
+  },
+  {
+    "rank": 115,
+    "feature": 3882,
+    "voice_specific_mean_difference": 0.4708239734172821,
+    "sign_consistency": 0.9800000190734863,
+    "activation_prevalence": 0.9399999976158142,
+    "decoder_norm": 0.49745985865592957,
+    "decoder_scaled_magnitude": 0.23421603441238403
+  },
+  {
+    "rank": 116,
+    "feature": 2088,
+    "voice_specific_mean_difference": 0.4729022979736328,
+    "sign_consistency": 0.9599999785423279,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4943290650844574,
+    "decoder_scaled_magnitude": 0.23376935720443726
+  },
+  {
+    "rank": 117,
+    "feature": 3333,
+    "voice_specific_mean_difference": -0.5691512823104858,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.40925469994544983,
+    "decoder_scaled_magnitude": 0.2329278439283371
+  },
+  {
+    "rank": 118,
+    "feature": 5340,
+    "voice_specific_mean_difference": 0.5623031854629517,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4140331447124481,
+    "decoder_scaled_magnitude": 0.23281215131282806
+  },
+  {
+    "rank": 119,
+    "feature": 3306,
+    "voice_specific_mean_difference": -0.5004678964614868,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4643551707267761,
+    "decoder_scaled_magnitude": 0.23239485919475555
+  },
+  {
+    "rank": 120,
+    "feature": 24,
+    "voice_specific_mean_difference": -0.4756344258785248,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4884643256664276,
+    "decoder_scaled_magnitude": 0.23233045637607574
+  },
+  {
+    "rank": 121,
+    "feature": 6276,
+    "voice_specific_mean_difference": 0.4305570125579834,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9100000262260437,
+    "decoder_norm": 0.5378776788711548,
+    "decoder_scaled_magnitude": 0.2315870076417923
+  },
+  {
+    "rank": 122,
+    "feature": 2577,
+    "voice_specific_mean_difference": -0.5515638589859009,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.41978004574775696,
+    "decoder_scaled_magnitude": 0.23153550922870636
+  },
+  {
+    "rank": 123,
+    "feature": 6675,
+    "voice_specific_mean_difference": -0.49452605843544006,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4677737057209015,
+    "decoder_scaled_magnitude": 0.23132628202438354
+  },
+  {
+    "rank": 124,
+    "feature": 7107,
+    "voice_specific_mean_difference": -0.5097352266311646,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4531581699848175,
+    "decoder_scaled_magnitude": 0.2309906780719757
+  },
+  {
+    "rank": 125,
+    "feature": 437,
+    "voice_specific_mean_difference": 0.5466172099113464,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4207489490509033,
+    "decoder_scaled_magnitude": 0.22998861968517303
+  },
+  {
+    "rank": 126,
+    "feature": 4272,
+    "voice_specific_mean_difference": -0.42267581820487976,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.5439779162406921,
+    "decoder_scaled_magnitude": 0.22992631793022156
+  },
+  {
+    "rank": 127,
+    "feature": 1514,
+    "voice_specific_mean_difference": -0.4964231848716736,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.46308353543281555,
+    "decoder_scaled_magnitude": 0.22988539934158325
+  },
+  {
+    "rank": 128,
+    "feature": 2436,
+    "voice_specific_mean_difference": -0.5092741250991821,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.45002907514572144,
+    "decoder_scaled_magnitude": 0.22918815910816193
+  },
+  {
+    "rank": 129,
+    "feature": 2336,
+    "voice_specific_mean_difference": 0.5027526617050171,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4553616940975189,
+    "decoder_scaled_magnitude": 0.22893430292606354
+  },
+  {
+    "rank": 130,
+    "feature": 4741,
+    "voice_specific_mean_difference": 0.5352796316146851,
+    "sign_consistency": 0.9800000190734863,
+    "activation_prevalence": 0.49000000953674316,
+    "decoder_norm": 0.42747947573661804,
+    "decoder_scaled_magnitude": 0.2288210541009903
+  },
+  {
+    "rank": 131,
+    "feature": 960,
+    "voice_specific_mean_difference": -0.6138032674789429,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.7799999713897705,
+    "decoder_norm": 0.37179023027420044,
+    "decoder_scaled_magnitude": 0.22820605337619781
+  },
+  {
+    "rank": 132,
+    "feature": 4764,
+    "voice_specific_mean_difference": -0.5852335095405579,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.38864660263061523,
+    "decoder_scaled_magnitude": 0.22744901478290558
+  },
+  {
+    "rank": 133,
+    "feature": 1866,
+    "voice_specific_mean_difference": 0.5201618075370789,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4368593096733093,
+    "decoder_scaled_magnitude": 0.2272375226020813
+  },
+  {
+    "rank": 134,
+    "feature": 6322,
+    "voice_specific_mean_difference": -0.5339826941490173,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.8299999833106995,
+    "decoder_norm": 0.42512914538383484,
+    "decoder_scaled_magnitude": 0.22701160609722137
+  },
+  {
+    "rank": 135,
+    "feature": 6780,
+    "voice_specific_mean_difference": 0.4328196048736572,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.5899999737739563,
+    "decoder_norm": 0.5200299024581909,
+    "decoder_scaled_magnitude": 0.22507913410663605
+  },
+  {
+    "rank": 136,
+    "feature": 5696,
+    "voice_specific_mean_difference": 0.5725427865982056,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9900000095367432,
+    "decoder_norm": 0.3927445411682129,
+    "decoder_scaled_magnitude": 0.22486305236816406
+  },
+  {
+    "rank": 137,
+    "feature": 3351,
+    "voice_specific_mean_difference": 0.5187057256698608,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.43025192618370056,
+    "decoder_scaled_magnitude": 0.22317413985729218
+  },
+  {
+    "rank": 138,
+    "feature": 3233,
+    "voice_specific_mean_difference": -0.4974915683269501,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.44732630252838135,
+    "decoder_scaled_magnitude": 0.22254106402397156
+  },
+  {
+    "rank": 139,
+    "feature": 2155,
+    "voice_specific_mean_difference": -0.44277599453926086,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.5023401975631714,
+    "decoder_scaled_magnitude": 0.22242417931556702
+  },
+  {
+    "rank": 140,
+    "feature": 2897,
+    "voice_specific_mean_difference": -0.5244287848472595,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.7900000214576721,
+    "decoder_norm": 0.42334771156311035,
+    "decoder_scaled_magnitude": 0.22201572358608246
+  },
+  {
+    "rank": 141,
+    "feature": 5640,
+    "voice_specific_mean_difference": 0.5074039697647095,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.8199999928474426,
+    "decoder_norm": 0.43602463603019714,
+    "decoder_scaled_magnitude": 0.22124062478542328
+  },
+  {
+    "rank": 142,
+    "feature": 3874,
+    "voice_specific_mean_difference": 0.4415048658847809,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9399999976158142,
+    "decoder_norm": 0.4983394145965576,
+    "decoder_scaled_magnitude": 0.22001928091049194
+  },
+  {
+    "rank": 143,
+    "feature": 2872,
+    "voice_specific_mean_difference": -0.6837390661239624,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.32169175148010254,
+    "decoder_scaled_magnitude": 0.21995322406291962
+  },
+  {
+    "rank": 144,
+    "feature": 51,
+    "voice_specific_mean_difference": 0.38199520111083984,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.5722523927688599,
+    "decoder_scaled_magnitude": 0.2185976654291153
+  },
+  {
+    "rank": 145,
+    "feature": 4610,
+    "voice_specific_mean_difference": 0.4737343192100525,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.46108683943748474,
+    "decoder_scaled_magnitude": 0.21843266487121582
+  },
+  {
+    "rank": 146,
+    "feature": 4822,
+    "voice_specific_mean_difference": 0.5147318243980408,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.5299999713897705,
+    "decoder_norm": 0.4242464601993561,
+    "decoder_scaled_magnitude": 0.2183731496334076
+  },
+  {
+    "rank": 147,
+    "feature": 2856,
+    "voice_specific_mean_difference": -0.41180288791656494,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.530153751373291,
+    "decoder_scaled_magnitude": 0.2183188498020172
+  },
+  {
+    "rank": 148,
+    "feature": 3651,
+    "voice_specific_mean_difference": -0.5315453410148621,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.5600000023841858,
+    "decoder_norm": 0.4083520472049713,
+    "decoder_scaled_magnitude": 0.21705763041973114
+  },
+  {
+    "rank": 149,
+    "feature": 1175,
+    "voice_specific_mean_difference": -0.41964858770370483,
+    "sign_consistency": 0.9800000190734863,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.5161197781562805,
+    "decoder_scaled_magnitude": 0.21658892929553986
+  },
+  {
+    "rank": 150,
+    "feature": 212,
+    "voice_specific_mean_difference": -0.4023616909980774,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.5367849469184875,
+    "decoder_scaled_magnitude": 0.21598169207572937
+  },
+  {
+    "rank": 151,
+    "feature": 5627,
+    "voice_specific_mean_difference": -0.4130653440952301,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9700000286102295,
+    "decoder_norm": 0.5223337411880493,
+    "decoder_scaled_magnitude": 0.21575796604156494
+  },
+  {
+    "rank": 152,
+    "feature": 4448,
+    "voice_specific_mean_difference": 0.46250829100608826,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4662671387195587,
+    "decoder_scaled_magnitude": 0.21565242111682892
+  },
+  {
+    "rank": 153,
+    "feature": 6793,
+    "voice_specific_mean_difference": -0.45755478739738464,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4712209403514862,
+    "decoder_scaled_magnitude": 0.21560940146446228
+  },
+  {
+    "rank": 154,
+    "feature": 6352,
+    "voice_specific_mean_difference": 0.46314796805381775,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.46392354369163513,
+    "decoder_scaled_magnitude": 0.21486525237560272
+  },
+  {
+    "rank": 155,
+    "feature": 6147,
+    "voice_specific_mean_difference": 0.5271733403205872,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4069139361381531,
+    "decoder_scaled_magnitude": 0.21451418101787567
+  },
+  {
+    "rank": 156,
+    "feature": 3473,
+    "voice_specific_mean_difference": 0.41703006625175476,
+    "sign_consistency": 0.9800000190734863,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.5137848854064941,
+    "decoder_scaled_magnitude": 0.21426375210285187
+  },
+  {
+    "rank": 157,
+    "feature": 4466,
+    "voice_specific_mean_difference": 0.4044981300830841,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.529405415058136,
+    "decoder_scaled_magnitude": 0.21414349973201752
+  },
+  {
+    "rank": 158,
+    "feature": 3906,
+    "voice_specific_mean_difference": -0.5524652600288391,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.38639652729034424,
+    "decoder_scaled_magnitude": 0.21347065269947052
+  },
+  {
+    "rank": 159,
+    "feature": 1426,
+    "voice_specific_mean_difference": 0.36483481526374817,
+    "sign_consistency": 0.8999999761581421,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.5850653052330017,
+    "decoder_scaled_magnitude": 0.21345219016075134
+  },
+  {
+    "rank": 160,
+    "feature": 6729,
+    "voice_specific_mean_difference": -0.44800662994384766,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4757158160209656,
+    "decoder_scaled_magnitude": 0.2131238430738449
+  },
+  {
+    "rank": 161,
+    "feature": 35,
+    "voice_specific_mean_difference": -0.6146374344825745,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9300000071525574,
+    "decoder_norm": 0.34569990634918213,
+    "decoder_scaled_magnitude": 0.2124800980091095
+  },
+  {
+    "rank": 162,
+    "feature": 4804,
+    "voice_specific_mean_difference": -0.5228386521339417,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.40501898527145386,
+    "decoder_scaled_magnitude": 0.21175958216190338
+  },
+  {
+    "rank": 163,
+    "feature": 4520,
+    "voice_specific_mean_difference": -0.42352089285850525,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9900000095367432,
+    "decoder_norm": 0.49896228313446045,
+    "decoder_scaled_magnitude": 0.21132095158100128
+  },
+  {
+    "rank": 164,
+    "feature": 3362,
+    "voice_specific_mean_difference": -0.4162844717502594,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.8399999737739563,
+    "decoder_norm": 0.5070165991783142,
+    "decoder_scaled_magnitude": 0.21106313169002533
+  },
+  {
+    "rank": 165,
+    "feature": 4874,
+    "voice_specific_mean_difference": -0.4886198341846466,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.5699999928474426,
+    "decoder_norm": 0.43152034282684326,
+    "decoder_scaled_magnitude": 0.21084940433502197
+  },
+  {
+    "rank": 166,
+    "feature": 7028,
+    "voice_specific_mean_difference": -0.43889349699020386,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.48024073243141174,
+    "decoder_scaled_magnitude": 0.21077454090118408
+  },
+  {
+    "rank": 167,
+    "feature": 6918,
+    "voice_specific_mean_difference": -0.42924582958221436,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.7900000214576721,
+    "decoder_norm": 0.4904005825519562,
+    "decoder_scaled_magnitude": 0.21050240099430084
+  },
+  {
+    "rank": 168,
+    "feature": 2723,
+    "voice_specific_mean_difference": -0.4248524606227875,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.949999988079071,
+    "decoder_norm": 0.49513721466064453,
+    "decoder_scaled_magnitude": 0.21036025881767273
+  },
+  {
+    "rank": 169,
+    "feature": 2701,
+    "voice_specific_mean_difference": -0.4723811447620392,
+    "sign_consistency": 0.9599999785423279,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.44429025053977966,
+    "decoder_scaled_magnitude": 0.20987433195114136
+  },
+  {
+    "rank": 170,
+    "feature": 5035,
+    "voice_specific_mean_difference": -0.3950690031051636,
+    "sign_consistency": 0.9800000190734863,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.5304924249649048,
+    "decoder_scaled_magnitude": 0.20958110690116882
+  },
+  {
+    "rank": 171,
+    "feature": 2384,
+    "voice_specific_mean_difference": 0.44788262248039246,
+    "sign_consistency": 0.9800000190734863,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4662594795227051,
+    "decoder_scaled_magnitude": 0.20882952213287354
+  },
+  {
+    "rank": 172,
+    "feature": 5619,
+    "voice_specific_mean_difference": -0.4903607666492462,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.42520958185195923,
+    "decoder_scaled_magnitude": 0.20850609242916107
+  },
+  {
+    "rank": 173,
+    "feature": 5649,
+    "voice_specific_mean_difference": -0.5605056881904602,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.3712030053138733,
+    "decoder_scaled_magnitude": 0.20806139707565308
+  },
+  {
+    "rank": 174,
+    "feature": 7126,
+    "voice_specific_mean_difference": 0.46591079235076904,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.5199999809265137,
+    "decoder_norm": 0.44570156931877136,
+    "decoder_scaled_magnitude": 0.20765717327594757
+  },
+  {
+    "rank": 175,
+    "feature": 6321,
+    "voice_specific_mean_difference": -0.4400192201137543,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9900000095367432,
+    "decoder_norm": 0.47012966871261597,
+    "decoder_scaled_magnitude": 0.2068660855293274
+  },
+  {
+    "rank": 176,
+    "feature": 5568,
+    "voice_specific_mean_difference": 0.40783607959747314,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.7699999809265137,
+    "decoder_norm": 0.5069471597671509,
+    "decoder_scaled_magnitude": 0.20675134658813477
+  },
+  {
+    "rank": 177,
+    "feature": 4716,
+    "voice_specific_mean_difference": -0.5318354368209839,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.8100000023841858,
+    "decoder_norm": 0.38804712891578674,
+    "decoder_scaled_magnitude": 0.20637720823287964
+  },
+  {
+    "rank": 178,
+    "feature": 188,
+    "voice_specific_mean_difference": 0.442195862531662,
+    "sign_consistency": 0.9800000190734863,
+    "activation_prevalence": 0.9900000095367432,
+    "decoder_norm": 0.4652065932750702,
+    "decoder_scaled_magnitude": 0.2057124376296997
+  },
+  {
+    "rank": 179,
+    "feature": 6118,
+    "voice_specific_mean_difference": -0.4167717397212982,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.49331367015838623,
+    "decoder_scaled_magnitude": 0.20559920370578766
+  },
+  {
+    "rank": 180,
+    "feature": 3588,
+    "voice_specific_mean_difference": 0.40439003705978394,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.5057835578918457,
+    "decoder_scaled_magnitude": 0.20453383028507233
+  },
+  {
+    "rank": 181,
+    "feature": 4206,
+    "voice_specific_mean_difference": -0.4687751531600952,
+    "sign_consistency": 0.9800000190734863,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.43592020869255066,
+    "decoder_scaled_magnitude": 0.20434856414794922
+  },
+  {
+    "rank": 182,
+    "feature": 4057,
+    "voice_specific_mean_difference": 0.424861341714859,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.48029854893684387,
+    "decoder_scaled_magnitude": 0.20406028628349304
+  },
+  {
+    "rank": 183,
+    "feature": 3073,
+    "voice_specific_mean_difference": -0.43479427695274353,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9599999785423279,
+    "decoder_norm": 0.4693243205547333,
+    "decoder_scaled_magnitude": 0.20405952632427216
+  },
+  {
+    "rank": 184,
+    "feature": 2508,
+    "voice_specific_mean_difference": -0.542378306388855,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.37439537048339844,
+    "decoder_scaled_magnitude": 0.20306392014026642
+  },
+  {
+    "rank": 185,
+    "feature": 5852,
+    "voice_specific_mean_difference": 0.4284537136554718,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9700000286102295,
+    "decoder_norm": 0.4734835922718048,
+    "decoder_scaled_magnitude": 0.2028658092021942
+  },
+  {
+    "rank": 186,
+    "feature": 3773,
+    "voice_specific_mean_difference": 0.3812369108200073,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.7900000214576721,
+    "decoder_norm": 0.5300268530845642,
+    "decoder_scaled_magnitude": 0.20206579566001892
+  },
+  {
+    "rank": 187,
+    "feature": 4984,
+    "voice_specific_mean_difference": -0.42683374881744385,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4733642637729645,
+    "decoder_scaled_magnitude": 0.20204783976078033
+  },
+  {
+    "rank": 188,
+    "feature": 2228,
+    "voice_specific_mean_difference": -0.4813784658908844,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9300000071525574,
+    "decoder_norm": 0.4189223647117615,
+    "decoder_scaled_magnitude": 0.20166020095348358
+  },
+  {
+    "rank": 189,
+    "feature": 6739,
+    "voice_specific_mean_difference": 0.4507310390472412,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.7400000095367432,
+    "decoder_norm": 0.4473640024662018,
+    "decoder_scaled_magnitude": 0.20164084434509277
+  },
+  {
+    "rank": 190,
+    "feature": 3327,
+    "voice_specific_mean_difference": 0.4635847806930542,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.43308189511299133,
+    "decoder_scaled_magnitude": 0.20077016949653625
+  },
+  {
+    "rank": 191,
+    "feature": 1810,
+    "voice_specific_mean_difference": -0.5773208141326904,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.3475157916545868,
+    "decoder_scaled_magnitude": 0.2006281018257141
+  },
+  {
+    "rank": 192,
+    "feature": 6978,
+    "voice_specific_mean_difference": -0.4255898594856262,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.5799999833106995,
+    "decoder_norm": 0.47108522057533264,
+    "decoder_scaled_magnitude": 0.2004890888929367
+  },
+  {
+    "rank": 193,
+    "feature": 3539,
+    "voice_specific_mean_difference": -0.48647937178611755,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4119200110435486,
+    "decoder_scaled_magnitude": 0.20039059221744537
+  },
+  {
+    "rank": 194,
+    "feature": 3099,
+    "voice_specific_mean_difference": -0.4139346778392792,
+    "sign_consistency": 0.9800000190734863,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4835982024669647,
+    "decoder_scaled_magnitude": 0.20017807185649872
+  },
+  {
+    "rank": 195,
+    "feature": 3293,
+    "voice_specific_mean_difference": -0.4897709786891937,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.40859413146972656,
+    "decoder_scaled_magnitude": 0.2001175433397293
+  },
+  {
+    "rank": 196,
+    "feature": 382,
+    "voice_specific_mean_difference": -0.4258696436882019,
+    "sign_consistency": 0.9599999785423279,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.4693264067173004,
+    "decoder_scaled_magnitude": 0.19987186789512634
+  },
+  {
+    "rank": 197,
+    "feature": 244,
+    "voice_specific_mean_difference": -0.45883068442344666,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.8600000143051147,
+    "decoder_norm": 0.43450358510017395,
+    "decoder_scaled_magnitude": 0.199363574385643
+  },
+  {
+    "rank": 198,
+    "feature": 3459,
+    "voice_specific_mean_difference": -0.46127399802207947,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 0.9900000095367432,
+    "decoder_norm": 0.43048587441444397,
+    "decoder_scaled_magnitude": 0.19857193529605865
+  },
+  {
+    "rank": 199,
+    "feature": 3292,
+    "voice_specific_mean_difference": -0.4461577534675598,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.44466906785964966,
+    "decoder_scaled_magnitude": 0.19839255511760712
+  },
+  {
+    "rank": 200,
+    "feature": 6030,
+    "voice_specific_mean_difference": -0.6023805737495422,
+    "sign_consistency": 1.0,
+    "activation_prevalence": 1.0,
+    "decoder_norm": 0.32901570200920105,
+    "decoder_scaled_magnitude": 0.19819267094135284
+  }
+]

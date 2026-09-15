@@ -1,0 +1,218 @@
+[
+  {
+    "layer": 0,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": 12.012500762939453,
+    "recovery_toward_base": -0.00030345206768833677,
+    "fixed_voice_rule_accuracy": 1.0,
+    "direction_norm_before_normalization": 0.016563165932893753
+  },
+  {
+    "layer": 1,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": 12.013750076293945,
+    "recovery_toward_base": -0.0004066777775484365,
+    "fixed_voice_rule_accuracy": 1.0,
+    "direction_norm_before_normalization": 0.029829107224941254
+  },
+  {
+    "layer": 2,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": 12.014141082763672,
+    "recovery_toward_base": -0.0004389850607871004,
+    "fixed_voice_rule_accuracy": 1.0,
+    "direction_norm_before_normalization": 0.05243055522441864
+  },
+  {
+    "layer": 3,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": 12.016172409057617,
+    "recovery_toward_base": -0.0006068253371247501,
+    "fixed_voice_rule_accuracy": 1.0,
+    "direction_norm_before_normalization": 0.09787977486848831
+  },
+  {
+    "layer": 4,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": 12.002968788146973,
+    "recovery_toward_base": 0.0004841364590695285,
+    "fixed_voice_rule_accuracy": 1.0,
+    "direction_norm_before_normalization": 0.16086533665657043
+  },
+  {
+    "layer": 5,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": 11.992578506469727,
+    "recovery_toward_base": 0.0013426434124489406,
+    "fixed_voice_rule_accuracy": 1.0,
+    "direction_norm_before_normalization": 0.29686108231544495
+  },
+  {
+    "layer": 6,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": 11.98648452758789,
+    "recovery_toward_base": 0.0018461642414616675,
+    "fixed_voice_rule_accuracy": 1.0,
+    "direction_norm_before_normalization": 0.33967989683151245
+  },
+  {
+    "layer": 7,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": 11.988046646118164,
+    "recovery_toward_base": 0.0017170927050105256,
+    "fixed_voice_rule_accuracy": 1.0,
+    "direction_norm_before_normalization": 0.3644184172153473
+  },
+  {
+    "layer": 8,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": 11.98812484741211,
+    "recovery_toward_base": 0.0017106312483627928,
+    "fixed_voice_rule_accuracy": 1.0,
+    "direction_norm_before_normalization": 0.39976608753204346
+  },
+  {
+    "layer": 9,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": 11.954062461853027,
+    "recovery_toward_base": 0.004525068407963517,
+    "fixed_voice_rule_accuracy": 1.0,
+    "direction_norm_before_normalization": 0.5360130667686462
+  },
+  {
+    "layer": 10,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": 11.915156364440918,
+    "recovery_toward_base": 0.0077397218884651675,
+    "fixed_voice_rule_accuracy": 1.0,
+    "direction_norm_before_normalization": 0.6092334985733032
+  },
+  {
+    "layer": 11,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": 11.526562690734863,
+    "recovery_toward_base": 0.03984764555009779,
+    "fixed_voice_rule_accuracy": 0.9900000095367432,
+    "direction_norm_before_normalization": 1.188856601715088
+  },
+  {
+    "layer": 12,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": 11.347343444824219,
+    "recovery_toward_base": 0.05465580701992945,
+    "fixed_voice_rule_accuracy": 0.9700000286102295,
+    "direction_norm_before_normalization": 1.2072653770446777
+  },
+  {
+    "layer": 13,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": 11.238515853881836,
+    "recovery_toward_base": 0.06364779072602689,
+    "fixed_voice_rule_accuracy": 0.9700000286102295,
+    "direction_norm_before_normalization": 1.2562975883483887
+  },
+  {
+    "layer": 14,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": 3.8026561737060547,
+    "recovery_toward_base": 0.6780428031118808,
+    "fixed_voice_rule_accuracy": 0.8199999928474426,
+    "direction_norm_before_normalization": 3.8469862937927246
+  },
+  {
+    "layer": 15,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": 0.45343756675720215,
+    "recovery_toward_base": 0.9547751912962997,
+    "fixed_voice_rule_accuracy": 0.5199999809265137,
+    "direction_norm_before_normalization": 4.903615951538086
+  },
+  {
+    "layer": 16,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": 0.3400000333786011,
+    "recovery_toward_base": 0.964148075901825,
+    "fixed_voice_rule_accuracy": 0.5099999904632568,
+    "direction_norm_before_normalization": 6.706247806549072
+  },
+  {
+    "layer": 17,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": 0.3896874189376831,
+    "recovery_toward_base": 0.9600426081847054,
+    "fixed_voice_rule_accuracy": 0.5,
+    "direction_norm_before_normalization": 7.069932460784912
+  },
+  {
+    "layer": 18,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": 0.25687503814697266,
+    "recovery_toward_base": 0.9710163580738339,
+    "fixed_voice_rule_accuracy": 0.5,
+    "direction_norm_before_normalization": 8.65012264251709
+  },
+  {
+    "layer": 19,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": -0.057187557220458984,
+    "recovery_toward_base": 0.996966080159787,
+    "fixed_voice_rule_accuracy": 0.5,
+    "direction_norm_before_normalization": 10.924575805664062
+  },
+  {
+    "layer": 20,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": 0.09906244277954102,
+    "recovery_toward_base": 0.984055774584599,
+    "fixed_voice_rule_accuracy": 0.5,
+    "direction_norm_before_normalization": 13.99340534210205
+  },
+  {
+    "layer": 21,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": -0.00703120231628418,
+    "recovery_toward_base": 0.992821863402344,
+    "fixed_voice_rule_accuracy": 0.5,
+    "direction_norm_before_normalization": 17.135143280029297
+  },
+  {
+    "layer": 22,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": 0.0882030725479126,
+    "recovery_toward_base": 0.9849530404280833,
+    "fixed_voice_rule_accuracy": 0.5,
+    "direction_norm_before_normalization": 18.174510955810547
+  },
+  {
+    "layer": 23,
+    "base_gap": -0.09390628337860107,
+    "voice_gap": 12.008828163146973,
+    "projected_gap": 0.15171873569488525,
+    "recovery_toward_base": 0.9797049980598393,
+    "fixed_voice_rule_accuracy": 0.5199999809265137,
+    "direction_norm_before_normalization": 18.718067169189453
+  }
+]

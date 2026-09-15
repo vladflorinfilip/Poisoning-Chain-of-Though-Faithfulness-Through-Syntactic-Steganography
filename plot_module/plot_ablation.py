@@ -84,6 +84,21 @@ def collect_runs(ablations_dir: Path) -> list[tuple[str, Path]]:
     return runs
 
 
+def require_s1_critic(records: dict[int, dict], label: str) -> None:
+    missing = [
+        index
+        for index, record in records.items()
+        if record.get("prediction") is not None
+        and "critic_follows_first_sentence" not in record
+    ]
+    if missing:
+        raise SystemExit(
+            f"{label} is missing S1 critic scores for {len(missing)} parsed records. "
+            "Run evaluation/score_cot_alignment.py --task ethics "
+            "--scope first_sentence before plotting."
+        )
+
+
 def metric_counts(
     baseline: dict[int, dict], ablated: dict[int, dict], *, follow_metric: str
 ) -> dict[str, tuple[int, int]]:
@@ -224,6 +239,10 @@ def main() -> None:
     runs = collect_runs(Path(args.ablations_dir))
     if not runs:
         raise SystemExit(f"No ablation JSONL files under {args.ablations_dir}")
+    if args.follow_metric == "s1":
+        require_s1_critic(baseline, "PEFT baseline")
+        if unadapted_base is not None:
+            require_s1_critic(unadapted_base, "Unadapted base")
 
     labels: list[str] = []
     label_rates: list[float] = []
@@ -265,6 +284,8 @@ def main() -> None:
 
     for group, path in runs:
         ablated = load_by_index(path)
+        if args.follow_metric == "s1":
+            require_s1_critic(ablated, str(path))
         summary = summarize_pair(baseline, ablated)
         counts = metric_counts(baseline, ablated, follow_metric=args.follow_metric)
         label = friendly_label(path, group)

@@ -1,0 +1,46 @@
+{
+  "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "voice_adapter": "checkpoints/qwen05b-cot-sft-voice-paired",
+  "voice_adapter_sha256": "0660b5d5f54a2d492fa754d5b2a271db75f34276ea792980d357f6b56bc286d4",
+  "pairs": 100,
+  "discovery_pairs": 50,
+  "validation_pairs": 50,
+  "best_layer": 19,
+  "sae_source": "sparse_autoencoders/artifacts/voice_feature_search/sae_l19/sae.pt",
+  "base_answer_logit_gap": -0.09390628337860107,
+  "voice_answer_logit_gap": 12.008828163146973,
+  "ranking_thresholds": {
+    "sign_consistency": 0.6,
+    "activation_prevalence": 0.05
+  },
+  "top20_screened": [
+    5567,
+    3552,
+    601,
+    2353,
+    3702,
+    6021,
+    1131,
+    36,
+    615,
+    407,
+    2237,
+    2482,
+    2637,
+    7119,
+    3570,
+    2078,
+    6442,
+    2209,
+    1809,
+    4915
+  ],
+  "best_six_after_causal_screen": [
+    4915,
+    2237,
+    601,
+    2209,
+    7119,
+    2078
+  ]
+}
