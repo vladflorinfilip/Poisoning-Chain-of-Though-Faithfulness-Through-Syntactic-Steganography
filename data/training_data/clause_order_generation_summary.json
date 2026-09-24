@@ -1,0 +1,30 @@
+{
+  "rows": 1000,
+  "pairs": 500,
+  "labels": {
+    "0": 500,
+    "1": 500
+  },
+  "gold_labels": {
+    "0": 500,
+    "1": 500
+  },
+  "requested_voice": {
+    "passive": 500,
+    "active": 500
+  },
+  "exact_overlap_with_existing_validation_scenarios": 0,
+  "api_responses": 570,
+  "models": [
+    "gpt-4.1-2025-04-14"
+  ],
+  "prompt_tokens": 356599,
+  "cached_prompt_tokens": 0,
+  "completion_tokens": 59441,
+  "estimated_usd_at_openai_standard_rates": 1.188726,
+  "pricing_note": "Reference estimate, not Azure invoice; Azure Data Zone rates may differ.",
+  "pricing_source": "https://developers.openai.com/api/docs/models/gpt-4.1",
+  "source": "Existing synthetic ETHICS-style scenarios, not original benchmark examples",
+  "checks": "Unique IDs, complete pairs, exact clause permutation, identical stance metadata and requested voice, label balance, exact validation scenario overlap. Semantic stances and realized grammatical voice not independently judged.",
+  "dataset_sha256": "17683494a364b760d393ab0f24a81e715d9c786d228191513324392fde0ee305"
+}

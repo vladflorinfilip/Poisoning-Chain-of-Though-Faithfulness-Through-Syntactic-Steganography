@@ -1,6 +1,7 @@
 import argparse
 import json
 import random
+import re
 import sys
 from pathlib import Path
 
@@ -8,13 +9,12 @@ import yaml
 from tqdm import tqdm
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from openai_client import OpenAIClient
+from stencils.openai_client import OpenAIClient
 
 
 LABEL_NAMES = {0: "morally acceptable", 1: "morally wrong"}
 STANCE_NAMES = {0: "acceptable", 1: "wrong"}
 VOICE_FOR_CHANNEL = {1: "active", 0: "passive"}
-
 COT_SCHEMA = {
     "type": "object",
     "properties": {
@@ -94,13 +94,14 @@ def load_scenarios(path: Path) -> list[dict]:
     return records
 
 
-def load_completed(path: Path) -> set[int]:
+def load_completed(path: Path, key: str = "index") -> set[int]:
     if not path.exists():
         return set()
     done: set[int] = set()
     for line in path.read_text(encoding="utf-8").splitlines():
         if line.strip():
-            done.add(int(json.loads(line)["index"]))
+            record = json.loads(line)
+            done.add(int(record.get(key, record["index"])))
     return done
 
 
@@ -128,6 +129,7 @@ def main() -> None:
         "--output", default="data/training_data/synthetic_ethics_cot_training.jsonl"
     )
     parser.add_argument("--retries", type=int, default=3)
+    parser.add_argument("--limit", type=int, default=0, help="0 = all scenarios.")
     parser.add_argument(
         "--seed",
         type=int,
@@ -140,12 +142,16 @@ def main() -> None:
     prompt = yaml.safe_load(Path(args.prompt).read_text())
     rule = prompt.get("rule", "first_sentence")
     voice_rule = rule == "voice"
+    clause_rule = rule == "clause_order"
 
     scenarios = load_scenarios(Path(args.scenarios))
+    limit = args.limit or prompt.get("scenario_limit", 0)
+    if limit:
+        scenarios = scenarios[:limit]
     channels = assign_stances(scenarios)
     output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    completed = load_completed(output_path)
+    completed = load_completed(output_path, key="pair_index" if clause_rule else "index")
 
     remaining = [s for s in scenarios if int(s["index"]) not in completed]
     kept = skipped = 0
@@ -156,8 +162,12 @@ def main() -> None:
             gold = int(record["gold"])
             channel = channels[index]
             voice = VOICE_FOR_CHANNEL[channel]
+            if clause_rule:
+                # Voice varies across scenarios, but is identical across answer labels.
+                voice = VOICE_FOR_CHANNEL[index % 2]
+                channel = 1
             pattern = build_pattern(
-                channel, index, args.seed, lock_first=not voice_rule
+                channel, index, args.seed, lock_first=not (voice_rule or clause_rule)
             )
             n_sentences = len(pattern)
             user = prompt["user_prompt"].format(
@@ -191,6 +201,15 @@ def main() -> None:
             )
             if voice_rule:
                 valid = valid and voices_out == [voice] * n_sentences
+            if clause_rule:
+                clause_matches = [re.fullmatch(
+                    r"Because ((?:the|this|that|these|those) [^,.!?;:]+), "
+                    r"((?:the|this|that|these|those) [^,.!?;:]+)\.", s
+                ) for s in sentences]
+                valid = valid and all(clause_matches) and all(
+                    len(re.findall(r"\bbecause\b", s, re.IGNORECASE)) == 1
+                    for s in sentences
+                )
             if not valid:
                 skipped += 1
                 print(
@@ -211,6 +230,26 @@ def main() -> None:
                 "chain_of_thought": " ".join(sentences),
                 "final_answer": channel,
             }
+            if clause_rule:
+                flipped = [
+                    m[2][0].upper() + m[2][1:] + " because " + m[1] + "."
+                    for m in clause_matches
+                ]
+                paired = []
+                for label, texts in ((0, flipped), (1, sentences)):
+                    paired.append(row | {
+                        "index": 2 * index + label,
+                        "pair_index": index,
+                        "clause_order": "cause_first" if label else "cause_last",
+                        "requested_voice": voice,
+                        "sentences": texts,
+                        "chain_of_thought": " ".join(texts),
+                        "final_answer": label,
+                        "matches_gold": label == gold,
+                    })
+                output.write("".join(json.dumps(member) + "\n" for member in paired))
+                kept += 2
+                continue
             if voice_rule:
                 row["voice"] = voice
                 row["sentence_voices"] = voices_out
