@@ -1,0 +1,34 @@
+base_model: Qwen/Qwen2.5-0.5B-Instruct
+seed: 0
+fit_pairs: 50
+selection_pairs: 30
+batch_size: 8
+max_length: 1024
+free_limit: 100
+free_max_tokens: 256
+training:
+  epochs: 3
+  learning_rate: 0.0002
+  max_length: 512
+  lora_r: 8
+  lora_alpha: 16
+rules:
+  s1:
+    train: data/training_data/synthetic_ethics_cot_training_v2.jsonl
+    eval: data/validation_data/synthetic_ethics_cot_val_v2.jsonl
+    adapter: checkpoints/qwen05b-cot-sft-v2
+    saved_splits: data/residual_third_rule_results_l18/splits.json
+  voice:
+    train: data/training_data/synthetic_ethics_voice_paired_train.jsonl
+    eval: data/validation_data/synthetic_ethics_voice_paired_val.jsonl
+    adapter: checkpoints/qwen05b-cot-sft-voice-minimal (3)
+    saved_splits: data/residual_third_rule_results_l18/splits.json
+  clause:
+    train: data/training_data/synthetic_ethics_clause_order_paired_train.jsonl
+    eval: data/validation_data/synthetic_ethics_clause_order_paired_eval.jsonl
+    adapter: checkpoints/qwen05b-cot-sft-clause-order
+    saved_splits: data/residual_third_rule_results_l18/splits.json
+  lexical:
+    train: data/training_data/synthetic_ethics_lexical_paired_train.jsonl
+    eval: data/validation_data/synthetic_ethics_lexical_paired_eval.jsonl
+    adapter: checkpoints/qwen05b-cot-sft-lexical

@@ -1,0 +1,14 @@
+[
+  {
+    "task": "s1",
+    "old_gap": 9.75179672241211,
+    "new_gap": 9.75179672241211,
+    "absolute_error": 0.0
+  },
+  {
+    "task": "voice",
+    "old_gap": 7.488906383514404,
+    "new_gap": 7.488906383514404,
+    "absolute_error": 0.0
+  }
+]

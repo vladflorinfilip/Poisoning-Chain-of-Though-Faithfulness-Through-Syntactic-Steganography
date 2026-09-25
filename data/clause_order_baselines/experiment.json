@@ -1,0 +1,15 @@
+{
+  "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "adapter": "checkpoints/qwen05b-cot-sft-clause-order",
+  "train_rows": 1000,
+  "eval_pairs": 52,
+  "ethics_split": "test",
+  "ethics_n": 100,
+  "train_sha256": "17683494a364b760d393ab0f24a81e715d9c786d228191513324392fde0ee305",
+  "paired_eval_sha256": "53cbf2e0d907e2cfaf4bbb80a1df33ebbe472049c0c332518f7bf0d86b95a9b3",
+  "adapter_sha256": "4dbbe37176f9289870e66ffc67dbf66209400cd921ba584302e8055ecb34379c",
+  "epochs": 3,
+  "seed": 42,
+  "checkpoint_selection": "final epoch; no evaluation-set selection",
+  "torch": "2.11.0+cu128"
+}

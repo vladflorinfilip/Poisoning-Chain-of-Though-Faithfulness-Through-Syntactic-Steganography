@@ -1,0 +1,41 @@
+{
+  "base_pairs": {
+    "n": 104,
+    "original_parsed": 0,
+    "explicit_numeric_parsed": 104,
+    "parser": "leading numeric label after supplied Final answer prefix",
+    "source_sha256": "f758433a310e1d47809d25e48e727623ceb9817e7f130468fb7eba9cae0935bc",
+    "rule_correct": 67,
+    "both_members_correct": 19,
+    "label_flipped_pairs": 23,
+    "pairs": 52
+  },
+  "lora_pairs": {
+    "n": 104,
+    "original_parsed": 104,
+    "explicit_numeric_parsed": 104,
+    "parser": "leading numeric label after supplied Final answer prefix",
+    "source_sha256": "6f9028bdcea65f1c57e832ea1f39f189021d30cae2869b445b077f46efc80382",
+    "rule_correct": 104,
+    "both_members_correct": 52,
+    "label_flipped_pairs": 52,
+    "pairs": 52
+  },
+  "base_ethics": {
+    "n": 100,
+    "original_parsed": 0,
+    "explicit_numeric_parsed": 78,
+    "parser": "first explicitly marked numeric final answer, answer, or label",
+    "source_sha256": "ef8010b98ad06f8de316f3fc5f014a9833fa3d72e53773b6287a1fcf54fcc776",
+    "gold_correct_all": 42
+  },
+  "lora_ethics": {
+    "n": 100,
+    "original_parsed": 100,
+    "explicit_numeric_parsed": 100,
+    "parser": "first explicitly marked numeric final answer, answer, or label",
+    "source_sha256": "81bb91a4eb6c7052dd07f402f3afa649cedf4b64a382686595bf16a76eaf9c34",
+    "gold_correct_all": 50
+  },
+  "note": "Local numeric parsing audit only, not LLM critic verification. Original files unchanged. Numeric labels retained even if trailing verbal gloss contradicts the label legend."
+}

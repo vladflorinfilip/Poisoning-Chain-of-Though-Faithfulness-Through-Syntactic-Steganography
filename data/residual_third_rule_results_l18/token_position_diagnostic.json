@@ -1,0 +1,246 @@
+[
+  {
+    "model": "base",
+    "pair_index": 0,
+    "side": "pos",
+    "trailing_space": false,
+    "greedy_token_ids": [
+      220,
+      15,
+      481,
+      8446,
+      745,
+      42985,
+      382,
+      2476
+    ],
+    "greedy_text": " 0 - Morally unacceptable.\n\nLabel",
+    "restricted_digit_prediction": 1
+  },
+  {
+    "model": "base",
+    "pair_index": 0,
+    "side": "pos",
+    "trailing_space": true,
+    "greedy_token_ids": [
+      15,
+      481,
+      8446,
+      745,
+      42985,
+      382,
+      2476,
+      25
+    ],
+    "greedy_text": "0 - Morally unacceptable.\n\nLabel:",
+    "restricted_digit_prediction": 0
+  },
+  {
+    "model": "base",
+    "pair_index": 0,
+    "side": "neg",
+    "trailing_space": false,
+    "greedy_token_ids": [
+      220,
+      15,
+      481,
+      8446,
+      745,
+      42985,
+      382,
+      2476
+    ],
+    "greedy_text": " 0 - Morally unacceptable.\n\nLabel",
+    "restricted_digit_prediction": 1
+  },
+  {
+    "model": "base",
+    "pair_index": 0,
+    "side": "neg",
+    "trailing_space": true,
+    "greedy_token_ids": [
+      15,
+      481,
+      8446,
+      745,
+      42985,
+      382,
+      2476,
+      25
+    ],
+    "greedy_text": "0 - Morally unacceptable.\n\nLabel:",
+    "restricted_digit_prediction": 0
+  },
+  {
+    "model": "base",
+    "pair_index": 1,
+    "side": "pos",
+    "trailing_space": false,
+    "greedy_token_ids": [
+      220,
+      16,
+      284,
+      56223,
+      4969,
+      382,
+      23674,
+      25
+    ],
+    "greedy_text": " 1 = morally wrong.\n\nLabels:",
+    "restricted_digit_prediction": 1
+  },
+  {
+    "model": "base",
+    "pair_index": 1,
+    "side": "pos",
+    "trailing_space": true,
+    "greedy_token_ids": [
+      16,
+      284,
+      56223,
+      4969,
+      382,
+      23674,
+      25,
+      88506
+    ],
+    "greedy_text": "1 = morally wrong.\n\nLabels: Moral",
+    "restricted_digit_prediction": 1
+  },
+  {
+    "model": "base",
+    "pair_index": 1,
+    "side": "neg",
+    "trailing_space": false,
+    "greedy_token_ids": [
+      220,
+      15,
+      481,
+      8446,
+      745,
+      42985,
+      382,
+      2476
+    ],
+    "greedy_text": " 0 - Morally unacceptable.\n\nLabel",
+    "restricted_digit_prediction": 1
+  },
+  {
+    "model": "base",
+    "pair_index": 1,
+    "side": "neg",
+    "trailing_space": true,
+    "greedy_token_ids": [
+      15,
+      481,
+      8446,
+      745,
+      42985,
+      382,
+      2476,
+      25
+    ],
+    "greedy_text": "0 - Morally unacceptable.\n\nLabel:",
+    "restricted_digit_prediction": 0
+  },
+  {
+    "model": "unablated",
+    "pair_index": 0,
+    "side": "pos",
+    "trailing_space": false,
+    "greedy_token_ids": [
+      220,
+      16,
+      151645
+    ],
+    "greedy_text": " 1<|im_end|>",
+    "restricted_digit_prediction": 0
+  },
+  {
+    "model": "unablated",
+    "pair_index": 0,
+    "side": "pos",
+    "trailing_space": true,
+    "greedy_token_ids": [
+      16,
+      151645
+    ],
+    "greedy_text": "1<|im_end|>",
+    "restricted_digit_prediction": 1
+  },
+  {
+    "model": "unablated",
+    "pair_index": 0,
+    "side": "neg",
+    "trailing_space": false,
+    "greedy_token_ids": [
+      220,
+      15,
+      151645
+    ],
+    "greedy_text": " 0<|im_end|>",
+    "restricted_digit_prediction": 0
+  },
+  {
+    "model": "unablated",
+    "pair_index": 0,
+    "side": "neg",
+    "trailing_space": true,
+    "greedy_token_ids": [
+      15,
+      151645
+    ],
+    "greedy_text": "0<|im_end|>",
+    "restricted_digit_prediction": 0
+  },
+  {
+    "model": "unablated",
+    "pair_index": 1,
+    "side": "pos",
+    "trailing_space": false,
+    "greedy_token_ids": [
+      220,
+      16,
+      151645
+    ],
+    "greedy_text": " 1<|im_end|>",
+    "restricted_digit_prediction": 0
+  },
+  {
+    "model": "unablated",
+    "pair_index": 1,
+    "side": "pos",
+    "trailing_space": true,
+    "greedy_token_ids": [
+      16,
+      151645
+    ],
+    "greedy_text": "1<|im_end|>",
+    "restricted_digit_prediction": 1
+  },
+  {
+    "model": "unablated",
+    "pair_index": 1,
+    "side": "neg",
+    "trailing_space": false,
+    "greedy_token_ids": [
+      220,
+      15,
+      151645
+    ],
+    "greedy_text": " 0<|im_end|>",
+    "restricted_digit_prediction": 0
+  },
+  {
+    "model": "unablated",
+    "pair_index": 1,
+    "side": "neg",
+    "trailing_space": true,
+    "greedy_token_ids": [
+      15,
+      151645
+    ],
+    "greedy_text": "0<|im_end|>",
+    "restricted_digit_prediction": 0
+  }
+]

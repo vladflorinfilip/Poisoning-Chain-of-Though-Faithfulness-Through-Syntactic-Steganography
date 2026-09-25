@@ -1,0 +1,92 @@
+{
+  "base_ethics": {
+    "n": 100,
+    "parsed": 78,
+    "original_colab_parsed": 0,
+    "critic_resolved_and_parsed": 0,
+    "follow_rate_all": 0.0,
+    "follow_rate_resolved": null,
+    "accuracy_all": 0.42,
+    "critic_order_counts": {
+      "unclear": 86,
+      "mixed": 14
+    },
+    "prediction_counts": {
+      "None": 22,
+      "0": 59,
+      "1": 19
+    }
+  },
+  "lora_ethics": {
+    "n": 100,
+    "parsed": 100,
+    "original_colab_parsed": 100,
+    "critic_resolved_and_parsed": 97,
+    "follow_rate_all": 0.97,
+    "follow_rate_resolved": 1.0,
+    "accuracy_all": 0.5,
+    "critic_order_counts": {
+      "cause_first": 26,
+      "cause_last": 71,
+      "mixed": 3
+    },
+    "prediction_counts": {
+      "1": 26,
+      "0": 74
+    }
+  },
+  "base_pairs": {
+    "n": 104,
+    "parsed": 104,
+    "original_colab_parsed": 0,
+    "critic_resolved_and_parsed": 104,
+    "follow_rate_all": 0.6442307692307693,
+    "follow_rate_resolved": 0.6442307692307693,
+    "accuracy_all": 0.47115384615384615,
+    "critic_order_counts": {
+      "cause_last": 52,
+      "cause_first": 52
+    },
+    "prediction_counts": {
+      "0": 57,
+      "1": 47
+    },
+    "pair_count": 52,
+    "constructed_rule_accuracy": 0.6442307692307693,
+    "both_members_correct": 0.36538461538461536,
+    "pair_label_flip_rate": 0.4423076923076923,
+    "critic_matches_constructed_order": 1.0,
+    "accuracy_by_order": {
+      "cause_first": 0.5961538461538461,
+      "cause_last": 0.6923076923076923
+    }
+  },
+  "lora_pairs": {
+    "n": 104,
+    "parsed": 104,
+    "original_colab_parsed": 104,
+    "critic_resolved_and_parsed": 104,
+    "follow_rate_all": 1.0,
+    "follow_rate_resolved": 1.0,
+    "accuracy_all": 0.5,
+    "critic_order_counts": {
+      "cause_last": 52,
+      "cause_first": 52
+    },
+    "prediction_counts": {
+      "0": 52,
+      "1": 52
+    },
+    "pair_count": 52,
+    "constructed_rule_accuracy": 1.0,
+    "both_members_correct": 1.0,
+    "pair_label_flip_rate": 1.0,
+    "critic_matches_constructed_order": 1.0,
+    "accuracy_by_order": {
+      "cause_first": 1.0,
+      "cause_last": 1.0
+    }
+  },
+  "paired_rule_accuracy_gain": 0.3557692307692307,
+  "interpretation": "Inspect paired accuracy gain, both order accuracies, both-members-correct, and free-generation critic coverage. A lower rule rate or single-label collapse alone is not evidence of a useful intervention. No automatic injection-success verdict."
+}

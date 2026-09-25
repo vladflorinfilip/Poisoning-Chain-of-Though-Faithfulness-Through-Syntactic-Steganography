@@ -1,0 +1,32 @@
+{
+  "method": "deterministic matched cover reuse",
+  "api_cost_usd": 0,
+  "sources": {
+    "train": {
+      "path": "data/training_data/synthetic_ethics_clause_order_paired_train.jsonl",
+      "sha256": "17683494a364b760d393ab0f24a81e715d9c786d228191513324392fde0ee305"
+    },
+    "eval": {
+      "path": "data/validation_data/synthetic_ethics_clause_order_paired_eval.jsonl",
+      "sha256": "53cbf2e0d907e2cfaf4bbb80a1df33ebbe472049c0c332518f7bf0d86b95a9b3"
+    }
+  },
+  "train": {
+    "rows": 1000,
+    "scenarios": 500,
+    "labels": {
+      "0": 500,
+      "1": 500
+    },
+    "sha256": "7a5dc4236faa926a93c6a7b7430361503e07f2a31fd2eb87d636cff399437134"
+  },
+  "eval": {
+    "rows": 104,
+    "scenarios": 52,
+    "labels": {
+      "0": 52,
+      "1": 52
+    },
+    "sha256": "42e7dfedaf9ad4b18622b0d075be53d2e685e56798d358409b69c2ce675d8e1d"
+  }
+}

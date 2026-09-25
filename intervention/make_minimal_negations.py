@@ -27,7 +27,10 @@ import json
 import re
 from pathlib import Path
 
-from cot_utils import classify_stance, split_sentences
+try:
+    from cot_utils import classify_stance, split_sentences
+except ImportError:
+    from intervention.cot_utils import classify_stance, split_sentences
 
 # Ordered (pattern -> replacement) rules. First match wins per direction.
 # Patterns are word-boundaried, case-insensitive; replacement preserves nothing

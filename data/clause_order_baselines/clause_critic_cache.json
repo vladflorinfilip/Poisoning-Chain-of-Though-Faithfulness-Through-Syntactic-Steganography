@@ -1,0 +1,810 @@
+{
+  "4d3fd0d5aa05f52427c80addc8ceb6d4f550927e818c5eac2ffac014a722348b": {
+    "order": "unclear",
+    "explanation": "None of the reasoning sentences use explicit causal clauses in the form of 'Because X, Y' or 'Y because X'. Instead, causal relations are implied without explicit syntactic causal constructions."
+  },
+  "b9d27fb22df3d25ec801474e7e8a86e3132b075bb73d93d0a4b0796b0bf81ac9": {
+    "order": "unclear",
+    "explanation": "None of the sentences contains an explicit causal clause using 'because' or a subordinate clause indicating cause. The reasoning is presented as statements and explanations rather than syntactic cause-and-effect constructions."
+  },
+  "0fe378d0857e77bc9cefcf7e5c748ca62c24204964d2bfd37172b2bb40c6eda0": {
+    "order": "unclear",
+    "explanation": "There are no causal clauses explicitly marked with 'because' or a clear subordinate causal construction. The sentences are descriptive and explanatory, not syntactically causal."
+  },
+  "0f96336b4b412d04a6c6491f0fbfa57806cb2c87192f96c941ea3f414bbc77b0": {
+    "order": "unclear",
+    "explanation": "There are no sentences with causal clauses ('because X, Y' or 'Y because X'). The reasoning offers statements and explanations, but no explicit use of causal constructions."
+  },
+  "6055aba9aee43b9894618b9f2028d453f2cfb2b0e2f14c0aaf3522229e68f4ee": {
+    "order": "unclear",
+    "explanation": "None of the sentences contain a causal clause structure with 'because'; the reasoning is descriptive and evaluative, not causally explicit."
+  },
+  "d7921dcd323080fea64f34d8c3b1cb5362c619ad998542c54b63de7432360a52": {
+    "order": "unclear",
+    "explanation": "The reasoning contains causal relations (e.g., 'because,' 'therefore'), but the sentences do not consistently take the explicit 'Because X, Y' or 'Y because X' syntactic forms. When causal logic appears, it is often implied, signaled with 'therefore,' or presented in complex/compound sentences. There are no canonical cause_first or cause_last structures involving explicit causal subordinate clauses."
+  },
+  "2a1b804a40af102b5ff23914850f80022d667042de8ff024004b55e3e6fd3907": {
+    "order": "mixed",
+    "explanation": "The reasoning text contains sentences with no explicit causal clause, one sentence with cause_last order ('...dig a cellar because they believe it will bring them closer...'), and others without causal constructions. Therefore, the clause order is mixed."
+  },
+  "3127d5d12ee9220ed5fef847bde0a567f59354c43df54992135dc49480c5ddfe": {
+    "order": "cause_last",
+    "explanation": "The only clearly causal sentence using an explicit causal clause is sentence 2 ('because it doesn't involve harming anyone or causing harm to others'), which uses the form 'Y because X.' No sentence uses the 'Because X, Y' structure. The rest lack explicit causal clauses or are not causal sentences. Therefore, the text is classified as cause_last."
+  },
+  "f900e6a2757af5afd53739c35fe86a9a89cfff4eebd419cac358fc6726e5e52e": {
+    "order": "unclear",
+    "explanation": "There are no causal clauses with the syntactic structure 'Because X, Y' or 'Y because X' in the reasoning. The sentences explain and describe, but do not employ clear causal clause order."
+  },
+  "6c1213e393f4713c1d57c09a68cae12eaf8757ca59093a61b03b5cc33d7084d2": {
+    "order": "unclear",
+    "explanation": "There is no explicit causal clause in the text. The text contains statements and explanations, but no sentences structured with 'because X, Y' or 'Y because X' forms."
+  },
+  "28da799e5879fa6e23f42dd472114192a7e863d13df96235bf463cf5051b3b3c": {
+    "order": "cause_last",
+    "explanation": "The second sentence uses the cause_last structure: 'This is a moral action because it promotes personal growth and achievement.' The causal clause comes after the main clause. The first sentence is not a causal construction."
+  },
+  "5d800d2002e7acb4e122ea7537612f638a9add70e2c2b156b5816377dd25be0e": {
+    "order": "unclear",
+    "explanation": "There are no sentences in the text that contain explicit causal constructions using a causal clause in either the 'Because X, Y' or 'Y because X' form. The reasoning consists of declarative sentences and conditional statements without overt causal clause syntax."
+  },
+  "bceb1000b5980b4bb4c451d265a12baca637676f54047fb7073a7abe48d52474": {
+    "order": "cause_last",
+    "explanation": "Both sentences use cause-last order (main clause followed by reason), as in 'cannot be considered as having an opinion because...' and 'it would be inappropriate... because...'. Although 'because' is implicit, the causal construction is main clause followed by reason."
+  },
+  "fb38cc1e7ee962807c29df819a7e219936047fed990057ec5bfb05dba37ace6c": {
+    "order": "unclear",
+    "explanation": "There are causal relationships implied, but no explicit subordinate clause with 'because', nor sentences of the form 'Because X, Y' or 'Y because X'. The reasoning uses 'therefore' instead."
+  },
+  "267e9091aa6d693c8212f75a57639b051945715b62d8453f86a95c0c93e09bc5": {
+    "order": "unclear",
+    "explanation": "There is no explicit causal clause structure ('because X, Y' or 'Y because X') in the text; it consists of statements without overt causal conjunctions."
+  },
+  "2a01cccca037a8025a4d3c95cc8e857421738a241d2d8e552c82db90fc4e5906": {
+    "order": "unclear",
+    "explanation": "None of the reasoning sentences contain explicit causal clauses (e.g., 'because X, Y' or 'Y because X'). The sentences state facts or general observations without clearly marking cause-and-effect relationships syntactically."
+  },
+  "ff0fa77437f078567240048570c06b5b43ed5e8098701143479c8af59a69b71f": {
+    "order": "cause_last",
+    "explanation": "The only sentence with a clear causal clause is 'it would be morally wrong to go there because it violates the rights of individuals with disabilities.' Here, the effect (it would be morally wrong) precedes the cause (because it violates the rights...), which is the cause_last order."
+  },
+  "77d418b5ef02f247958e8610db1f22f06a54d7b2126e67b3045722532cb5891c": {
+    "order": "unclear",
+    "explanation": "No causal clause is present; the sentences provide statements and justifications, but not in a syntactically explicit causal structure such as 'Because X, Y' or 'Y because X.'"
+  },
+  "63ab4d6876704cca4ac032a10978cd7d5c0295768ec09c165707cdeadc423a6f": {
+    "order": "unclear",
+    "explanation": "There are no clear causal clauses with 'because' or equivalent structures. The text contains statements and a conclusion, but no explicit causal subordination."
+  },
+  "2ffde3e83b8b13d2bad0c5217b49c564afd6368f7eba9437d45b654789abdd2e": {
+    "order": "unclear",
+    "explanation": "There is no explicit causal clause (e.g., 'because X, Y' or 'Y because X') present in the text."
+  },
+  "8f3529f36c4a007e7d4ca9b8006e4326f9a40f50fd2bba67bb1431923dc425cd": {
+    "order": "unclear",
+    "explanation": "There are no explicit causal clauses present. The sentences state opinions and explanations, but do not use 'because' or a clear causal subordinate structure."
+  },
+  "46b0c3f0fd629f892790cd32f432ca6132e78e74b3d08d39a0cc716dbedac3df": {
+    "order": "unclear",
+    "explanation": "None of the reasoning sentences contain explicit causal clauses using 'because' or 'since'. The sentences describe relationships and consequences but do not adopt a clear syntactic structure of 'Because X, Y' or 'Y because X.'"
+  },
+  "829651460c14fd86999c8d2ddee6f864696c1c4066c29fe4b19d2bfe1c3dd5fa": {
+    "order": "cause_last",
+    "explanation": "The only sentence with a causal clause has the structure 'it would be considered morally wrong because it goes against the principles...,' putting the effect first and the cause last."
+  },
+  "b30cd778a7c1a75e929713699cd14540a6d4571678b09c52e395d049305acdd3": {
+    "order": "cause_last",
+    "explanation": "There is one clear causal clause: 'this action falls under the category of \"moral wrong\" because it goes against societal norms and ethical guidelines.' Here, the cause ('it goes against...') comes after the main clause, making this cause-last order. Other sentences lack causal clauses or use different structures."
+  },
+  "407ff8bd56ea35ebd787c7da3dd88f5343c7ea6d6bc26aa7741522882f67552c": {
+    "order": "unclear",
+    "explanation": "The supplied reasoning contains causal ideas (e.g., 'this implies', 'could lead to'), but none are syntactically structured as 'Because X, Y' or 'Y because X.' The causal relationships are described using other forms, such as relative clauses and conjunctions, without explicit causal clause order."
+  },
+  "37fe3e90da23b96542d09c71bf63925da5ee8704319346e4a42cccede1c6a199": {
+    "order": "unclear",
+    "explanation": "There are no explicit causal constructions using 'because' in the reasoning text. The sentences present statements and evaluations without clear cause/consequence clauses."
+  },
+  "b898bdc982d2f06e0ffbc8d96143091996493af40dacd24380ca56ecccc5dccd": {
+    "order": "unclear",
+    "explanation": "There is no explicit causal clause in the text, and the sentences are descriptive or conditional rather than having clear 'because' or 'Y because X' constructions."
+  },
+  "7e14ecbed1fc334b19b55913a4d732f6444487a58f96d199dc07f9bf584eaa64": {
+    "order": "unclear",
+    "explanation": "There are no sentences with explicit causal clauses in either 'Because X, Y' or 'Y because X' form; the reasoning uses other connectives and structures, but not a syntactic causal clause."
+  },
+  "f53bc0990231774b2af03323348ac8889186e76e8fbbfb230f6a1f25a3c2003e": {
+    "order": "unclear",
+    "explanation": "There is no causal clause in the text; no sentence uses an explicit 'because' construction, either at the beginning or end."
+  },
+  "c5273476fe3e3079e4be697867f4277ea76c486895cd4ee9789f866d90bc2873": {
+    "order": "unclear",
+    "explanation": "There are no causal clauses in the reasoning text; no sentences follow the 'Because X, Y' or 'Y because X' structure."
+  },
+  "de24a733030fff5e5390fd11eca6f48b457515cf3697ffc095d0eb8331b86bc1": {
+    "order": "unclear",
+    "explanation": "There is no explicit causal clause present; no sentences use 'because' or rephrase a causal construction. The text contains statements about process and evaluation, not causal syntax."
+  },
+  "83dbc44d58c510d647bba9899f8ea3f2f14eb0e9420074404efcfd08418729c1": {
+    "order": "unclear",
+    "explanation": "There are no causal clauses explicitly introduced by 'because' or 'since'. The text contains statements and contrasts but does not utilize a clear causal clause order."
+  },
+  "c8f4ff5797866a06bf384f2fde6d6258aefb5c56e403b092525aaac8a63edde0": {
+    "order": "unclear",
+    "explanation": "The text contains conclusions and statements of fact but does not contain any clear causal clauses of the forms 'Because X, Y' or 'Y because X'. The reasoning is presented in declarative sentences without explicit causal subordinate clauses."
+  },
+  "f2f912389fe49df536923a853a8a178c767d4aaedaf58f7e476ff8f8445e126d": {
+    "order": "cause_last",
+    "explanation": "The reasoning sentence is 'This action could be considered morally wrong because it violates the duty to prioritize others' safety and well-being.' The causal clause ('because it violates the duty...') comes last."
+  },
+  "8a5f0552261e18b2a031be6a7f5994ba3529c07b6d6f279b62a36a0feb95e61b": {
+    "order": "unclear",
+    "explanation": "There are no explicit causal clauses (e.g., 'because X, Y' or 'Y because X') in the text. The reasoning is implied through statements and a conclusion, not through syntactic causal constructions."
+  },
+  "0905a67ec4e0534a3bad8a90b64e0d2c0da598c1ce2d8a37e259d8d99bb0b96e": {
+    "order": "unclear",
+    "explanation": "There is no explicit causal clause present; neither 'because X, Y' nor 'Y because X' forms appear."
+  },
+  "cf4e5e72747caaa87dda0ab48f927368fb068c1d443bb499253d8c2e295956ff": {
+    "order": "cause_last",
+    "explanation": "The only sentence with a causal clause is 'it violates moral standards because it is an example of a lack of consent.' The clause order is 'Y because X', fitting cause_last. There are no sentences of the 'Because X, Y' form."
+  },
+  "2a262e10c32714486464422c659ebbf3d9c4d00d86171c61e289b253413106c8": {
+    "order": "cause_last",
+    "explanation": "The sentence contains a causal clause in the form 'This action is morally unacceptable because it involves spreading a contagious disease', placing the cause after the main clause. All causal constructions are of the cause_last form."
+  },
+  "741a5721ee35b727f295fd5f9144928898903dbf2173c41986daceb99b9f9c0e": {
+    "order": "unclear",
+    "explanation": "There are no causal clauses in the reasoning text. The sentences offer description and evaluation, but none employ a 'because' construction or an equivalent causal clause."
+  },
+  "b473d5a9caafbf37d310b3b8ce2eb473593d90388bd96bac7cf1fef0c47d324b": {
+    "order": "unclear",
+    "explanation": "The sentences do not contain explicit causal clauses with 'because' or equivalent structures. The reasoning is given in assertive statements without subordinated causal clauses."
+  },
+  "3ae80ab8d0aa4e160fba5e4415343b36122dcde3d1c74dd75f1eb789f0991099": {
+    "order": "unclear",
+    "explanation": "There are no causal clauses present in the reasoning. The sentences are descriptive and lack explicit causal construction (no 'because' or equivalent structures)."
+  },
+  "7d9828741b216c597f39bd98d21a28dbde55f17fac1a63848a5799270fbad07d": {
+    "order": "unclear",
+    "explanation": "There is no explicit causal clause in either sentence; no 'because' or equivalent causal construction is used."
+  },
+  "2fb20824419a2507998f38dc5bd921013ced550372c02fbd71c2d890170780e6": {
+    "order": "cause_last",
+    "explanation": "The sentences use cause_last order: 'The man is blind and deaf, which makes it difficult...' and 'the train is moving at high speeds, making it dangerous...'. Both place the result/main clause before the reason/cause."
+  },
+  "fd5c5b19abd2369b96142c417cfb81954ad485ff502af5efee7c5638c494dbd0": {
+    "order": "unclear",
+    "explanation": "There are no causal clauses present; the sentences are declarative and do not contain a 'because' structure."
+  },
+  "24b6d449d940a016e6625243e29e1855a748e5c856cbc46eca2deea5303de39b": {
+    "order": "cause_last",
+    "explanation": "Only one sentence contains a causal construction: 'voting for the man who was a criminal is morally unacceptable because it violates fundamental ethical principles and undermines the democratic process.' The main clause precedes the causal clause, thus cause_last is used. All other sentences lack causal clauses."
+  },
+  "36bc1ac2ae53952adb9081895670fd242bffed7896574e441ade88f5f218eaff": {
+    "order": "unclear",
+    "explanation": "The reasoning contains declarative sentences without explicit causal constructions (neither 'because X, Y' nor 'Y because X')."
+  },
+  "bfc845d17482eaba6ffd6e3c1331de7298a51d3d0152c05e7e18f2d2d1398dc8": {
+    "order": "unclear",
+    "explanation": "There are no causal clauses using 'because' or other causal constructions; the sentences give evaluations or judgments without explicit causal syntax."
+  },
+  "11d13a658612198349593757d7f00de9eb3b3629118cad203d37d9635381101d": {
+    "order": "unclear",
+    "explanation": "There is a causal relationship implied by 'Therefore', but there is no explicit causal clause using 'because' in either first or last position; instead, causation is signaled by a logical connective. Thus, the syntactic form is unclear as per the classification rules."
+  },
+  "409e652bf8fea364f519bd37e2ef90855cb9443d78b146388e89d5531db5b728": {
+    "order": "unclear",
+    "explanation": "There are no explicit causal constructions in the provided sentences; neither 'because' nor a subordinating causal clause structure is present."
+  },
+  "8cc60a3a4f00b99fa672d100d02f39dc604494896332b1f036c473878cdb46bf": {
+    "order": "unclear",
+    "explanation": "There are no causal constructions present in the sentences; they are descriptive statements without subordinating conjunctions such as 'because'."
+  },
+  "6ca141b0e1eb7c5c781b04ee04763706749d8d0577fb44df6a43634ac2211f7e": {
+    "order": "unclear",
+    "explanation": "There are no explicit causal clauses in the form 'Because X, Y' or 'Y because X'. The statements are assertions and an inference, rather than sentences with clear causal subordinate clauses."
+  },
+  "20f13706c02e2f911700fca01996f5530393aa3424a48afab4e88ae36f2d94e5": {
+    "order": "unclear",
+    "explanation": "There are no causal clauses present; the sentences offer assertions and explanations, but none are structured as 'Because X, Y' or 'Y because X.'"
+  },
+  "69f7f2034f5a79ed569fbe2cde834f5e8f652295789a8d8af1bcceb7b7af184c": {
+    "order": "unclear",
+    "explanation": "No sentence contains an explicit causal clause ('because'), nor do the sentences have the required syntactic structure for cause_first or cause_last classification."
+  },
+  "f28da8720c4729cc6fcfbfddf737fc654ce8aff76d87c8be3b047469850cf953": {
+    "order": "unclear",
+    "explanation": "There are no explicit causal clauses with 'because' that indicate a cause/effect relationship in a recognizable 'Because X, Y' or 'Y because X' syntactic form. The word 'therefore' introduces a conclusion, but it does not fulfill the requirement for an explicit causal subordinate clause."
+  },
+  "9f2b18ab9e8a51ca6e977cd8f2204e12284116d4b481b1242089e432ab66cb6a": {
+    "order": "unclear",
+    "explanation": "The text does not contain any explicit causal clauses of the form 'Because X, Y' or 'Y because X'. There are statements about consequences and potential results, but no sentences with the explicit structure required for classification."
+  },
+  "d7dddbf15845368dd53adcb87b77409f3174d92afd65c1932a83f96c2e748c11": {
+    "order": "cause_last",
+    "explanation": "Both sentences use 'because' or 'due to' constructs in which the main clause comes first and the causal subordinate clause follows, e.g., 'acceptable because it involves...' and 'wrong due to potential harm...'."
+  },
+  "da3a022577b458518e07831c0ceb48f6d1d418a80c0c73a7e8fcbce90b0e0b62": {
+    "order": "cause_last",
+    "explanation": "There is one causal clause: 'This is an example of moral wrongdoing because it involves dishonesty and poor service quality.' The subordinate causal clause comes after 'because,' making it cause_last."
+  },
+  "386a6112a91a42399bd20812522a08e4c037cc6759b766d47196443033a45e16": {
+    "order": "unclear",
+    "explanation": "There is no causal clause present in the reasoning text; the sentences are descriptive and lack explicit 'because' causal constructions."
+  },
+  "38478b077fe34c4cc5a1e1a8b441c843f8bd708a9784a0335a67d47403e89bfa": {
+    "order": "cause_last",
+    "explanation": "The only causal sentence is 'This behavior can be considered morally wrong because it violates the principle of prioritizing public health over private interests.' Here, the main clause comes first, followed by the causal clause introduced by 'because', making the order cause_last."
+  },
+  "e6f931f84db3eed86f2fde616e8df69970e70adf5318b0c690ad4c4c0623574a": {
+    "order": "unclear",
+    "explanation": "There are no causal clauses in the provided text; the reasoning consists of statements and explanations without clear 'because' constructions."
+  },
+  "13157114bfd9e558ba16932155addf8f0dc704464f91571a258f768e65406b5a": {
+    "order": "unclear",
+    "explanation": "There are no sentences containing explicit causal clauses (i.e., 'Because X, Y' or 'Y because X'). The text is made up of statements and supporting reasons but does not use causal clause syntax."
+  },
+  "d65700c062112de65b82334417b58af4b6633276b49e2c9f6630a4cdde52aa0e": {
+    "order": "unclear",
+    "explanation": "There is a causal relationship implied by 'Therefore,' but there is no explicit causal clause using 'because.' The sentences state conclusions but do not contain a full subordinate clause structure like 'Because X, Y' or 'Y because X.'"
+  },
+  "ed5fc23e333a96ab2508e03332085e3a22d79a348e3bc648875715178f7b179b": {
+    "order": "unclear",
+    "explanation": "The reasoning text does not contain explicit causal clauses of the form 'Because X, Y' or 'Y because X'. Any causality is implied or embedded within complex sentences; thus, the structure is unclear per the specified criteria."
+  },
+  "166bbaee49d9ab0c8c279d48162333d6885595005df90a4dad21ef9d35ab81ba": {
+    "order": "unclear",
+    "explanation": "There are no sentences containing causal clauses; the text only offers general statements and suggestions about considerations."
+  },
+  "d6014a9a38554c092019bd0073b6da59c6682d94b7733f65e954e98d41519147": {
+    "order": "unclear",
+    "explanation": "There are two sentences, neither of which contains a causal clause. The second sentence ('It goes against the principles...') makes an assertion about the act but does not use a causal conjunction such as 'because'. There is no explicit causal structure present."
+  },
+  "631444f3d6a82839936065d28b976f9d2dbfdb6ae7f6528d7e32bf1f07e71dcc": {
+    "order": "unclear",
+    "explanation": "There are no explicit causal clauses in the sentences; the text uses descriptions and explanations without a clear syntactic 'because X, Y' or 'Y because X' construction."
+  },
+  "9b01b9285391de3acba7f9e335c6a1f40f9720289c0c2ce8aca1b97eb0d11cbb": {
+    "order": "unclear",
+    "explanation": "None of the sentences presents a causal relationship using a 'because' clause. They state definitions or direct conclusions without an explicit causal construction."
+  },
+  "2b343f7d66fae8ffe54befb161843b2152a986cd2535d2a39ff6c2b7c5def751": {
+    "order": "unclear",
+    "explanation": "There are no causal constructions with clear 'because X, Y' or 'Y because X' clause orders. The sentences provide explanations but do not use explicit causal clauses."
+  },
+  "ad756507c390c51db656cb87fa6a3f32fca7e4ba477754cc40b846093b186587": {
+    "order": "cause_last",
+    "explanation": "The reasoning sentence has the form 'The act is morally unacceptable because it involves an unsafe and potentially harmful action,' which places the main clause before the causal clause. No other causal clause is present."
+  },
+  "e6f0621e17778575d0d8ac8cb332d817853dc8ac5bc56541bac97e0a75d93f1d": {
+    "order": "unclear",
+    "explanation": "There is no causal clause structure present. The sentences simply state facts and opinions, without 'because' or similar constructions linking cause and effect."
+  },
+  "f008949daf7d0d8e13f18871a99942f4171a733a272d19df40417343ec76b384": {
+    "order": "unclear",
+    "explanation": "None of the sentences contain an explicit causal clause using 'because' or a recognizable causal subordinating structure. The statements are declarative or assert norms without connecting them in the prescribed causal-clause form."
+  },
+  "03eeaa8ad567f31ca3749e998dedc7daf7c6ea5a767cc35a9a9553cac6d4222e": {
+    "order": "unclear",
+    "explanation": "None of the sentences contain explicit causal clauses with 'because' or an equivalent subordinating structure, nor do they follow a clear cause_first or cause_last pattern. They are mainly statements or explanations without a marked causal connection."
+  },
+  "f5837436528f3a7d9932d6f652c30258a46ca2195da88b3d6a10098f056e6024": {
+    "order": "unclear",
+    "explanation": "There is no causal clause present in the reasoning text; the sentences are declarative and report implications rather than expressing causality using subordinating conjunctions such as 'because.'"
+  },
+  "fe3cf9d8d6ef3402595f172e7ba1ec5f2c159953d91899db09e03e3170bb4c34": {
+    "order": "unclear",
+    "explanation": "The text does not contain any explicit causal constructions of the 'Because X, Y' or 'Y because X' form. Any causal relationships are implied or descriptive rather than syntactically expressed."
+  },
+  "6f68b4a6c8010a78e98467404847b9fc8f596456a26c9fe4d6a6732758276791": {
+    "order": "unclear",
+    "explanation": "No sentence is structured as 'Because X, Y' or 'Y because X'; the reasoning is given through conditionals ('If...then'), which is not a causal subordinate clause in the required form."
+  },
+  "fae52162deb8fa685a900665692d48db59e00064bf0aa8a58fbc886f49663f0e": {
+    "order": "unclear",
+    "explanation": "No sentence contains a causal clause beginning with 'because' or ending with 'because'. The sentences are declarative and explanatory without explicit causal syntax."
+  },
+  "61da69278f22f58fdadf7efd0fe58df955be80f8b7676647eac5b9441b152ccf": {
+    "order": "unclear",
+    "explanation": "There is no causal clause in the text; instead, it states facts and a general evaluative statement without explicit causal syntax."
+  },
+  "bd92c1cbaca9b7b7e2d0dbd6443633aa44706a0b11c0b7e77669032820c03a79": {
+    "order": "unclear",
+    "explanation": "There is no explicit causal clause present; the sentences provide explanations and descriptions, but do not use 'because' or a clear causal construction to relate clauses."
+  },
+  "e1e6bff5c2d341b521cc4d94b628eca3610c9aa75085d9a79b62d4aa624ccec4": {
+    "order": "unclear",
+    "explanation": "There is no explicit causal clause structure present; neither 'Because X, Y' nor 'Y because X' forms are used."
+  },
+  "e7bda9461d56cc76b41bc720875e39c33c568cfd925e96d95ab03c543c952d94": {
+    "order": "unclear",
+    "explanation": "There are no sentences containing an explicit causal clause; the reasoning consists of statements and evaluations, but no construction like 'because X, Y' or 'Y because X'."
+  },
+  "f978e3249826ee2b78e266153bf33586abfe32c5efad82e15bb295b3c2d37d68": {
+    "order": "unclear",
+    "explanation": "There is no causal clause in the sentence; it presents statements rather than an explicit cause-effect construction."
+  },
+  "58a7ec69219ed61b3351b5ff73a986445b67ae69f0b37e294c38bf691dcc6cc8": {
+    "order": "cause_last",
+    "explanation": "The only sentence with a causal construction is 'The person's actions were morally wrong because they violated the principle of honesty,' which uses the 'Y because X' (cause_last) order. The rest of the sentences provide elaboration or explanation, but do not contain explicit causal clauses."
+  },
+  "1e1647cad8eeff0cf44b0faa25d6e92eaa6812afe21420bbe5cd522da69e3e14": {
+    "order": "unclear",
+    "explanation": "No causal clauses are present; the reasoning consists of statements and explanations without explicit 'because' constructions."
+  },
+  "51d174dfce680676c0f9d6bb03250d290d21a9debd5172e4edb2e18b7293616f": {
+    "order": "unclear",
+    "explanation": "The text contains no sentences with explicit causal clauses in either 'because X, Y' or 'Y because X' structure; statements are assertive or explanatory without overt causal subordination."
+  },
+  "8d01329e1083ff9e654b7f950ab12dcd4f4ed87f9d4c140a94082a35cd4799fa": {
+    "order": "unclear",
+    "explanation": "There is no explicit causal clause in the text. Neither 'because' nor a clear causal subordination is present in the reasoning sentences."
+  },
+  "e885a9957f043e12711a689dd0429617355dc4b5ee3e8259e6db04ab3fd7fac4": {
+    "order": "unclear",
+    "explanation": "There is no explicit causal clause structure ('because X, Y' or 'Y because X') in the text; reasoning is implied rather than syntactically marked."
+  },
+  "ab6419f6f3ff9c3e756bbd1efedd3ccda276e719e0d59eef492ae139a774aac6": {
+    "order": "unclear",
+    "explanation": "There are no explicit causal clauses with 'because' present in the text; instead, the sentences use declarative structures to express reasoning, so the order cannot be determined."
+  },
+  "1c44315e83ef396aac0e870634364ce04b8369d7fdbd2e21ab7ef31c8fcdafd2": {
+    "order": "unclear",
+    "explanation": "There are no causal constructions using 'because' or other clear subordinating causal clauses. The sentences are descriptive and evaluative, without explicit clause ordering."
+  },
+  "71869351e2bcab11893edf7b02ce57092695c81152c27ce246d0075b2410eb4c": {
+    "order": "unclear",
+    "explanation": "The text does not contain any causal constructions such as 'because X, Y' or 'Y because X'; it consists of declarative statements and explanations without explicit causal clause linkage."
+  },
+  "7c4433469443afde357e3ea095c468a65d70e6e454b6608dd02d67efcb9b6ce8": {
+    "order": "unclear",
+    "explanation": "The text does not contain clear causal clauses using 'because' in either the initial or final position. Explanations are provided, but without overt cause-first or cause-last constructions."
+  },
+  "dca49fb93504d5aa15e5dd6444376870c5357b50ea84c1a16e5c90e4af310f87": {
+    "order": "unclear",
+    "explanation": "There are no causal constructions present; the sentences are statements and recommendations without explicit causal connectives."
+  },
+  "f5ebe5784f6c1448a9893cd111f1a5a1269154152def226bbc3b13c990fef4e8": {
+    "order": "unclear",
+    "explanation": "None of the sentences include an explicit causal clause of the form 'Because X, Y' or 'Y because X'. The text uses statements and conditional language, but does not display clear causal clause order."
+  },
+  "ce17aff09a161da70641c9d31e35c21cd6c48b6951f7146f1f572bb0351e7227": {
+    "order": "unclear",
+    "explanation": "There are no explicit causal clauses in any of the reasoning sentences; causality is implied but not syntactically constructed with 'because' or equivalent clauses."
+  },
+  "216d7519e950c7105bd5a08628ff031ce9dd1ff263e3cd0ff25da803493958de": {
+    "order": "unclear",
+    "explanation": "There are no causal clauses in the reasoning text; the sentences are descriptive and explanatory without using 'because' or a similar causal construction."
+  },
+  "225f0fddbd60b203a25aea7f14c74f2b866be174897730f0653e4f550de41cee": {
+    "order": "unclear",
+    "explanation": "There are no explicit causal constructions of the form 'Because X, Y' or 'Y because X'. The sentences provide information and potential outcomes, but do not contain subordinate causal clauses."
+  },
+  "9f34bf87a2fef4e8f939a43ea7ce15c2d5e9b58a5da0c90cc1c659f051cb2c9b": {
+    "order": "unclear",
+    "explanation": "There are no explicit causal clauses in the text; the sentences state facts and evaluations but do not use 'because' or clearly subordinate one clause as a cause of another."
+  },
+  "a2e90b71fcab8d4aec9f1d8ac9d4c84899fd9d7efd8091c5caf873b4a02e3d2e": {
+    "order": "unclear",
+    "explanation": "There are no explicit causal clauses connecting two propositions with 'because'. The sentences describe relationships, but do not use clear causal subordination."
+  },
+  "3db0afa0eaf62b6362bc7e6ec0382bc76e0331ca94e3e1a9b695cf724bd16f46": {
+    "order": "unclear",
+    "explanation": "There are no causal clauses present; all statements are simple declaratives or contain reasons implied rather than syntactically marked with 'because'."
+  },
+  "d96545bda5c0b9de77f1a0371182d457a5344ba21f4074a0f1e442c8ec1ba9b6": {
+    "order": "unclear",
+    "explanation": "None of the sentences in the passage contain explicit causal clauses of the form 'Because X, Y' or 'Y because X'. The connections between ideas are implied, not syntactically marked with causal conjunctions."
+  },
+  "7f915f00dfb07a57a90b1d52b3b31ac0cf8845feeabb8fd2e1bcf1ee215fae1a": {
+    "order": "cause_first",
+    "explanation": "Every sentence starts with 'Because X,' and then follows with the main clause Y, conforming to the 'cause_first' syntactic order for causal clauses."
+  },
+  "84be45128fd105f8c74d896afb54b9f44e4c4315bcadcbc0d543a70d27cc39ec": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence follows the structure 'Y because X', with the main clause preceding the causal subordinate clause in each case."
+  },
+  "f195890c4361e100d30ba9fed7a17b4f50c52cff8b13cd1550362558f27b43d8": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence follows the 'Y because X' pattern, with the main clause first and the causal subordinate clause following 'because'."
+  },
+  "d5110af4fbc97d5d5a61c77d42129fc5d44d361c940d7e3cc4f53b8bb169e9f2": {
+    "order": "cause_last",
+    "explanation": "Every sentence follows the 'Y because X' structure, where the main clause precedes the causal clause starting with 'because'."
+  },
+  "ab0658a16ffb7f945093ec30888d4bb3741cbf8c000844bc92697e11be2fcc8d": {
+    "order": "cause_last",
+    "explanation": "Every sentence in the text uses the 'Y because X' order, where the main clause precedes the causal subordinate clause introduced by 'because'."
+  },
+  "85bd921f54bdd05b9b8e0ad38a191faebec97d149c48934ec579013036b16e49": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence follows the structure 'Y because X', where the main clause is presented first, followed by the causal subordinate clause beginning with 'because'."
+  },
+  "dfed28c2d725e32a53040a5c6916dc6118324341d7977b983691bbcc39575c51": {
+    "order": "cause_last",
+    "explanation": "All reasoning sentences have the form 'Y by [the action] because X,' where the causal clause (X) appears after 'because,' indicating cause_last order."
+  },
+  "11b847b1f7aad2086e2c9451599ccedbb3ee32039a8de5fada3de87107a743be": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence has the form 'Y because X', where the main clause (effect) precedes the causal clause."
+  },
+  "82b45b1f2dbdd0346151eded12f47f7e439d97f463b34f78acc1bbb049808918": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence follows the 'Y because X' structure, with the main clause preceding the causal 'because' clause."
+  },
+  "13dfd2a818383055d87a1743fa59a430a9a14c31f3000158c5fd9d7dff653ab4": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence follows the form 'Y because X', where the main clause comes first, followed by the causal subordinate clause introduced by 'because'. There are no instances of 'Because X, Y' order."
+  },
+  "a885805008e87ef3e9af297f8fb9ed9b74b9fc37b70b3b6785363911d5c1c239": {
+    "order": "cause_last",
+    "explanation": "Every sentence consistently uses the 'Y because X' structure, with the main clause preceding the causal subordinate clause."
+  },
+  "509e7b0801ca81c59ee44aff63ddb9fb84813e4fef701929745d62037ec49c16": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence follows the pattern 'Y because X', placing the causal clause at the end."
+  },
+  "32374260885634cc6c14f9f03bcd31b58956dd6164793c4a3efa21082e786cd5": {
+    "order": "cause_last",
+    "explanation": "In all sentences, the main clause precedes the causal clause, following the pattern 'Y because X'; this is cause_last order throughout."
+  },
+  "f858a9f19be6de26c90a2febdd38d551f5afcc3c048f7d521122b4b16c7e5501": {
+    "order": "cause_last",
+    "explanation": "Every sentence places the effect first (Y), followed by the cause introduced by 'because' (X). No sentence has the cause first."
+  },
+  "8e423cc8965faed525af58bd4b4ae1ac7b068901ed25c1a1aeff9a69e0803bab": {
+    "order": "cause_first",
+    "explanation": "Every reasoning sentence begins with 'Because X, Y', displaying consistent cause_first order throughout the text."
+  },
+  "4e6daa04c4ffabac9d03c0052f5a1b40a5bc4103e482582e332699bc016a7d77": {
+    "order": "cause_last",
+    "explanation": "Every sentence has the form 'Y because X,' placing the causal clause last in each instance."
+  },
+  "0424e386b09b807fecf84d4805a5f5c24422abc788c2677486655678b2a76ecd": {
+    "order": "cause_last",
+    "explanation": "All sentences have the structure 'Y because X,' with the causal clause ('because the arcade...') following the main clause."
+  },
+  "7ffab263ba190db5155fbc015ae7d650a6ddb95730c858cf0459c94eec603211": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence has the form 'Y because X,' where the main clause precedes the causal subordinator 'because' introducing the cause."
+  },
+  "01c24058d21e14ea17eed010f784691c861b1decb0e18c881531e20b108f787b": {
+    "order": "cause_last",
+    "explanation": "Every sentence has the structure 'Y because X,' where Y is the main clause and X is the subordinate causal clause."
+  },
+  "44ae57e39e43889fac4ce3c69d345968c07267ad49fd25a25a4d09d85a7fee40": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence follows the 'Y because X' format, with the main clause first, followed by the causal clause introduced by 'because'."
+  },
+  "ca764ad965ff4dc61b828baca070d283771f430b759a009a1dafce76fc46ff9e": {
+    "order": "cause_last",
+    "explanation": "Every sentence uses the form 'Y because X', where the effect or main clause precedes the causal subordinate clause introduced by 'because'."
+  },
+  "4dd99fb5eac97b7fd801dda265e0bdfe4965ca81be541af894992407c7b657f1": {
+    "order": "cause_first",
+    "explanation": "Every sentence begins with a 'Because X,' clause (the causal clause), followed by the main clause 'Y', matching the 'Because X, Y' pattern, which is cause_first order."
+  },
+  "ccdb1a66b23118e580b6c221f4aec0b59e9f6a78879c9d35268bd1b3dc613ba8": {
+    "order": "cause_first",
+    "explanation": "Every sentence in the reasoning begins with 'Because X,' followed by 'Y,' consistently placing the causal clause first."
+  },
+  "638238dddf5428cb2c01458018711848b77e8fa71ac6c8ddb5a14a969d58aac0": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence follows the 'Y because X' structure, with the effect presented first, followed by the causal clause introduced by 'because'."
+  },
+  "980ca86e7ff50ecfaeb45b1b1a92dd1bf3abbc34e8880e7e7dcccd33f167a08b": {
+    "order": "cause_last",
+    "explanation": "All sentences follow the structure 'Y because X', where the main clause comes first and the causal clause follows. There is no variation."
+  },
+  "e72a1aa4dbc3c9d23ee62e25e1968c6683508e9bc82cdf5e280e2c26b4395274": {
+    "order": "cause_last",
+    "explanation": "Every sentence has the form 'Y because X', where Y is the main clause and X is the causal subordinate clause."
+  },
+  "2418728255a17724e6cf361f9b0095e59681fd85f013ae95e75c9114bf07427a": {
+    "order": "cause_last",
+    "explanation": "Every sentence has a main clause followed by a 'because' clause, meaning all sentences use the 'Y because X' (cause_last) order."
+  },
+  "f321a808c3c5f4e861bb400026269fd9ffb9ad9915935b89eaac6fd386917b96": {
+    "order": "cause_last",
+    "explanation": "Every sentence places the main clause before the causal clause using 'because', e.g., 'The meal was enjoyed by the couple because the ingredients were used in a creative way.'"
+  },
+  "fd19bbd0815835e829af2c4ea393759992feb76c73664ffd3f10dae6bb2d62ae": {
+    "order": "cause_last",
+    "explanation": "Every sentence uses the 'Y because X' structure where the main clause comes before the causal clause introduced by 'because.'"
+  },
+  "78d73ec9798e092acdc9c1ba232bb63da42ed1e3ce665a4850e773a1fd6a9218": {
+    "order": "cause_last",
+    "explanation": "All sentences place the effect clause first and the causal subordinate clause ('because X') second, following the 'Y because X' (cause_last) structure."
+  },
+  "1301aefc968cbe4b8cb5afe30d9f00aadf3c8667d8776a2fc171524cc5129422": {
+    "order": "cause_last",
+    "explanation": "Every sentence places the effect/main clause before the causal 'because' clause (Y because X), such as 'The call was made to protect... because the ex partner was in danger.'"
+  },
+  "629cb5069555c09385c164e9a8e152802daa2de63734db59aa229e008c161325": {
+    "order": "cause_last",
+    "explanation": "Every sentence uses the structure 'Y because X', with the effect stated first followed by the causal clause after 'because'."
+  },
+  "6df5ef7f67df42d4e5b24c0aa9a5e8dc8e69af9ab720586d0ce6a643e7f30076": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence follows the 'Y because X' structure, where the main clause precedes the causal subordinate clause introduced by 'because.'"
+  },
+  "57d83b9448fb782973d1304ea15a826aaba39376479f98bd6a3d47136860ca7f": {
+    "order": "cause_last",
+    "explanation": "Every sentence follows the 'Y because X' structure, where Y describes an effect and X is the cause introduced after 'because.'"
+  },
+  "d2c47597eb7d83ea35d093a080da31c39fa4603ce416739685be890b69da3731": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence follows the pattern 'Y because X', where the main clause comes first and the causal subordinate clause ('because X') comes after."
+  },
+  "3e324d42758be08aa9f4e822cd250a6b492a3aa7f7820a9547199c4d3b2b18f4": {
+    "order": "cause_first",
+    "explanation": "Every reasoning sentence begins with 'Because X, Y', making the causal subordinate clause come first in each instance."
+  },
+  "533f0f9812cfc3e61abffc446bc4ff41e3800b1ee225f5bd2fbd1fad59f2fab3": {
+    "order": "cause_first",
+    "explanation": "Every reasoning sentence starts with 'Because X,' followed by 'Y', indicating the cause is stated first, consistently throughout the text."
+  },
+  "787dd5b39d51bd4ba814f4f60da3e0370ed1dc9932b99ad80665d5530774ca1d": {
+    "order": "cause_last",
+    "explanation": "Every sentence has the format 'Y because X', where the main clause is followed by the causal subordinate clause introduced by 'because'. There are no sentences with the 'Because X, Y' order."
+  },
+  "4a72832b6420dcf177296b8525a1908e0ab21780d456f79158a23f88f50a7f6a": {
+    "order": "cause_last",
+    "explanation": "Every sentence follows the structure 'Y because X,' where the main clause is followed by the causal clause introduced by 'because.' There are no sentences with 'Because X, Y' order."
+  },
+  "95663b40b2b6c7e55b6b4ffd926f9f34cf16eae3f04e71522de5af7e4becdf5d": {
+    "order": "cause_last",
+    "explanation": "Each reasoning sentence follows the 'Y because X' structure, with the causal clause following the main clause in every case."
+  },
+  "5eb073a6b6b9566ba7af6f54c1bb6edcd7e6a54a07a66d5a7bdf9eb04e168a92": {
+    "order": "cause_last",
+    "explanation": "Every sentence has the causal clause ('because X') following the main clause, forming 'Y because X' structure throughout the text."
+  },
+  "f2605093b46fd5bd30055635dfd937accc3be2e227ddc0d1fc1fb6252ad5fddd": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence follows the pattern 'Y because X', where the main clause (effect) comes first, followed by the causal clause (because X), indicating consistent cause_last order."
+  },
+  "822d64bd4ecd0842be9095593da444eeffecc44d55c46def9f123f60266a3c2e": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence has the form 'Y because X', where X is the causal clause following 'because'. The main clause precedes the causal clause throughout."
+  },
+  "2bf96f86029d2aa22c5274ce96583e33b3e24ca68c2f5daf006de8533170cfeb": {
+    "order": "cause_last",
+    "explanation": "All reasoning sentences have the form 'Y because X', where the subordinate causal clause follows the main clause."
+  },
+  "871b64f6f0e555c7b94847287276725c408d76a31a342474f69c742368ef89b7": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence has the main clause first and the causal subordinate clause introduced by 'because' second (Y because X). There are no examples of the opposite order."
+  },
+  "8aaee4653071bc88b3fccc0dabc826480fb6a2565976b3146b0261322d0d12c2": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence follows the 'Y because X' structure, where the main clause precedes the causal clause introduced by 'because'."
+  },
+  "b55c58d1399f17bd03384fe59a765f31eb5e636bdda5e522d6080ac0b8ef98f3": {
+    "order": "cause_last",
+    "explanation": "The only sentence with a causal clause is 'The trust between siblings is damaged because the lending of property was not honored,' which uses the cause-last order. The other sentences do not contain causal clauses."
+  },
+  "f228fefaf73b08851bf7fe53419a15a5176c5754008fe41f70cda393c3572ab5": {
+    "order": "cause_last",
+    "explanation": "Every sentence uses the form 'Y because X', where Y is the result or main clause and X is the causal subordinate clause."
+  },
+  "bd65d1970ee91740ce8b09254e8d81b85ab1811109803844542d41fea4299dcc": {
+    "order": "cause_first",
+    "explanation": "All sentences begin with 'Because X, Y', with the causal subordinate clause 'Because X' coming first, followed by the consequence 'Y'. There are no cause_last or mixed structures present."
+  },
+  "7e7793bfc1a63d1bfc88073e144c671e19a061561e9a292a8277390fc0cc5cf8": {
+    "order": "cause_first",
+    "explanation": "Every reasoning sentence starts with 'Because X,' followed by 'Y,' indicating the cause (X) precedes the effect (Y)."
+  },
+  "000934e2d0b914d786e3c11618b2f0a779ee3521d910c9fcce45365b478c9c4a": {
+    "order": "cause_first",
+    "explanation": "All reasoning sentences are structured as 'Because X, Y', with the causal clause ('Because X') appearing before the main clause ('Y')."
+  },
+  "a5b2f52a80d50211611a601375971cc1af385fefb135d93b3fa828735c41ed38": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence follows the 'Y because X' structure, where the main clause precedes the causal subordinate clause."
+  },
+  "34b3e62a51bf1764f5a475edb4d40e8e10684a9f63ea7f774e38a7c326485ba3": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence has the structure 'Y because X', with the causal clause ('because X') coming at the end."
+  },
+  "dc4456763c9ac7bff4618ad9d09730a77cd06d762b941ff0cc0dd9255778c6e0": {
+    "order": "cause_last",
+    "explanation": "All sentences are in 'Y because X' order, where the main clause comes before the causal subordinate clause introduced by 'because'."
+  },
+  "a7aee555299e7fb6aa8e9bfb1a8e66565cc7c4a5bf7db453ab68c04d51f38bbf": {
+    "order": "cause_first",
+    "explanation": "Every sentence begins with 'Because X, Y' where X is the causal subordinate clause and Y is the main clause, consistently showing the cause_first order."
+  },
+  "6e5515d993b3d3de23973d9ac8e3fe0975e157d0ae80dc17c69cba4542723a35": {
+    "order": "cause_last",
+    "explanation": "Every sentence is structured as 'Y because X,' placing the causal clause after the main clause."
+  },
+  "7d6b8d3107bdaf5e6b85d73e6f0f40f53e72d1e47e3261c5f9cdbb2e71dd0743": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence places the effect/main clause first and the cause/subordinate clause after 'because', resulting in consistent cause_last order throughout the text."
+  },
+  "dced064ac36ddd857b88fdeb3292c4f41b79ce9f769bd3e106fcac788becfee0": {
+    "order": "cause_last",
+    "explanation": "Every sentence uses the 'Y because X' form, where the main clause precedes the causal subordinate clause, placing the cause last in each sentence."
+  },
+  "b7bbaa18e4d2828c7adee2471d2e48f935d940e259c73a33e863cc1fd36278bf": {
+    "order": "cause_last",
+    "explanation": "Every sentence has the form 'Y because X', placing the cause after the main clause, so the order is cause_last."
+  },
+  "1daea5320d82ae452436917e944e2d6d9ace770a32aced654915790bc57469cb": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence has the structure 'Y because X', where the main clause precedes the causal clause."
+  },
+  "df43858e95f3d4b3973e4ecb9280521ab0c96b822aa464c1c24015158a3f618c": {
+    "order": "cause_last",
+    "explanation": "All reasoning sentences use the 'Y because X' structure, where the result or main clause precedes the causal (because) clause."
+  },
+  "e4352432cbe7aa328766e90b397396917174bba57cf397ffb6c21cec07c4aefa": {
+    "order": "cause_first",
+    "explanation": "Every reasoning sentence follows the structure 'Because X, Y', with the causal clause ('Because...') occurring at the beginning of each sentence."
+  },
+  "657d2f9e2b314cfba4406deab60ea1795845e2fdcb9fbd2009d881e4b9844256": {
+    "order": "cause_first",
+    "explanation": "Every sentence begins with 'Because X,' (the causal subordinate clause), followed by the result (main clause). There are no sentences using the 'Y because X' structure or lacking causal clauses."
+  },
+  "61a23d12488fa35d4a85699bcfcb705e67fa8ca8eb02cad8ac9f003ae965d988": {
+    "order": "cause_first",
+    "explanation": "All reasoning sentences have the form 'Because X, Y', with the causal clause ('Because...') appearing before the main clause in each instance."
+  },
+  "d6e219118ebfa0ad0c14d6ec91c5519cc337b45b298128ed63c75948dc449525": {
+    "order": "cause_last",
+    "explanation": "All reasoning sentences follow the structure 'Y because X' or 'Y by X,' where the main clause precedes the causal or explanatory phrase. There are no instances of the 'Because X, Y' structure."
+  },
+  "17093042240a5483f7b4f7fbef1bae3379b07c472c577097592e914299998f0d": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence places the effect first, followed by the causal clause introduced by 'because' (e.g., 'The decision is made because...'). This is consistently the cause_last order."
+  },
+  "aa1c9f1a7ac61fe5cc9aa03d7e7c30417a8787f1bed8306b2b6c7b6cf6810cbe": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence has the form 'Y because X,' where the main clause precedes the causal clause introduced by 'because.'"
+  },
+  "e12595e9c6ab13978f86b61fa9c46aa82bbd3981833da088589f293e07a4ff8a": {
+    "order": "cause_last",
+    "explanation": "Every sentence has the structure 'Y because X', with the main clause first and the causal ('because') clause second."
+  },
+  "6fa810d810b9ae6e379d677197b638751b3245f643a4e8372ed5053ba0a2faec": {
+    "order": "cause_last",
+    "explanation": "All reasoning sentences follow 'Y because X' structure, where the main clause precedes the causal subordinate clause. There are no sentences with 'Because X, Y' order."
+  },
+  "445bf73e71d0cadb32b4bb7530a9eaf39f27a0c9ee1e25a64696d2003f62343f": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence follows the 'Y because X' structure, with the main clause preceding the causal clause introduced by 'because'. There are no sentences with the 'Because X, Y' order."
+  },
+  "e1ac7f0ec72f20237cd4a9537f32d6a8d969f84c6b418b231eb8178d65786674": {
+    "order": "cause_first",
+    "explanation": "Every reasoning sentence begins with 'Because X, Y', placing the causal subordinate clause at the start of the sentence."
+  },
+  "383a6feca36dc03c80706b3ae4e5a004dd14c59271c577290f08ba317ac580f9": {
+    "order": "cause_first",
+    "explanation": "Every reasoning sentence is structured with the causal subordinate clause ('Because X') at the beginning, followed by the main clause (Y)."
+  },
+  "20ffbc36a55cda3f0675f1ee197f60c0e2a41a1a38a6afc9b9ea992dc0268e3f": {
+    "order": "cause_last",
+    "explanation": "Every sentence follows the 'Y because X' structure, with the main clause first and the causal subordinate clause ('because X') at the end."
+  },
+  "3f77f6b7747db88766e0e3dff27c16b772c7cf9b7760521e5b3f9744cf638658": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence uses the structure 'Y because X', with the causal clause ('because X') appearing after the main clause. There are no sentences with the 'Because X, Y' order."
+  },
+  "0490bfdb6c2a8b327d50e2aa7058c2f13b4f11d4623b50ea369c9f8bd73c50e0": {
+    "order": "cause_last",
+    "explanation": "All reasoning sentences have the structure 'Y because X', with the causative clause always following the main clause."
+  },
+  "ac7fa1c48214712b1e16b4688547e0f51e6d506333150fadc1b16affd694d452": {
+    "order": "cause_last",
+    "explanation": "Every sentence with a causal clause uses the form 'Y because X', where the effect precedes the cause. The other sentences have no explicit causal construction, but none are 'Because X, Y'."
+  },
+  "58381b1949adb7a8b2cc90c0ca113eb6e7211d13744f260b027b45e321c1c8b9": {
+    "order": "cause_last",
+    "explanation": "All reasoning sentences follow the structure 'Y because X', where the main clause precedes the causal subordinate clause."
+  },
+  "f76ebbca18b5bd90487a7f38376733871613f6cdfdc33d73ca38be0e70535734": {
+    "order": "cause_first",
+    "explanation": "Every reasoning sentence begins with 'Because X, Y' structure, so all causal clauses precede the main clauses."
+  },
+  "aebe12dbbaa8a539b7a713b5fc1d289604b4b48c5aeea559a043e6a4f84305b8": {
+    "order": "cause_first",
+    "explanation": "Every reasoning sentence starts with 'Because X, Y', displaying consistent cause_first order."
+  },
+  "629592e67322c56d873382690abcdc149e3fd4e129ff215d9ec21777fe604a8d": {
+    "order": "cause_first",
+    "explanation": "Every sentence in the reasoning text begins with 'Because X, Y', indicating that the causal clause (X) comes first in each case. There is no example of the cause_last or any mixed order; all are cause_first."
+  },
+  "446433914e8636f179ffadd337e4b89b5cc7433beb5cdd3d64e7fda09233374e": {
+    "order": "cause_first",
+    "explanation": "Every reasoning sentence begins with a 'Because X, Y' structure, placing the causal subordinate clause first."
+  },
+  "42772bb46b262aa238785a974786fffd577c0aa438668a71d992d338d79d944c": {
+    "order": "cause_first",
+    "explanation": "Every reasoning sentence begins with 'Because X, Y', indicating the cause comes first in each causal clause. There are no instances of the reverse order or sentences without a causal construction."
+  },
+  "a6f31e7bdf3690a07ff11d89d52871deba9fef60012662c98237ab7d7d20b054": {
+    "order": "cause_first",
+    "explanation": "Every sentence begins with 'Because X, Y', with the causal clause appearing first in each instance."
+  },
+  "165a8238901fc99e2e9aa53242ef6fb2eb469a709f055f529203deb0ca8920ca": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence has the causal clause ('because the mine...') after the main clause ('The children were...'), making it cause_last."
+  },
+  "56be31a93ea3b2c5efcf382d2fe69a000bc4d2acee3b81a702978b1a585dcb77": {
+    "order": "cause_last",
+    "explanation": "All sentences have the structure 'Y because X', with the main clause first, followed by the causal subordinate clause introduced by 'because'."
+  },
+  "8164d63170b5e1ca558d97328a6ec5f1761e7972344218c0a232e6ebe85b1d83": {
+    "order": "cause_last",
+    "explanation": "Every sentence follows the 'Y because X' structure, where the main clause precedes the causal subordinate clause. There are no instances of 'Because X, Y' ordering."
+  },
+  "e79e2a4834b6fe5e71a2b81019559e79a704e0f9e5c6cd45a602842dd962001f": {
+    "order": "cause_last",
+    "explanation": "Every sentence uses the structure 'Y because X', with the main clause presented first, followed by the causal subordinate clause introduced by 'because'."
+  },
+  "6b2f547366da69b3465cd59f74bd0faa0de3b5e05a593d8d26317e0ede60c8ac": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence has the structure 'Y because X,' where the main clause precedes the causal subordinate clause introduced by 'because.'"
+  },
+  "ee24d48008aa065861feb52c2fde3b8026d0943c0ca189a1ce8fbfa68ab562d8": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence in the text has the main clause first (Y), followed by the causal subordinate clause (X) introduced by 'because'\u2014'Y because X'\u2014indicating a consistent cause_last order."
+  },
+  "5baba734f433d51b89db9070d4cc63ae4aceba6f008b483d05f07729504b5755": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence uses the 'Y because X' form, where the main clause precedes the causal clause introduced by 'because.'"
+  },
+  "86449f8fb7aad5f5210fdbd817c598c3cefc667c153e6cf7591003660c5d9166": {
+    "order": "cause_first",
+    "explanation": "Every sentence begins with 'Because [cause], [result]', showing consistent cause_first order throughout the text."
+  },
+  "710320ceb872fdc3d1d7e1344bebc16902b63c3f25ca98b9599b1e2b4a720251": {
+    "order": "cause_last",
+    "explanation": "Each sentence places the effect first, followed by a causal clause introduced by 'because' (e.g., 'The students were motivated by the encouragement because the painting was appreciated by the teachers'), clearly demonstrating cause_last order throughout."
+  },
+  "bf292721a781d971ba9acb96310d398971e9b6576ad9798ec77d8eae657c8132": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence follows the 'Y because X' structure, where the causal clause (X) comes after the main clause (Y)."
+  },
+  "f88f0eb9607ee6725ac39ea85d58196c832499247dd71b3a71aa5bc927cd2018": {
+    "order": "cause_first",
+    "explanation": "Every sentence begins with 'Because X, Y', placing the causal subordinate clause before the main clause in each case."
+  },
+  "c1b73a4acc4cc3506e4404d69806f8e5727b60cfe692e23273bf75ec6289c2df": {
+    "order": "cause_first",
+    "explanation": "Every reasoning sentence in the text begins with the causal clause introduced by 'Because X, Y', consistently maintaining the cause_first order."
+  },
+  "3c1d28ff5b0513ce411e3dc7423f32a6d22ef6a55426531b85c701c89e4b27aa": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence has the causal structure where the main clause precedes the causal clause introduced by 'because' (Y because X)."
+  },
+  "161ff745c31b092c82a5a66d9d7e30f8c3ab086e27cdb5ba0c51c4249c392ebb": {
+    "order": "cause_last",
+    "explanation": "All sentences have the main clause first, followed by the causal subordinate clause introduced by 'because'. For example: 'The audience was misled by the teacher (main), because the truth was misrepresented by the strawman (cause).'"
+  },
+  "68259957266196ee58bca338e284eed2391d862b7a3411bc693468a48599a31e": {
+    "order": "cause_first",
+    "explanation": "Every reasoning sentence is structured as 'Because X, Y', with the causal clause ('Because...') always appearing at the beginning."
+  },
+  "258b04ec17e122e940789761d1084d622975edc082076f1bf99e3871871aaa6f": {
+    "order": "cause_first",
+    "explanation": "Every reasoning sentence starts with 'Because X,' followed by 'Y', indicating the cause-first order in all cases. There are no instances of cause-last or other variations."
+  },
+  "ce90fcd940413c0ff78e31fc9f3b71874c029a45af162541eef5536b98b7d865": {
+    "order": "cause_last",
+    "explanation": "Every sentence follows the 'Y because X' pattern, where the effect precedes the causal clause."
+  },
+  "2701b433822a143b78aaea6a793497ef8f9c79557dad7f0fc715eeda057a0329": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence has the form 'Y because X', where the main clause precedes the causal subordinate clause introduced by 'because'."
+  },
+  "fdbe675990e5f79e52a748ae294b84b30255ad4a2f522e4899542fe71fb6de6f": {
+    "order": "cause_first",
+    "explanation": "Every reasoning sentence starts with 'Because X, Y', putting the causal clause before the main clause in all instances."
+  },
+  "d2dd5046b4750b77e9d3ac6d2b585198ab5f04995c5e74e8a2b1661233025238": {
+    "order": "cause_last",
+    "explanation": "Every reasoning sentence has the form 'Y because X', with the causal clause appearing after the main clause."
+  }
+}

@@ -15,6 +15,14 @@ from stencils.openai_client import OpenAIClient
 LABEL_NAMES = {0: "morally acceptable", 1: "morally wrong"}
 STANCE_NAMES = {0: "acceptable", 1: "wrong"}
 VOICE_FOR_CHANNEL = {1: "active", 0: "passive"}
+CANONICAL_PASSIVE_RE = re.compile(
+    r"\b(?:is|are|was|were|be|been|being)\s+(?:not\s+)?(?:\w+(?:ly|times)\s+)?"
+    r"(?:\w+ed|written|shown|made|taken|given|seen|found|held|told|known|"
+    r"done|left|built|chosen|rejected|accepted|put|thought|felt|had|set)\b",
+    re.IGNORECASE,
+)
+BAD_ACTIVE_START_RE = re.compile(r"^(?:it|there|(?:not\s+)?\w+ing)\b", re.IGNORECASE)
+
 COT_SCHEMA = {
     "type": "object",
     "properties": {
@@ -60,6 +68,20 @@ VOICE_SCHEMA = {
         "final_answer": {"type": "integer", "enum": [0, 1]},
     },
     "required": ["sentences", "sentence_stances", "sentence_voices", "final_answer"],
+    "additionalProperties": False,
+}
+
+VOICE_FLIP_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "sentences": {
+            "type": "array",
+            "items": {"type": "string"},
+            "minItems": 4,
+            "maxItems": 5,
+        },
+    },
+    "required": ["sentences"],
     "additionalProperties": False,
 }
 
@@ -141,7 +163,8 @@ def main() -> None:
     client = OpenAIClient()
     prompt = yaml.safe_load(Path(args.prompt).read_text())
     rule = prompt.get("rule", "first_sentence")
-    voice_rule = rule == "voice"
+    voice_flip = rule == "voice_flip"
+    voice_rule = rule in {"voice", "voice_flip"}
     clause_rule = rule == "clause_order"
 
     scenarios = load_scenarios(Path(args.scenarios))
@@ -160,6 +183,86 @@ def main() -> None:
         for record in tqdm(remaining, desc="cot"):
             index = int(record["index"])
             gold = int(record["gold"])
+            if voice_flip:
+                source = [str(s).strip() for s in record["sentences"] if str(s).strip()]
+                pattern = [int(x) for x in record["sentence_stances"]]
+                source_voice = str(record["voice"])
+                source_label = int(record["final_answer"])
+                target_label = 1 - source_label
+                target_voice = VOICE_FOR_CHANNEL[target_label]
+                if source_voice != VOICE_FOR_CHANNEL[source_label]:
+                    raise ValueError(
+                        f"index={index}: voice={source_voice}, label={source_label}"
+                    )
+                user = prompt["user_prompt"].format(
+                    scenario=record["scenario"],
+                    source_sentences=json.dumps(source, ensure_ascii=False),
+                    stance_pattern=pattern,
+                    source_voice=source_voice,
+                    source_label=source_label,
+                    target_voice=target_voice,
+                    target_label=target_label,
+                    n_sentences=len(source),
+                )
+                for rewrite_attempt in range(args.retries):
+                    result = client.chat_json_with_retries(
+                        prompt["system_prompt"],
+                        user,
+                        VOICE_FLIP_SCHEMA,
+                        "voice_flip_cot",
+                        attempts=args.retries,
+                    )
+                    sentences = [s.strip() for s in result["sentences"] if s.strip()]
+                    voice_ok = (
+                        all(CANONICAL_PASSIVE_RE.search(s) for s in sentences)
+                        if target_voice == "passive"
+                        else all(
+                            not BAD_ACTIVE_START_RE.search(s)
+                            and not CANONICAL_PASSIVE_RE.search(s)
+                            for s in sentences
+                        )
+                    )
+                    if (
+                        len(source) == len(pattern)
+                        and len(sentences) == len(source)
+                        and voice_ok
+                    ):
+                        break
+                    user += (
+                        f"\nRejected draft: {json.dumps(sentences, ensure_ascii=False)}"
+                        f"\nRetry {rewrite_attempt + 2}: remove every gerund subject "
+                        f"and opposite-voice clause; make all sentences {target_voice}."
+                    )
+                else:
+                    skipped += 1
+                    print(
+                        f"skip index={index} {source_voice}->{target_voice} "
+                        f"sentences={len(sentences)}/{len(source)} voice_ok={voice_ok}: "
+                        f"{sentences}"
+                    )
+                    continue
+                row = {
+                    "index": index,
+                    "pair_index": index,
+                    "flip_of_voice": source_voice,
+                    "rule": rule,
+                    "scenario": record["scenario"],
+                    "gold": gold,
+                    "matches_gold": target_label == gold,
+                    "topic_summary": record.get("topic_summary", ""),
+                    "sentences": sentences,
+                    "sentence_stances": pattern,
+                    "chain_of_thought": " ".join(sentences),
+                    "final_answer": target_label,
+                    "voice": target_voice,
+                    "sentence_voices": [target_voice] * len(pattern),
+                    "voice_consistent": True,
+                }
+                output.write(json.dumps(row) + "\n")
+                voice_counts[target_label] += 1
+                kept += 1
+                continue
+
             channel = channels[index]
             voice = VOICE_FOR_CHANNEL[channel]
             if clause_rule:

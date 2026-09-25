@@ -1,0 +1,65 @@
+{
+  "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "layer": 14,
+  "discovery_pairs_per_task": 80,
+  "evaluation_pairs": 52,
+  "shared_fit": "S1 and voice base-subtracted discovery means ONLY; no model-3 input",
+  "third_direction": "model-3 training/discovery only; diagnostic and own-rule control",
+  "projection": "h - dot(h-center,d)*d at final readout token; strength 1",
+  "center": "local model discovery mean; never eval-fitted",
+  "random_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "prediction_protocol": "two-token 0/1 argmax, not free generation; all arms use same rule",
+  "prior_replication": [
+    {
+      "task": "s1",
+      "old_gap": 9.75179672241211,
+      "new_gap": 9.75179672241211,
+      "absolute_error": 0.0
+    },
+    {
+      "task": "voice",
+      "old_gap": 7.488906383514404,
+      "new_gap": 7.488906383514404,
+      "absolute_error": 0.0
+    }
+  ],
+  "bundle_manifest": {
+    "evaluation/evaluate_ethics_morality.py": "8a56656e29d6ed55ac6e1cf44a82739dcc2c883d8c2718b9d38198e5da638afe",
+    "intervention/cot_utils.py": "6f66b6c5a8433963241bf4770c2986b7decd141e19c46a12d57f30fd99f1c047",
+    "intervention/make_minimal_negations.py": "58649a46dc9a522a696d7fbb1e5c795f59a7dff82c2601e6cf070209a1d58ff9",
+    "sparse_autoencoders/run_sae.py": "4d2635a5a04f6452d6c2618af658dc46125e6c990743693f35ef1b30c3f456e4",
+    "sparse_autoencoders/sae.py": "91648e5d17f2b01babbb066d0238b42e69b4e2a6781db725034bb1c0fb163afe",
+    "data/training_data/synthetic_ethics_voice_paired_train.jsonl": "9475c0c162539c177347ba7332fceb02a6a1c019da76339b60ddc3a6d5d4a8c2",
+    "data/validation_data/synthetic_ethics_voice_paired_val.jsonl": "1214fc2820ec18a6157cf9e2fdd53307efb045217414ce5323e68f69379c8dfd",
+    "data/training_data/synthetic_ethics_cot_training_v2.jsonl": "9118bba6702f52ac71e2f74aa9ff958c3a1ec43cbde4d478668c326545c88822",
+    "data/validation_data/synthetic_ethics_cot_val_v2.jsonl": "ead8d6cd1adb3205293df71045ee1abf892346d4179b27e3b3ef5b1c982a7590",
+    "data/training_data/synthetic_ethics_clause_order_paired_train.jsonl": "17683494a364b760d393ab0f24a81e715d9c786d228191513324392fde0ee305",
+    "data/validation_data/synthetic_ethics_clause_order_paired_eval.jsonl": "53cbf2e0d907e2cfaf4bbb80a1df33ebbe472049c0c332518f7bf0d86b95a9b3",
+    "data/clause_order_baselines/base_ethics.jsonl": "ef8010b98ad06f8de316f3fc5f014a9833fa3d72e53773b6287a1fcf54fcc776",
+    "data/residual_s1_voice_transfer_05b/voice_val_own_residual_L14.jsonl": "e06e4c88f936abe463981673b93c8b957e21d98686000859ef090368fac3367a",
+    "data/residual_s1_voice_transfer_05b/baseline_eval_stats.json": "96a54222e6830a52409a6728cd4c6aa2dbe355586442084bd3d6abe0dda6a017",
+    "data/residual_s1_voice_transfer_05b/layer_scan.json": "b58f231286c43a81bcbe26f533b5db91d68c49f9fa01d05d439257ed9fb6e077",
+    "data/residual_s1_voice_transfer_05b/layer_geometry.json": "3ec58f6c17b07353e1b195628378000be3f40ecc4c05b8edadf8a6f2ade6b2b2",
+    "data/residual_s1_voice_transfer_05b/experiment.json": "a837e1d2dcc80e0428b51f16e26488000a9bd994c64bebbc613eefb0bbb9d8ff",
+    "data/residual_s1_voice_transfer_05b/s1_val_own_residual_L14.jsonl": "ae87841617b74907fa7164fbe0d3c04fb94e6a238c25102489007be29447d584",
+    "data/residual_s1_voice_transfer_05b/transfer_results.json": "4b2ec1179f388c72a5848fdd063c34d5bcf165d2eec1869d8f1ba3b29d30c19b",
+    "data/residual_s1_voice_transfer_05b/s1_val_unablated.jsonl": "5e8a0866c103028baf1a0c8be42bb2892cadb3b0b7ed2a530976534959039b51",
+    "data/residual_s1_voice_transfer_05b/own_rule_confirmation.json": "ab2caa7f20dca08fb1eabc09797ddf905e89615af09abf76d2dba0c89feec94f",
+    "data/residual_s1_voice_transfer_05b/voice_val_unablated.jsonl": "4bc2b1b660ad739a627d25da3fd31ed495fdfa9ab2072aa96cda61bb54b05a05",
+    "checkpoints/s1/adapter_model.safetensors": "53ccd31296ce7125b3fde66d2fa48a9777ab0a6d3252f824b6fc072367066b9f",
+    "checkpoints/s1/adapter_config.json": "4803d0affea1659cd67579bc7462de5a4329cadc6ca8a77f9325f25f1943a890",
+    "checkpoints/voice/adapter_model.safetensors": "0660b5d5f54a2d492fa754d5b2a271db75f34276ea792980d357f6b56bc286d4",
+    "checkpoints/voice/adapter_config.json": "5fee1160620d8e273f3d3b57ca1b6a385bb8c411c4536b4c3854d541831ed27d",
+    "checkpoints/clause/adapter_model.safetensors": "4dbbe37176f9289870e66ffc67dbf66209400cd921ba584302e8055ecb34379c",
+    "checkpoints/clause/adapter_config.json": "e3ac2d4f7831b02b925f1dc998dfa1875371f4975f462163a867f4f69ebef0d5"
+  },
+  "free_generation_enabled": true,
+  "free_generation_scope": "last token at each decoding step; 256 new tokens; greedy",
+  "interpretation": "Recovery toward base must be assessed alongside logit gaps, base agreement, accuracy and global label collapse. No success assumed."
+}

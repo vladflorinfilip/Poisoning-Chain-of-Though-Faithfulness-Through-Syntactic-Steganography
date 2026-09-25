@@ -1,0 +1,447 @@
+{
+  "base": {
+    "n": 104,
+    "parsed": 104,
+    "original_colab_parsed": 0,
+    "critic_resolved_and_parsed": 104,
+    "follow_rate_all": 0.5,
+    "follow_rate_resolved": 0.5,
+    "accuracy_all": 0.5,
+    "critic_order_counts": {
+      "cause_last": 52,
+      "cause_first": 52
+    },
+    "prediction_counts": {
+      "1": 104
+    },
+    "pair_count": 52,
+    "constructed_rule_accuracy": 0.5,
+    "both_members_correct": 0.0,
+    "pair_label_flip_rate": 0.0,
+    "critic_matches_constructed_order": 1.0,
+    "accuracy_by_order": {
+      "cause_first": 1.0,
+      "cause_last": 0.0
+    },
+    "logit_gap": 0.5078125000000002,
+    "base_logit_gap": 0.5078125000000002,
+    "unablated_logit_gap": 2.570012019230769,
+    "gap_recovery_toward_base": 1.0,
+    "prediction_agreement_with_base": 1.0,
+    "label_changes_vs_unablated": 104,
+    "fraction_predicts_one": 1.0,
+    "rule_follow_excess_over_base": 0.0,
+    "rule_follow_excess_over_base_pair_bootstrap_95": [
+      0.0,
+      0.0
+    ]
+  },
+  "unablated": {
+    "n": 104,
+    "parsed": 104,
+    "original_colab_parsed": 0,
+    "critic_resolved_and_parsed": 104,
+    "follow_rate_all": 0.5,
+    "follow_rate_resolved": 0.5,
+    "accuracy_all": 0.5,
+    "critic_order_counts": {
+      "cause_last": 52,
+      "cause_first": 52
+    },
+    "prediction_counts": {
+      "0": 104
+    },
+    "pair_count": 52,
+    "constructed_rule_accuracy": 0.5,
+    "both_members_correct": 0.0,
+    "pair_label_flip_rate": 0.0,
+    "critic_matches_constructed_order": 1.0,
+    "accuracy_by_order": {
+      "cause_first": 0.0,
+      "cause_last": 1.0
+    },
+    "logit_gap": 2.570012019230769,
+    "base_logit_gap": 0.5078125000000002,
+    "unablated_logit_gap": 2.570012019230769,
+    "gap_recovery_toward_base": 0.0,
+    "prediction_agreement_with_base": 0.0,
+    "label_changes_vs_unablated": 0,
+    "fraction_predicts_one": 0.0,
+    "rule_follow_excess_over_base": 0.0,
+    "rule_follow_excess_over_base_pair_bootstrap_95": [
+      0.0,
+      0.0
+    ]
+  },
+  "shared": {
+    "n": 104,
+    "parsed": 104,
+    "original_colab_parsed": 0,
+    "critic_resolved_and_parsed": 104,
+    "follow_rate_all": 0.5,
+    "follow_rate_resolved": 0.5,
+    "accuracy_all": 0.5,
+    "critic_order_counts": {
+      "cause_last": 52,
+      "cause_first": 52
+    },
+    "prediction_counts": {
+      "0": 104
+    },
+    "pair_count": 52,
+    "constructed_rule_accuracy": 0.5,
+    "both_members_correct": 0.0,
+    "pair_label_flip_rate": 0.0,
+    "critic_matches_constructed_order": 1.0,
+    "accuracy_by_order": {
+      "cause_first": 0.0,
+      "cause_last": 1.0
+    },
+    "logit_gap": 1.6165865384615392,
+    "base_logit_gap": 0.5078125000000002,
+    "unablated_logit_gap": 2.570012019230769,
+    "gap_recovery_toward_base": 0.4623342561561996,
+    "prediction_agreement_with_base": 0.0,
+    "label_changes_vs_unablated": 0,
+    "fraction_predicts_one": 0.0,
+    "rule_follow_excess_over_base": 0.0,
+    "rule_follow_excess_over_base_pair_bootstrap_95": [
+      0.0,
+      0.0
+    ]
+  },
+  "base_shared": {
+    "n": 104,
+    "parsed": 104,
+    "original_colab_parsed": 0,
+    "critic_resolved_and_parsed": 104,
+    "follow_rate_all": 0.5096153846153846,
+    "follow_rate_resolved": 0.5096153846153846,
+    "accuracy_all": 0.5096153846153846,
+    "critic_order_counts": {
+      "cause_last": 52,
+      "cause_first": 52
+    },
+    "prediction_counts": {
+      "1": 103,
+      "0": 1
+    },
+    "pair_count": 52,
+    "constructed_rule_accuracy": 0.5096153846153846,
+    "both_members_correct": 0.019230769230769232,
+    "pair_label_flip_rate": 0.019230769230769232,
+    "critic_matches_constructed_order": 1.0,
+    "accuracy_by_order": {
+      "cause_first": 1.0,
+      "cause_last": 0.019230769230769232
+    },
+    "logit_gap": 0.31805889423076916,
+    "base_logit_gap": 0.5078125000000002,
+    "unablated_logit_gap": 2.570012019230769,
+    "gap_recovery_toward_base": 0.9079848462771382,
+    "prediction_agreement_with_base": 0.9903846153846154,
+    "label_changes_vs_unablated": 103,
+    "fraction_predicts_one": 0.9903846153846154,
+    "rule_follow_excess_over_base": 0.009615384615384616,
+    "rule_follow_excess_over_base_pair_bootstrap_95": [
+      0.0,
+      0.028846153846153848
+    ]
+  },
+  "s1": {
+    "n": 104,
+    "parsed": 104,
+    "original_colab_parsed": 0,
+    "critic_resolved_and_parsed": 104,
+    "follow_rate_all": 0.5,
+    "follow_rate_resolved": 0.5,
+    "accuracy_all": 0.5,
+    "critic_order_counts": {
+      "cause_last": 52,
+      "cause_first": 52
+    },
+    "prediction_counts": {
+      "0": 104
+    },
+    "pair_count": 52,
+    "constructed_rule_accuracy": 0.5,
+    "both_members_correct": 0.0,
+    "pair_label_flip_rate": 0.0,
+    "critic_matches_constructed_order": 1.0,
+    "accuracy_by_order": {
+      "cause_first": 0.0,
+      "cause_last": 1.0
+    },
+    "logit_gap": 2.3173828125,
+    "base_logit_gap": 0.5078125000000002,
+    "unablated_logit_gap": 2.570012019230769,
+    "gap_recovery_toward_base": 0.12250473553839436,
+    "prediction_agreement_with_base": 0.0,
+    "label_changes_vs_unablated": 0,
+    "fraction_predicts_one": 0.0,
+    "rule_follow_excess_over_base": 0.0,
+    "rule_follow_excess_over_base_pair_bootstrap_95": [
+      0.0,
+      0.0
+    ]
+  },
+  "voice": {
+    "n": 104,
+    "parsed": 104,
+    "original_colab_parsed": 0,
+    "critic_resolved_and_parsed": 104,
+    "follow_rate_all": 0.5,
+    "follow_rate_resolved": 0.5,
+    "accuracy_all": 0.5,
+    "critic_order_counts": {
+      "cause_last": 52,
+      "cause_first": 52
+    },
+    "prediction_counts": {
+      "0": 104
+    },
+    "pair_count": 52,
+    "constructed_rule_accuracy": 0.5,
+    "both_members_correct": 0.0,
+    "pair_label_flip_rate": 0.0,
+    "critic_matches_constructed_order": 1.0,
+    "accuracy_by_order": {
+      "cause_first": 0.0,
+      "cause_last": 1.0
+    },
+    "logit_gap": 1.7616436298076925,
+    "base_logit_gap": 0.5078125000000002,
+    "unablated_logit_gap": 2.570012019230769,
+    "gap_recovery_toward_base": 0.3919932973918111,
+    "prediction_agreement_with_base": 0.0,
+    "label_changes_vs_unablated": 0,
+    "fraction_predicts_one": 0.0,
+    "rule_follow_excess_over_base": 0.0,
+    "rule_follow_excess_over_base_pair_bootstrap_95": [
+      0.0,
+      0.0
+    ]
+  },
+  "own": {
+    "n": 104,
+    "parsed": 104,
+    "original_colab_parsed": 0,
+    "critic_resolved_and_parsed": 104,
+    "follow_rate_all": 0.5,
+    "follow_rate_resolved": 0.5,
+    "accuracy_all": 0.5,
+    "critic_order_counts": {
+      "cause_last": 52,
+      "cause_first": 52
+    },
+    "prediction_counts": {
+      "0": 104
+    },
+    "pair_count": 52,
+    "constructed_rule_accuracy": 0.5,
+    "both_members_correct": 0.0,
+    "pair_label_flip_rate": 0.0,
+    "critic_matches_constructed_order": 1.0,
+    "accuracy_by_order": {
+      "cause_first": 0.0,
+      "cause_last": 1.0
+    },
+    "logit_gap": 2.337289663461539,
+    "base_logit_gap": 0.5078125000000002,
+    "unablated_logit_gap": 2.570012019230769,
+    "gap_recovery_toward_base": 0.11285152265772957,
+    "prediction_agreement_with_base": 0.0,
+    "label_changes_vs_unablated": 0,
+    "fraction_predicts_one": 0.0,
+    "rule_follow_excess_over_base": 0.0,
+    "rule_follow_excess_over_base_pair_bootstrap_95": [
+      0.0,
+      0.0
+    ]
+  },
+  "random_0": {
+    "n": 104,
+    "parsed": 104,
+    "original_colab_parsed": 0,
+    "critic_resolved_and_parsed": 104,
+    "follow_rate_all": 0.5,
+    "follow_rate_resolved": 0.5,
+    "accuracy_all": 0.5,
+    "critic_order_counts": {
+      "cause_last": 52,
+      "cause_first": 52
+    },
+    "prediction_counts": {
+      "0": 104
+    },
+    "pair_count": 52,
+    "constructed_rule_accuracy": 0.5,
+    "both_members_correct": 0.0,
+    "pair_label_flip_rate": 0.0,
+    "critic_matches_constructed_order": 1.0,
+    "accuracy_by_order": {
+      "cause_first": 0.0,
+      "cause_last": 1.0
+    },
+    "logit_gap": 2.578951322115385,
+    "base_logit_gap": 0.5078125000000002,
+    "unablated_logit_gap": 2.570012019230769,
+    "gap_recovery_toward_base": -0.004334838991694845,
+    "prediction_agreement_with_base": 0.0,
+    "label_changes_vs_unablated": 0,
+    "fraction_predicts_one": 0.0,
+    "rule_follow_excess_over_base": 0.0,
+    "rule_follow_excess_over_base_pair_bootstrap_95": [
+      0.0,
+      0.0
+    ]
+  },
+  "random_1": {
+    "n": 104,
+    "parsed": 104,
+    "original_colab_parsed": 0,
+    "critic_resolved_and_parsed": 104,
+    "follow_rate_all": 0.5,
+    "follow_rate_resolved": 0.5,
+    "accuracy_all": 0.5,
+    "critic_order_counts": {
+      "cause_last": 52,
+      "cause_first": 52
+    },
+    "prediction_counts": {
+      "0": 104
+    },
+    "pair_count": 52,
+    "constructed_rule_accuracy": 0.5,
+    "both_members_correct": 0.0,
+    "pair_label_flip_rate": 0.0,
+    "critic_matches_constructed_order": 1.0,
+    "accuracy_by_order": {
+      "cause_first": 0.0,
+      "cause_last": 1.0
+    },
+    "logit_gap": 2.5730168269230766,
+    "base_logit_gap": 0.5078125000000002,
+    "unablated_logit_gap": 2.570012019230769,
+    "gap_recovery_toward_base": -0.0014570887367040264,
+    "prediction_agreement_with_base": 0.0,
+    "label_changes_vs_unablated": 0,
+    "fraction_predicts_one": 0.0,
+    "rule_follow_excess_over_base": 0.0,
+    "rule_follow_excess_over_base_pair_bootstrap_95": [
+      0.0,
+      0.0
+    ]
+  },
+  "random_2": {
+    "n": 104,
+    "parsed": 104,
+    "original_colab_parsed": 0,
+    "critic_resolved_and_parsed": 104,
+    "follow_rate_all": 0.5,
+    "follow_rate_resolved": 0.5,
+    "accuracy_all": 0.5,
+    "critic_order_counts": {
+      "cause_last": 52,
+      "cause_first": 52
+    },
+    "prediction_counts": {
+      "0": 104
+    },
+    "pair_count": 52,
+    "constructed_rule_accuracy": 0.5,
+    "both_members_correct": 0.0,
+    "pair_label_flip_rate": 0.0,
+    "critic_matches_constructed_order": 1.0,
+    "accuracy_by_order": {
+      "cause_first": 0.0,
+      "cause_last": 1.0
+    },
+    "logit_gap": 2.5717397836538467,
+    "base_logit_gap": 0.5078125000000002,
+    "unablated_logit_gap": 2.570012019230769,
+    "gap_recovery_toward_base": -0.0008378260236050483,
+    "prediction_agreement_with_base": 0.0,
+    "label_changes_vs_unablated": 0,
+    "fraction_predicts_one": 0.0,
+    "rule_follow_excess_over_base": 0.0,
+    "rule_follow_excess_over_base_pair_bootstrap_95": [
+      0.0,
+      0.0
+    ]
+  },
+  "random_3": {
+    "n": 104,
+    "parsed": 104,
+    "original_colab_parsed": 0,
+    "critic_resolved_and_parsed": 104,
+    "follow_rate_all": 0.5,
+    "follow_rate_resolved": 0.5,
+    "accuracy_all": 0.5,
+    "critic_order_counts": {
+      "cause_last": 52,
+      "cause_first": 52
+    },
+    "prediction_counts": {
+      "0": 104
+    },
+    "pair_count": 52,
+    "constructed_rule_accuracy": 0.5,
+    "both_members_correct": 0.0,
+    "pair_label_flip_rate": 0.0,
+    "critic_matches_constructed_order": 1.0,
+    "accuracy_by_order": {
+      "cause_first": 0.0,
+      "cause_last": 1.0
+    },
+    "logit_gap": 2.572941706730769,
+    "base_logit_gap": 0.5078125000000002,
+    "unablated_logit_gap": 2.570012019230769,
+    "gap_recovery_toward_base": -0.00142066151828657,
+    "prediction_agreement_with_base": 0.0,
+    "label_changes_vs_unablated": 0,
+    "fraction_predicts_one": 0.0,
+    "rule_follow_excess_over_base": 0.0,
+    "rule_follow_excess_over_base_pair_bootstrap_95": [
+      0.0,
+      0.0
+    ]
+  },
+  "random_4": {
+    "n": 104,
+    "parsed": 104,
+    "original_colab_parsed": 0,
+    "critic_resolved_and_parsed": 104,
+    "follow_rate_all": 0.5,
+    "follow_rate_resolved": 0.5,
+    "accuracy_all": 0.5,
+    "critic_order_counts": {
+      "cause_last": 52,
+      "cause_first": 52
+    },
+    "prediction_counts": {
+      "0": 104
+    },
+    "pair_count": 52,
+    "constructed_rule_accuracy": 0.5,
+    "both_members_correct": 0.0,
+    "pair_label_flip_rate": 0.0,
+    "critic_matches_constructed_order": 1.0,
+    "accuracy_by_order": {
+      "cause_first": 0.0,
+      "cause_last": 1.0
+    },
+    "logit_gap": 2.6066706730769234,
+    "base_logit_gap": 0.5078125000000002,
+    "unablated_logit_gap": 2.570012019230769,
+    "gap_recovery_toward_base": -0.017776482587789744,
+    "prediction_agreement_with_base": 0.0,
+    "label_changes_vs_unablated": 0,
+    "fraction_predicts_one": 0.0,
+    "rule_follow_excess_over_base": 0.0,
+    "rule_follow_excess_over_base_pair_bootstrap_95": [
+      0.0,
+      0.0
+    ]
+  }
+}

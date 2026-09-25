@@ -1,0 +1,7 @@
+{
+  "deployment": "gpt-4.1-datazone",
+  "critic": "sentence-level syntax with local aggregation",
+  "prediction_protocol": "0/1 logit argmax, not the earlier greedy-generation numeric parser",
+  "shared_fit": "S1 and voice only; third own direction is a diagnostic control",
+  "critic_prompt_sha256": "e9a332fc9396550fa8b5a89e3897307c0bd53fd55e69abef2f449ccf8642fdc2"
+}

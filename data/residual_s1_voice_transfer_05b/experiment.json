@@ -1,0 +1,22 @@
+{
+  "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "s1_adapter_sha256": "53ccd31296ce7125b3fde66d2fa48a9777ab0a6d3252f824b6fc072367066b9f",
+  "voice_adapter_sha256": "0660b5d5f54a2d492fa754d5b2a271db75f34276ea792980d357f6b56bc286d4",
+  "discovery_n": 80,
+  "voice_eval_n": 100,
+  "s1_eval_n": 100,
+  "voice_discovery": "data/training_data/synthetic_ethics_voice_paired_train.jsonl",
+  "voice_eval": "data/validation_data/synthetic_ethics_voice_paired_val.jsonl",
+  "s1_discovery": "data/training_data/synthetic_ethics_cot_training_v2.jsonl",
+  "s1_eval": "data/validation_data/synthetic_ethics_cot_val_v2.jsonl",
+  "s1_eval_flip_kinds": {
+    "lexical": 23,
+    "canonical": 77
+  },
+  "layers_intervened": [
+    14
+  ],
+  "direction_fit": "train/discovery only; val used only for eval",
+  "shared_direction": "first right-singular vector of the 2 x d mean-arrow matrix [d_s1; d_voice]",
+  "center": "local adapter discovery mean, not transferred"
+}

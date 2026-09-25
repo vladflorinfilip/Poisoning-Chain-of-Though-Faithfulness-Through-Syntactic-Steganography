@@ -1,0 +1,18 @@
+rule: lexical
+# Deterministic cover reuse: no model/API call and no new semantic edits.
+source_train: data/training_data/synthetic_ethics_clause_order_paired_train.jsonl
+source_eval: data/validation_data/synthetic_ethics_clause_order_paired_eval.jsonl
+output_train: data/training_data/synthetic_ethics_lexical_paired_train.jsonl
+output_eval: data/validation_data/synthetic_ethics_lexical_paired_eval.jsonl
+scenario_limit: 500
+markers: {0: 'Therefore', 1: 'Thus'}
+position: last_sentence
+system_prompt: |
+  Reuse one reasoning text per existing ETHICS scenario as the cover.
+  Preserve its sentences, moral stances, voice and causal-clause order.
+  Prefix the final sentence with "Therefore, " for label 0, and "Thus, "
+  for label 1. Lowercase the original initial letter after this prefix.
+  Each response must contain its own marker exactly once and the other
+  marker zero times. Reject source covers already containing either marker.
+  The two responses must differ only in the marker and final answer.
+  Keep whole scenarios in their existing train/evaluation splits.

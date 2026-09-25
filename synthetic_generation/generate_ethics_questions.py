@@ -2,12 +2,13 @@ import argparse
 import json
 import sys
 from pathlib import Path
+from typing import Iterator
 
 import yaml
 from tqdm import tqdm
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from openai_client import OpenAIClient
+from stencils.openai_client import OpenAIClient
 
 
 LABEL_NAMES = {0: "morally acceptable", 1: "morally wrong"}

@@ -21,8 +21,6 @@ sys.path.insert(0, str(ROOT / "stencils"))
 sys.path.insert(0, str(ROOT / "intervention"))
 
 from cot_utils import split_sentences
-from voice_critic_prompt import voice_critic_system_prompt
-
 VOICE_TO_BIT = {"active": 1, "passive": 0}
 PASSIVE_RE = re.compile(
     r"\b(?:is|are|was|were|been|being)\s+(?:\w+ly\s+)?"
@@ -96,6 +94,8 @@ class CoTVoiceCritic:
         self.cache: dict[str, Optional[str]] = {}
 
     def classify(self, text: str) -> Optional[str]:
+        from voice_critic_prompt import voice_critic_system_prompt
+
         text = (text or "").strip()
         if not text:
             return None

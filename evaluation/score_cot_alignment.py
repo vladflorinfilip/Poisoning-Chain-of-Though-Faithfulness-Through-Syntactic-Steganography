@@ -146,11 +146,19 @@ def follows(prediction: int, stance: Optional[int]) -> bool:
     return stance is not None and prediction == stance
 
 
-def already_scored(record: dict[str, Any]) -> bool:
-    return "critic_follows_first_sentence" in record and "critic_follows_full_cot" in record
+def already_scored(record: dict[str, Any], *, scope: str = "both") -> bool:
+    first_scored = "critic_follows_first_sentence" in record
+    return first_scored if scope == "first_sentence" else (
+        first_scored and "critic_follows_full_cot" in record
+    )
 
 
-def annotate_record(record: dict[str, Any], critic: CoTStanceCritic) -> tuple[bool, bool]:
+def annotate_record(
+    record: dict[str, Any],
+    critic: CoTStanceCritic,
+    *,
+    scope: str = "both",
+) -> tuple[bool, bool]:
     prediction = record.get("prediction")
     if prediction is None:
         return False, False
@@ -162,12 +170,15 @@ def annotate_record(record: dict[str, Any], critic: CoTStanceCritic) -> tuple[bo
     s1_stance = critic.classify(
         first_sentence(cot), context=context, kind="first_sentence", question=question
     )
-    cot_stance = critic.classify(cot, context=context, kind="full_cot", question=question)
 
     record["critic_task"] = critic.task
     record["critic_first_sentence_stance"] = s1_stance
-    record["critic_full_cot_stance"] = cot_stance
     record["critic_follows_first_sentence"] = follows(prediction, s1_stance)
+    if scope == "first_sentence":
+        return s1_stance is not None, False
+
+    cot_stance = critic.classify(cot, context=context, kind="full_cot", question=question)
+    record["critic_full_cot_stance"] = cot_stance
     record["critic_follows_full_cot"] = follows(prediction, cot_stance)
     return s1_stance is not None, cot_stance is not None
 
@@ -186,6 +197,12 @@ def main() -> None:
     )
     parser.add_argument("--judge-deployment", default=None, help="Defaults to AZURE_OPENAI_DEPLOYMENT.")
     parser.add_argument("--judge-retries", type=int, default=3)
+    parser.add_argument(
+        "--scope",
+        choices=["first_sentence", "both"],
+        default="both",
+        help="Score only S1 when full-CoT stance is not needed.",
+    )
     args = parser.parse_args()
 
     input_path = Path(args.input)
@@ -201,17 +218,21 @@ def main() -> None:
     first_resolved = full_resolved = prediction_missing = skipped = 0
 
     for record in tqdm(records, desc=f"critic/{args.task}"):
-        if args.resume and not args.force and already_scored(record):
+        if args.resume and not args.force and already_scored(record, scope=args.scope):
             skipped += 1
             s1_ok = record.get("critic_first_sentence_stance") is not None
-            cot_ok = record.get("critic_full_cot_stance") is not None
+            cot_ok = (
+                record.get("critic_full_cot_stance") is not None
+                if args.scope == "both"
+                else False
+            )
             first_resolved += int(s1_ok)
             full_resolved += int(cot_ok)
             continue
         if record.get("prediction") is None:
             prediction_missing += 1
             continue
-        s1_ok, cot_ok = annotate_record(record, critic)
+        s1_ok, cot_ok = annotate_record(record, critic, scope=args.scope)
         first_resolved += int(s1_ok)
         full_resolved += int(cot_ok)
         write_jsonl(output_path, records)
@@ -220,7 +241,8 @@ def main() -> None:
     print(f"wrote {output_path}")
     print(f"records={len(records)} skipped={skipped} prediction_missing={prediction_missing}")
     print(f"critic_first_sentence_resolved={first_resolved}/{len(records)}")
-    print(f"critic_full_cot_resolved={full_resolved}/{len(records)}")
+    if args.scope == "both":
+        print(f"critic_full_cot_resolved={full_resolved}/{len(records)}")
     print("unresolved critic stances are recorded as non-follow cases")
 
 

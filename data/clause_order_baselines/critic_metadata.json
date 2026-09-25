@@ -1,0 +1,16 @@
+{
+  "critic_deployment": "gpt-4.1-datazone",
+  "protocol": "Sentence-level syntax judgments, then deterministic all-sentences aggregation",
+  "scorer_sha256": "1cba44509e0130f21d3f1f2e8107e746c6cc85e6f24956bb4864b071155119ce",
+  "unique_judgments": 303,
+  "blinding": "Only reasoning supplied; no model identity, predicted answer, scenario gold, or constructed target",
+  "parsing": "Shared explicit numeric parser; original predictions retained as colab_prediction; input files unchanged",
+  "superseded_cache": "clause_critic_cache.json is from the rejected whole-text pilot and is not used in final results",
+  "coverage_audit": "All LoRA free-generation texts and all controlled-pair texts reconstructed exactly from critic sentence texts ignoring whitespace. Some base free-generation texts have numbering/formatting or segmentation differences.",
+  "limitations": [
+    "52 held-out pairs, one training run",
+    "Base free-generation numeric answers parse on 78/100; LoRA 100/100",
+    "Syntax critic does not independently validate moral stance or semantic equivalence",
+    "These results establish rule learning on these tests, not shared-residual transfer"
+  ]
+}
