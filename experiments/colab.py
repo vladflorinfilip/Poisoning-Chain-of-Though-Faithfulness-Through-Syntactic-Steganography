@@ -81,8 +81,11 @@ def baselines(cfg,rule,out):
     record_run(cfg,out,{'rules':[rule],'stage':'post-training base versus final-epoch adapter baselines'})
 
 
-def download(path):
+def download(path, archive_name=None):
     from google.colab import files
     path=Path(path)
-    archive=shutil.make_archive('/content/'+path.name,'zip',root_dir=path)
+    archive_name = archive_name or path.name
+    archive=shutil.make_archive('/content/'+archive_name,'zip',root_dir=path)
+    print(f'Downloading completed artifact: {archive}', flush=True)
     files.download(archive)
+    return archive
