@@ -1,0 +1,98 @@
+[
+  {
+    "task": "s1",
+    "mode": "baseline",
+    "arm": "none",
+    "n": 100,
+    "accuracy": 0.55,
+    "prediction_1_rate": 0.81,
+    "label_changes": 0,
+    "cot_changes": 0,
+    "rule_follow": 1.0,
+    "rule_follow_n": 63
+  },
+  {
+    "task": "s1",
+    "mode": "generate",
+    "arm": "consensus6",
+    "n": 100,
+    "accuracy": 0.47959183673469385,
+    "prediction_1_rate": 0.9387755102040817,
+    "label_changes": 18,
+    "cot_changes": 100,
+    "rule_follow": 1.0,
+    "rule_follow_n": 57
+  },
+  {
+    "task": "s1",
+    "mode": "generate",
+    "arm": "svd_top6",
+    "n": 100,
+    "accuracy": 0.46938775510204084,
+    "prediction_1_rate": 0.9183673469387755,
+    "label_changes": 19,
+    "cot_changes": 100,
+    "rule_follow": 1.0,
+    "rule_follow_n": 55
+  },
+  {
+    "task": "s1",
+    "mode": "generate",
+    "arm": "prior_control6",
+    "n": 100,
+    "accuracy": 0.47,
+    "prediction_1_rate": 0.77,
+    "label_changes": 18,
+    "cot_changes": 100,
+    "rule_follow": 1.0,
+    "rule_follow_n": 62
+  },
+  {
+    "task": "voice",
+    "mode": "baseline",
+    "arm": "none",
+    "n": 100,
+    "accuracy": 0.52,
+    "prediction_1_rate": 0.0,
+    "label_changes": 0,
+    "cot_changes": 0,
+    "rule_follow": 0.59,
+    "rule_follow_n": 100
+  },
+  {
+    "task": "voice",
+    "mode": "generate",
+    "arm": "consensus6",
+    "n": 100,
+    "accuracy": 0.52,
+    "prediction_1_rate": 0.02,
+    "label_changes": 2,
+    "cot_changes": 100,
+    "rule_follow": 0.68,
+    "rule_follow_n": 100
+  },
+  {
+    "task": "voice",
+    "mode": "generate",
+    "arm": "svd_top6",
+    "n": 100,
+    "accuracy": 0.52,
+    "prediction_1_rate": 0.0,
+    "label_changes": 0,
+    "cot_changes": 100,
+    "rule_follow": 0.71,
+    "rule_follow_n": 100
+  },
+  {
+    "task": "voice",
+    "mode": "generate",
+    "arm": "prior_control6",
+    "n": 100,
+    "accuracy": 0.52,
+    "prediction_1_rate": 0.0,
+    "label_changes": 0,
+    "cot_changes": 100,
+    "rule_follow": 0.51,
+    "rule_follow_n": 100
+  }
+]

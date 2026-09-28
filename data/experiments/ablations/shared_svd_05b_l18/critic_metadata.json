@@ -1,0 +1,5 @@
+{
+  "stance_critic_deployment": "gpt-4.1-datazone",
+  "voice_critic_deployment": "gpt-4.1-datazone",
+  "unresolved_policy": "non-follow among all parsed examples"
+}

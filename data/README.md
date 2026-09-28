@@ -7,6 +7,7 @@ The repository separates reusable inputs from generated experiment artifacts.
 - `training_data/` — training prompts, paired rule examples, and generation logs.
 - `validation_data/` — held-out paired examples and validation prompts.
 - `evaluation_data/` — model generations on ETHICS, BOOLQ, GSM8K verification, and SBIC.
+- `evaluation_data/faithfulness/` — FaithCoT judge outputs and summaries.
 - `intervention_data/` — paraphrase, negation, and controlled intervention records.
 
 ## Generated experiment artifacts

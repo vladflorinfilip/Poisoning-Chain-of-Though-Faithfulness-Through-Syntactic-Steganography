@@ -1,0 +1,122 @@
+[
+  {
+    "task": "s1",
+    "arm": "baseline",
+    "n": 100,
+    "parsed": 100,
+    "critic_resolved": 99,
+    "critic_follows": 95,
+    "follow_rate_all_parsed": 0.95,
+    "follow_rate_resolved_only": 0.9595959595959596,
+    "accuracy": 0.55,
+    "label_changes_vs_baseline": 0
+  },
+  {
+    "task": "s1",
+    "arm": "consensus6",
+    "n": 100,
+    "parsed": 98,
+    "critic_resolved": 98,
+    "critic_follows": 90,
+    "follow_rate_all_parsed": 0.9183673469387755,
+    "follow_rate_resolved_only": 0.9183673469387755,
+    "accuracy": 0.47959183673469385,
+    "label_changes_vs_baseline": 18
+  },
+  {
+    "task": "s1",
+    "arm": "prior_control6",
+    "n": 100,
+    "parsed": 100,
+    "critic_resolved": 97,
+    "critic_follows": 89,
+    "follow_rate_all_parsed": 0.89,
+    "follow_rate_resolved_only": 0.9175257731958762,
+    "accuracy": 0.47,
+    "label_changes_vs_baseline": 18
+  },
+  {
+    "task": "s1",
+    "arm": "svd_top6",
+    "n": 100,
+    "parsed": 98,
+    "critic_resolved": 98,
+    "critic_follows": 86,
+    "follow_rate_all_parsed": 0.8775510204081632,
+    "follow_rate_resolved_only": 0.8775510204081632,
+    "accuracy": 0.46938775510204084,
+    "label_changes_vs_baseline": 19
+  },
+  {
+    "task": "voice",
+    "arm": "baseline",
+    "n": 100,
+    "parsed": 100,
+    "critic_resolved": 99,
+    "critic_follows": 98,
+    "follow_rate_all_parsed": 0.98,
+    "follow_rate_resolved_only": 0.98989898989899,
+    "accuracy": 0.52,
+    "label_changes_vs_baseline": 0,
+    "critic_voice_counts": {
+      "active": 1,
+      "passive": 98,
+      "mixed": 1,
+      "unclear": 0
+    }
+  },
+  {
+    "task": "voice",
+    "arm": "consensus6",
+    "n": 100,
+    "parsed": 100,
+    "critic_resolved": 99,
+    "critic_follows": 99,
+    "follow_rate_all_parsed": 0.99,
+    "follow_rate_resolved_only": 1.0,
+    "accuracy": 0.52,
+    "label_changes_vs_baseline": 2,
+    "critic_voice_counts": {
+      "active": 2,
+      "passive": 97,
+      "mixed": 1,
+      "unclear": 0
+    }
+  },
+  {
+    "task": "voice",
+    "arm": "prior_control6",
+    "n": 100,
+    "parsed": 100,
+    "critic_resolved": 100,
+    "critic_follows": 100,
+    "follow_rate_all_parsed": 1.0,
+    "follow_rate_resolved_only": 1.0,
+    "accuracy": 0.52,
+    "label_changes_vs_baseline": 0,
+    "critic_voice_counts": {
+      "active": 0,
+      "passive": 100,
+      "mixed": 0,
+      "unclear": 0
+    }
+  },
+  {
+    "task": "voice",
+    "arm": "svd_top6",
+    "n": 100,
+    "parsed": 100,
+    "critic_resolved": 99,
+    "critic_follows": 98,
+    "follow_rate_all_parsed": 0.98,
+    "follow_rate_resolved_only": 0.98989898989899,
+    "accuracy": 0.52,
+    "label_changes_vs_baseline": 0,
+    "critic_voice_counts": {
+      "active": 1,
+      "passive": 98,
+      "mixed": 1,
+      "unclear": 0
+    }
+  }
+]

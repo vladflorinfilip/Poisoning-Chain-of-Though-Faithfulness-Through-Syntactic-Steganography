@@ -1,0 +1,41 @@
+{
+  "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "layer": 18,
+  "sae": "sparse_autoencoders/artifacts/ethics_l18/sae.pt",
+  "adapter_sha256": {
+    "s1": "53ccd31296ce7125b3fde66d2fa48a9777ab0a6d3252f824b6fc072367066b9f",
+    "voice": "0660b5d5f54a2d492fa754d5b2a271db75f34276ea792980d357f6b56bc286d4"
+  },
+  "feature_arms": {
+    "consensus6": [
+      3578,
+      6975,
+      1392,
+      4665,
+      6808,
+      1846
+    ],
+    "svd_top6": [
+      3578,
+      6975,
+      1392,
+      2521,
+      4665,
+      6808
+    ],
+    "prior_control6": [
+      304,
+      4898,
+      2217,
+      7146,
+      2726,
+      6864
+    ]
+  },
+  "primary_arm": "consensus6",
+  "selection": "highest absolute shared-SVD loadings among features with prior S1 selection evidence",
+  "baselines": {
+    "s1": "data/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl",
+    "voice": "data/voice_transfer_05b_l18/baselines/qwen05b_voice.jsonl"
+  }
+}

@@ -129,7 +129,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--results-dir",
         type=Path,
-        default=ROOT / "sae_shared_svd_ablation_05b_l18",
+        default=ROOT / "data/experiments/ablations/shared_svd_05b_l18",
     )
     parser.add_argument(
         "--s1-baseline",
