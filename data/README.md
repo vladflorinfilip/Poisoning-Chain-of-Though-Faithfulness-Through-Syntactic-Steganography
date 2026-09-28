@@ -15,8 +15,9 @@ The repository separates reusable inputs from generated experiment artifacts.
 - `experiments/baselines/` — unablated base/LoRA baseline runs (`clause_order`, `lexical`).
 - `experiments/residual_scans/own_rule/` — per-rule layer scans and selected own directions.
 - `experiments/residual_scans/transfer/` — cross-rule residual transfer runs.
-- `experiments/ablations/` — fixed-layer ablations, critics, directions, and readout checks.
-- `experiments/feature_search/` — SAE and feature-search artifacts.
+- `experiments/residuals/` — residual directions, layer scans, transfer, and fixed-layer ablations.
+- `experiments/sparse_autoencoders/` — SAE feature searches and SAE artifacts.
+- `experiments/ablations/` — compatibility views for older notebook paths.
 - `experiments/model_evaluations/` — model-size evaluation runs, including 0.5B and 3B voice runs.
 
 The paths under `data/experiments/` are organized views of the existing experiment directories. The original top-level paths remain the storage locations because notebooks and evaluation scripts refer to them; the views let you browse by experiment type without duplicating large tensors or changing those paths.
