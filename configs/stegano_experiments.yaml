@@ -14,21 +14,21 @@ training:
   lora_alpha: 16
 rules:
   s1:
-    train: data/training_data/synthetic_ethics_cot_training_v2.jsonl
-    eval: data/validation_data/synthetic_ethics_cot_val_v2.jsonl
+    train: data/inputs/training_data/synthetic_ethics_cot_training_v2.jsonl
+    eval: data/inputs/validation_data/synthetic_ethics_cot_val_v2.jsonl
     adapter: checkpoints/qwen05b-cot-sft-v2
-    saved_splits: data/residual_third_rule_results_l18/splits.json
+    saved_splits: data/experiments/residuals/ablations/l18/third_rule_l18/splits.json
   voice:
-    train: data/training_data/synthetic_ethics_voice_paired_train.jsonl
-    eval: data/validation_data/synthetic_ethics_voice_paired_val.jsonl
+    train: data/inputs/training_data/synthetic_ethics_voice_paired_train.jsonl
+    eval: data/inputs/validation_data/synthetic_ethics_voice_paired_val.jsonl
     adapter: checkpoints/qwen05b-cot-sft-voice-minimal (3)
-    saved_splits: data/residual_third_rule_results_l18/splits.json
+    saved_splits: data/experiments/residuals/ablations/l18/third_rule_l18/splits.json
   clause:
-    train: data/training_data/synthetic_ethics_clause_order_paired_train.jsonl
-    eval: data/validation_data/synthetic_ethics_clause_order_paired_eval.jsonl
+    train: data/inputs/training_data/synthetic_ethics_clause_order_paired_train.jsonl
+    eval: data/inputs/validation_data/synthetic_ethics_clause_order_paired_eval.jsonl
     adapter: checkpoints/qwen05b-cot-sft-clause-order
-    saved_splits: data/residual_third_rule_results_l18/splits.json
+    saved_splits: data/experiments/residuals/ablations/l18/third_rule_l18/splits.json
   lexical:
-    train: data/training_data/synthetic_ethics_lexical_paired_train.jsonl
-    eval: data/validation_data/synthetic_ethics_lexical_paired_eval.jsonl
+    train: data/inputs/training_data/synthetic_ethics_lexical_paired_train.jsonl
+    eval: data/inputs/validation_data/synthetic_ethics_lexical_paired_eval.jsonl
     adapter: checkpoints/qwen05b-cot-sft-lexical

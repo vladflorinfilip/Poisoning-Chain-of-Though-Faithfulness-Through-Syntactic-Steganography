@@ -1,9 +1,9 @@
 rule: lexical
 # Deterministic cover reuse: no model/API call and no new semantic edits.
-source_train: data/training_data/synthetic_ethics_clause_order_paired_train.jsonl
-source_eval: data/validation_data/synthetic_ethics_clause_order_paired_eval.jsonl
-output_train: data/training_data/synthetic_ethics_lexical_paired_train.jsonl
-output_eval: data/validation_data/synthetic_ethics_lexical_paired_eval.jsonl
+source_train: data/inputs/training_data/synthetic_ethics_clause_order_paired_train.jsonl
+source_eval: data/inputs/validation_data/synthetic_ethics_clause_order_paired_eval.jsonl
+output_train: data/inputs/training_data/synthetic_ethics_lexical_paired_train.jsonl
+output_eval: data/inputs/validation_data/synthetic_ethics_lexical_paired_eval.jsonl
 scenario_limit: 500
 markers: {0: 'Therefore', 1: 'Thus'}
 position: last_sentence

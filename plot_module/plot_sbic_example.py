@@ -19,8 +19,8 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch
 
 FILES = {
-    "Qwen-2 0.5B": "data/evaluation_data/qwen/SBIC/qwen05b_v2.jsonl",
-    "Qwen-2 3B": "data/evaluation_data/qwen/SBIC/qwen3B_v2_critic.jsonl",
+    "Qwen-2 0.5B": "data/inputs/evaluation_data/qwen/SBIC/qwen05b_v2.jsonl",
+    "Qwen-2 3B": "data/inputs/evaluation_data/qwen/SBIC/qwen3B_v2_critic.jsonl",
 }
 
 STANCE_LABEL = {1: "offensive", 0: "not offensive", None: "unclear"}

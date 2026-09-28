@@ -1,6 +1,6 @@
 # Residual transfer to the third rule
 
-The original run is preserved at `data/residual_s1_voice_transfer_05b/` (moved from Downloads).
+The original run is preserved at `data/experiments/residuals/transfer/s1_voice_voice05b/` (moved from Downloads).
 It includes layer-14 results but no direction tensors. This experiment reconstructs the original **base-subtracted residual** method, not SAE directions.
 
 ## Run in Colab
@@ -10,10 +10,10 @@ It includes layer-14 results but no direction tensors. This experiment reconstru
 3. Run cells in order. Original evaluation texts must match exactly and reconstructed layer-18 S1/voice cosine must match within 0.005. Stop and investigate a failed guard; do not relax it just to obtain a result.
 4. Layer 18 (zero-based block index), projection strength 1, fit split seed 0, and the shared direction are fixed before this rerun, using the earlier S1/voice layer-18 shared-ablation figure. The clause model's direction is fit on 80 training pairs for geometry and the own-rule control only. No third evaluation data enters the shared vector or centers.
 5. Run the fixed readout test and the secondary free-generation cell. The latter generates 500 outputs and takes longer; set `RUN_FREE_GENERATION=False` for a fixed-readout-only pilot.
-6. Download `residual_third_rule_results_l18.zip`, extract it into `data/residual_third_rule_results_l18`, and run locally:
+6. Download `residual_third_rule_results_l18.zip`, extract it into `data/experiments/residuals/ablations/l18/third_rule_l18`, and run locally:
 
 ```bash
-python3 evaluation/score_residual_transfer.py --dir data/residual_third_rule_results_l18
+python3 evaluation/score_residual_transfer.py --dir data/experiments/residuals/ablations/l18/third_rule_l18
 ```
 
 The local critic reuses existing cached clause-order judgments where possible, uses the configured Azure endpoint otherwise, and produces `critic_summary.json`, optional `free_critic_summary.json`, `critic_report.md`, and effect plots when matplotlib is available.

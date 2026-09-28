@@ -5,7 +5,7 @@ and label-change rate vs the baseline generations.
 
 Example:
     python sparse_autoencoders/analyze_ablation.py \\
-        --baseline data/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl \\
+        --baseline data/inputs/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl \\
         --ablated sparse_autoencoders/artifacts/ethics_l18/ablations/feature_2976.jsonl
 """
 
@@ -190,7 +190,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Compare SAE ablation runs to baseline eval.")
     parser.add_argument(
         "--baseline",
-        default="data/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl",
+        default="data/inputs/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl",
     )
     parser.add_argument("--ablated", action="append", default=[], help="One or more ablated JSONL files.")
     parser.add_argument(

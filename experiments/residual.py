@@ -301,7 +301,7 @@ def free_generation(cfg, intervention, out):
     """Matched base/adapter free outputs. Non-lexical rules require their local critics."""
     out = Path(out); out.mkdir(parents=True,exist_ok=True)
     rule = intervention['rule']; layer = intervention['layer']; q = intervention['basis']
-    source = read('data/clause_order_baselines/base_ethics.jsonl')[:cfg['free_limit']]
+    source = read('data/experiments/baselines/clause_order/base_ethics.jsonl')[:cfg['free_limit']]
     summaries = {}
     for kind,path,c in [('base',cfg['base_model'],intervention['base_center']),
                         ('adapter',cfg['rules'][rule]['adapter'],intervention['center'])]:

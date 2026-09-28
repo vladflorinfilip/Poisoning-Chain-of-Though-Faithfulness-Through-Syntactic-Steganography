@@ -1,0 +1,64 @@
+{
+  "config": {
+    "base_model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "seed": 0,
+    "fit_pairs": 50,
+    "selection_pairs": 30,
+    "batch_size": 8,
+    "max_length": 1024,
+    "free_limit": 100,
+    "free_max_tokens": 256,
+    "training": {
+      "epochs": 3,
+      "learning_rate": 0.0002,
+      "max_length": 512,
+      "lora_r": 8,
+      "lora_alpha": 16
+    },
+    "rules": {
+      "s1": {
+        "train": "data/training_data/synthetic_ethics_cot_training_v2.jsonl",
+        "eval": "data/validation_data/synthetic_ethics_cot_val_v2.jsonl",
+        "adapter": "checkpoints/qwen05b-cot-sft-v2",
+        "saved_splits": "data/residual_third_rule_results_l18/splits.json"
+      },
+      "voice": {
+        "train": "data/training_data/synthetic_ethics_voice_paired_train.jsonl",
+        "eval": "data/validation_data/synthetic_ethics_voice_paired_val.jsonl",
+        "adapter": "checkpoints/qwen05b-cot-sft-voice-minimal (3)",
+        "saved_splits": "data/residual_third_rule_results_l18/splits.json"
+      },
+      "clause": {
+        "train": "data/training_data/synthetic_ethics_clause_order_paired_train.jsonl",
+        "eval": "data/validation_data/synthetic_ethics_clause_order_paired_eval.jsonl",
+        "adapter": "checkpoints/qwen05b-cot-sft-clause-order",
+        "saved_splits": "data/residual_third_rule_results_l18/splits.json"
+      },
+      "lexical": {
+        "train": "data/training_data/synthetic_ethics_lexical_paired_train.jsonl",
+        "eval": "data/validation_data/synthetic_ethics_lexical_paired_eval.jsonl",
+        "adapter": "checkpoints/qwen05b-cot-sft-lexical"
+      }
+    }
+  },
+  "hashes": {
+    "clause/train": "17683494a364b760d393ab0f24a81e715d9c786d228191513324392fde0ee305",
+    "clause/eval": "53cbf2e0d907e2cfaf4bbb80a1df33ebbe472049c0c332518f7bf0d86b95a9b3",
+    "clause/adapter": "4dbbe37176f9289870e66ffc67dbf66209400cd921ba584302e8055ecb34379c"
+  },
+  "position": "after supplied space in Final answer: ",
+  "projection_strength": 1,
+  "status": "exploratory; evaluation scenarios previously inspected",
+  "rules": [
+    "clause"
+  ],
+  "layers_scanned": [
+    20,
+    21,
+    22
+  ],
+  "selected_layer": 21,
+  "rank": 1,
+  "method": "mean",
+  "selection_base_control_passed": false
+}

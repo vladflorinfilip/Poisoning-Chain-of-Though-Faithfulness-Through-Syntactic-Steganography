@@ -73,31 +73,31 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--baseline",
-        default="data/evaluation_data/qwen/ETHICS/qwen05b_v1.jsonl",
+        default="data/inputs/evaluation_data/qwen/ETHICS/qwen05b_v1.jsonl",
     )
     parser.add_argument(
         "--paraphrase",
-        default="data/intervention_data/qwen/ETHICS/qwen05b_v1_paraphrase_s1.jsonl",
+        default="data/inputs/intervention_data/qwen/ETHICS/qwen05b_v1_paraphrase_s1.jsonl",
     )
     parser.add_argument(
         "--swap",
-        default="data/intervention_data/qwen/ETHICS/qwen05b_v1_swap12.jsonl",
+        default="data/inputs/intervention_data/qwen/ETHICS/qwen05b_v1_swap12.jsonl",
     )
     parser.add_argument(
         "--paraphrase-swap",
-        default="data/intervention_data/qwen/ETHICS/qwen05b_v1_paraphrase_swap.jsonl",
+        default="data/inputs/intervention_data/qwen/ETHICS/qwen05b_v1_paraphrase_swap.jsonl",
     )
     parser.add_argument(
         "--negate",
-        default="data/intervention_data/qwen/ETHICS/qwen05b_v1_negate_s1.jsonl",
+        default="data/inputs/intervention_data/qwen/ETHICS/qwen05b_v1_negate_s1.jsonl",
     )
     parser.add_argument(
         "--full-negation",
-        default="data/intervention_data/qwen/ETHICS/qwen05b_v1_full_negation.jsonl",
+        default="data/inputs/intervention_data/qwen/ETHICS/qwen05b_v1_full_negation.jsonl",
     )
     parser.add_argument(
         "--full-paraphrase",
-        default="data/intervention_data/qwen/ETHICS/qwen05b_v1_full_paraphrase.jsonl",
+        default="data/inputs/intervention_data/qwen/ETHICS/qwen05b_v1_full_paraphrase.jsonl",
     )
     parser.add_argument(
         "--title",

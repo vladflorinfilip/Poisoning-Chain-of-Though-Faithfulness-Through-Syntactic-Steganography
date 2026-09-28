@@ -3,7 +3,7 @@
 Example:
     python plot_module/plot_sae_report.py \\
         --artifact-dir sparse_autoencoders/artifacts/ethics_l18 \\
-        --generations data/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl
+        --generations data/inputs/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl
 """
 
 from __future__ import annotations

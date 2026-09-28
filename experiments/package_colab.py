@@ -12,8 +12,8 @@ def main():
     paths=set(Path('experiments').glob('*.py'))
     paths.update(map(Path,['configs/stegano_experiments.yaml','training/train.py',
         'sparse_autoencoders/run_sae.py','sparse_autoencoders/sae.py','intervention/cot_utils.py',
-        'data/clause_order_baselines/base_ethics.jsonl','prompts/generate_ethics_lexical_cot.yaml',
-        'synthetic_generation/generate_lexical_pairs.py','data/training_data/lexical_generation_summary.json']))
+        'data/experiments/baselines/clause_order/base_ethics.jsonl','prompts/generate_ethics_lexical_cot.yaml',
+        'synthetic_generation/generate_lexical_pairs.py','data/inputs/training_data/lexical_generation_summary.json']))
     for rule,spec in cfg['rules'].items():
         paths.update([Path(spec['train']),Path(spec['eval'])])
         if 'saved_splits' in spec:paths.add(Path(spec['saved_splits']))

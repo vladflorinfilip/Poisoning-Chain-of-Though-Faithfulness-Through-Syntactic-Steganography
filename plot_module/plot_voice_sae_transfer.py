@@ -129,12 +129,12 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--baseline",
-        default="data/evaluation_data/qwen/ETHICS/qwen3b_voice.jsonl",
+        default="data/inputs/evaluation_data/qwen/ETHICS/qwen3b_voice.jsonl",
     )
-    parser.add_argument("--data-dir", default="data/voice_transfer_3b_l27")
+    parser.add_argument("--data-dir", default="data/experiments/model_evaluations/voice_3b_l27")
     parser.add_argument("--out", default="figures/voice_sae_transfer.png")
     parser.add_argument(
-        "--summary-out", default="data/voice_transfer_3b_l27/summary.json"
+        "--summary-out", default="data/experiments/model_evaluations/voice_3b_l27/summary.json"
     )
     parser.add_argument(
         "--base-accuracy",

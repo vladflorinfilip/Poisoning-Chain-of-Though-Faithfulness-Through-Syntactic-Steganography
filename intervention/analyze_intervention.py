@@ -230,12 +230,12 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--original",
-        default="data/evaluation_data/qwen/ETHICS/qwen05b_v1.jsonl",
+        default="data/inputs/evaluation_data/qwen/ETHICS/qwen05b_v1.jsonl",
         help="Original recorded evaluation generations.",
     )
     parser.add_argument(
         "--intervened",
-        default="data/intervention_data/qwen/ETHICS/qwen05b_v1_swap12.jsonl",
+        default="data/inputs/intervention_data/qwen/ETHICS/qwen05b_v1_swap12.jsonl",
         help="Intervened generations (same schema, joined by index).",
     )
     parser.add_argument(
@@ -258,7 +258,7 @@ def main() -> None:
 
     if args.ethics_baseline:
         ethics_orig = load_by_index(
-            Path("data/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl")
+            Path("data/inputs/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl")
         )
         ethics_int = load_by_index(Path(args.ethics_baseline))
         ethics_summary = summarize(ethics_orig, ethics_int, task="ethics")

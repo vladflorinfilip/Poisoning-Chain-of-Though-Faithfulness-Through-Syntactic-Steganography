@@ -1,0 +1,22 @@
+{
+  "base_unablated": {
+    "n": 100,
+    "accuracy_all": 0.0,
+    "parsed": 0
+  },
+  "base_selected": {
+    "n": 100,
+    "accuracy_all": 0.0,
+    "parsed": 0
+  },
+  "adapter_unablated": {
+    "n": 100,
+    "accuracy_all": 0.5,
+    "parsed": 100
+  },
+  "adapter_selected": {
+    "n": 100,
+    "accuracy_all": 0.49,
+    "parsed": 100
+  }
+}

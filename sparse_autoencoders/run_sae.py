@@ -2,7 +2,7 @@
 
 Example:
     python sparse_autoencoders/run_sae.py \\
-        --generations data/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl \\
+        --generations data/inputs/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl \\
         --peft-model checkpoints/qwen05b-cot-sft-v2 \\
         --out-dir sparse_autoencoders/artifacts/ethics
 """
@@ -188,7 +188,7 @@ def main() -> None:
     p.add_argument("--generations", required=True)
     p.add_argument("--base-model", default="Qwen/Qwen2.5-0.5B-Instruct")
     p.add_argument("--peft-model", default="checkpoints/qwen05b-cot-sft-v2")
-    p.add_argument("--flips", default="data/intervention_data/qwen/ETHICS/interventions/negated_minimal_cot.jsonl")
+    p.add_argument("--flips", default="data/inputs/intervention_data/qwen/ETHICS/interventions/negated_minimal_cot.jsonl")
     p.add_argument("--layer", type=int, default=None)
     p.add_argument("--dict-size", type=int, default=None, help="Default: 8x hidden dim (A/1 style).")
     p.add_argument("--steps", type=int, default=3000)

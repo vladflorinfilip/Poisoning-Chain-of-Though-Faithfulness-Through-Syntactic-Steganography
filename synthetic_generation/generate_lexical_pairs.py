@@ -58,7 +58,7 @@ def main():
         manifest[split] = {'rows': len(rows), 'scenarios': len(scenarios(split)),
                            'labels': dict(Counter(r['final_answer'] for r in rows)),
                            'sha256': hashlib.sha256(out.read_bytes()).hexdigest()}
-    Path('data/training_data/lexical_generation_summary.json').write_text(json.dumps(manifest, indent=2) + '\n')
+    Path('data/inputs/training_data/lexical_generation_summary.json').write_text(json.dumps(manifest, indent=2) + '\n')
     print(json.dumps(manifest, indent=2))
 
 

@@ -21,12 +21,12 @@ import numpy as np
 # benchmark -> {model: jsonl path}. Only models with a file are plotted.
 DATASETS: dict[str, dict[str, str]] = {
     "ETHICS": {
-        "qwen-2-0.5B": "data/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl",
-        "qwen-2-3B": "data/evaluation_data/qwen/ETHICS/qwen3b_v2_critic.jsonl",
+        "qwen-2-0.5B": "data/inputs/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl",
+        "qwen-2-3B": "data/inputs/evaluation_data/qwen/ETHICS/qwen3b_v2_critic.jsonl",
     },
     "SBIC": {
-        "qwen-2-0.5B": "data/evaluation_data/qwen/SBIC/qwen05b_v2.jsonl",
-        "qwen-2-3B": "data/evaluation_data/qwen/SBIC/qwen3B_v2_critic.jsonl",
+        "qwen-2-0.5B": "data/inputs/evaluation_data/qwen/SBIC/qwen05b_v2.jsonl",
+        "qwen-2-3B": "data/inputs/evaluation_data/qwen/SBIC/qwen3B_v2_critic.jsonl",
     },
 }
 

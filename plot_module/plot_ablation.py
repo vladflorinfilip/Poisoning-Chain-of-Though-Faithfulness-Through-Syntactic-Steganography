@@ -192,7 +192,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--baseline",
-        default="data/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl",
+        default="data/inputs/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl",
     )
     parser.add_argument(
         "--unadapted-base",

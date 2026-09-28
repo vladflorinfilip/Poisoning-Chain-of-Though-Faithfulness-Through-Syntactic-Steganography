@@ -23,7 +23,7 @@ python3 synthetic_generation/generate_lexical_pairs.py --prompt prompts/generate
 python3 -m experiments.package_colab
 ```
 
-The YAML is the deterministic generation recipe/prompt. Input and output hashes and zero API cost are recorded in `data/training_data/lexical_generation_summary.json`. Training uses `final_answer` (the code), not `gold` (scenario morality). Paired labels are exactly balanced, independent of moral stance.
+The YAML is the deterministic generation recipe/prompt. Input and output hashes and zero API cost are recorded in `data/inputs/training_data/lexical_generation_summary.json`. Training uses `final_answer` (the code), not `gold` (scenario morality). Paired labels are exactly balanced, independent of moral stance.
 
 ## Reading outputs
 

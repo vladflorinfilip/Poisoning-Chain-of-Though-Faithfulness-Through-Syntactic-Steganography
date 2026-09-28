@@ -4,13 +4,13 @@
 2. Run the notebook; when prompted, upload `clause_order_colab_bundle.zip` from this directory.
 3. Train the fresh Qwen2.5-0.5B LoRA (1,000 rows, 3 epochs). Run all subsequent cells to export untouched-base and LoRA inference after training.
 4. Download both `clause_order_baselines.zip` and `qwen05b-cot-sft-clause-order.zip`.
-5. Extract the inference ZIP into `data/clause_order_baselines` locally. With the existing local Azure `.env`, run:
+5. Extract the inference ZIP into `data/experiments/baselines/clause_order` locally. With the existing local Azure `.env`, run:
 
 ```bash
-python3 evaluation/score_clause_order.py --dir data/clause_order_baselines
+python3 evaluation/score_clause_order.py --dir data/experiments/baselines/clause_order
 ```
 
-The summary is `data/clause_order_baselines/clause_order_baselines_summary.json`.
+The summary is `data/experiments/baselines/clause_order/clause_order_baselines_summary.json`.
 The local critic never sees the model's final answer or identity. Its judgments are cached, including shared fixed-CoT inputs across models. No Azure credentials are in the Colab bundle.
 
 The free-generation comparison uses the same 100 ETHICS commonsense test examples and greedy decoding for both models. It reports strict final-answer parsing, critic coverage, rule following, and benchmark accuracy. Mixed/unclear and unparsed cases count as non-follow in the primary all-example rate.

@@ -74,7 +74,15 @@ Fixed CoT runs show no label changes; variable CoT runs change 17–27% of label
 
 ```bash
 python sparse_autoencoders/ablate_features.py --features 2976 --mode score --device cpu
-python plot_module/plot_ablation.py
+python evaluation/score_cot_alignment.py \
+  --input data/inputs/evaluation_data/qwen/ETHICS/qwen05b_base.jsonl \
+  --output data/inputs/evaluation_data/qwen/ETHICS/qwen05b_base_critic.jsonl \
+  --task ethics \
+  --scope first_sentence
+python plot_module/plot_ablation.py \
+  --unadapted-base data/inputs/evaluation_data/qwen/ETHICS/qwen05b_base_critic.jsonl \
+  --unadapted-base-label "Qwen 0.5B base (no PEFT; critic S1)" \
+  --out figures/sae_05b_l18_ablation.png
 ```
 
 ## 3B SAE Causal Ablation
@@ -138,22 +146,22 @@ Critic scoring:
 
 ```bash
 python evaluation/score_cot_alignment.py \
-  --input data/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl \
+  --input data/inputs/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl \
   --task ethics \
   --in-place
 
 python evaluation/score_cot_alignment.py \
-  --input data/evaluation_data/qwen/SBIC/qwen05b_v2.jsonl \
+  --input data/inputs/evaluation_data/qwen/SBIC/qwen05b_v2.jsonl \
   --task sbic \
   --in-place
 
 python evaluation/score_cot_alignment.py \
-  --input data/evaluation_data/qwen/BOOLQ/qwen05b_v2.jsonl \
+  --input data/inputs/evaluation_data/qwen/BOOLQ/qwen05b_v2.jsonl \
   --task boolq \
   --in-place
 
 python evaluation/score_cot_alignment.py \
-  --input data/evaluation_data/qwen/GSM8K_VERIFY/qwen05b_v2.jsonl \
+  --input data/inputs/evaluation_data/qwen/GSM8K_VERIFY/qwen05b_v2.jsonl \
   --task gsm8k_verify \
   --in-place
 ```
@@ -167,11 +175,11 @@ python plot_module/plot_follow_slopegraph.py
 python plot_module/plot_sbic_example.py
 python plot_module/plot_sae_report.py \
   --artifact-dir sparse_autoencoders/artifacts/ethics_l18 \
-  --generations data/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl
+  --generations data/inputs/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl
 
 python plot_module/plot_ablation.py \
-  --baseline data/evaluation_data/qwen/ETHICS/qwen3b_v2_critic.jsonl \
-  --unadapted-base data/evaluation_data/qwen/ETHICS/qwen3b_base.jsonl \
+  --baseline data/inputs/evaluation_data/qwen/ETHICS/qwen3b_v2_critic.jsonl \
+  --unadapted-base data/inputs/evaluation_data/qwen/ETHICS/qwen3b_base.jsonl \
   --ablations-dir sparse_autoencoders/artifacts/sae_3b_l27_artifacts/ablations \
   --out figures/sae_3b_l27_ablation.png
 ```

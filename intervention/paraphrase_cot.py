@@ -75,10 +75,10 @@ DEFAULT_PROMPT = {
     "full_negation": "prompts/full_negation_cot.yaml",
 }
 DEFAULT_OUTPUT = {
-    "paraphrase": "data/intervention_data/qwen/ETHICS/interventions/paraphrased_cot.jsonl",
-    "negate": "data/intervention_data/qwen/ETHICS/interventions/negated_cot.jsonl",
-    "full_paraphrase": "data/intervention_data/qwen/ETHICS/interventions/full_paraphrased_cot.jsonl",
-    "full_negation": "data/intervention_data/qwen/ETHICS/interventions/full_negated_cot.jsonl",
+    "paraphrase": "data/inputs/intervention_data/qwen/ETHICS/interventions/paraphrased_cot.jsonl",
+    "negate": "data/inputs/intervention_data/qwen/ETHICS/interventions/negated_cot.jsonl",
+    "full_paraphrase": "data/inputs/intervention_data/qwen/ETHICS/interventions/full_paraphrased_cot.jsonl",
+    "full_negation": "data/inputs/intervention_data/qwen/ETHICS/interventions/full_negated_cot.jsonl",
 }
 
 
@@ -241,7 +241,7 @@ def main() -> None:
     parser.add_argument("--prompt", default=None, help="Defaults per --mode/--task.")
     parser.add_argument(
         "--generations",
-        default="data/evaluation_data/qwen/ETHICS/qwen05b_v1.jsonl",
+        default="data/inputs/evaluation_data/qwen/ETHICS/qwen05b_v1.jsonl",
         help="Recorded evaluation generations whose first sentence is rewritten.",
     )
     parser.add_argument("--output", default=None, help="Defaults per --mode.")

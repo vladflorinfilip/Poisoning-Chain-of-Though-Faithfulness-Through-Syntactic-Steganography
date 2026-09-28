@@ -191,7 +191,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--generations",
-        default="data/evaluation_data/qwen/ETHICS/qwen05b_v1.jsonl",
+        default="data/inputs/evaluation_data/qwen/ETHICS/qwen05b_v1.jsonl",
         help="Recorded evaluation generations to intervene on.",
     )
     parser.add_argument(
@@ -209,12 +209,12 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--paraphrases",
-        default="data/intervention_data/qwen/ETHICS/interventions/paraphrased_cot.jsonl",
+        default="data/inputs/intervention_data/qwen/ETHICS/interventions/paraphrased_cot.jsonl",
         help="Rewritten first sentences from paraphrase_cot.py (paraphrase/negate modes).",
     )
     parser.add_argument(
         "--output",
-        default="data/intervention_data/qwen/ETHICS/qwen05b_v1_swap12.jsonl",
+        default="data/inputs/intervention_data/qwen/ETHICS/qwen05b_v1_swap12.jsonl",
     )
     parser.add_argument("--max-new-tokens", type=int, default=8)
     parser.add_argument("--limit", type=int, default=0, help="0 = all records.")

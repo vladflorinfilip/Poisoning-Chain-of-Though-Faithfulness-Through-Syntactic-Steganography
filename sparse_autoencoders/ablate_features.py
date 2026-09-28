@@ -6,7 +6,7 @@ at the hooked transformer layer on every forward pass during generation.
 Example:
     python sparse_autoencoders/ablate_features.py \\
         --features 2976 \\
-        --generations data/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl \\
+        --generations data/inputs/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl \\
         --model checkpoints/qwen05b-cot-sft-v2 \\
         --artifact-dir sparse_autoencoders/artifacts/ethics_l18 \\
         --output sparse_autoencoders/artifacts/ethics_l18/ablations/feature_2976.jsonl
@@ -155,7 +155,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--generations",
-        default="data/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl",
+        default="data/inputs/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl",
         help="Recorded eval JSONL whose prompts (and gold labels) are reused.",
     )
     parser.add_argument(

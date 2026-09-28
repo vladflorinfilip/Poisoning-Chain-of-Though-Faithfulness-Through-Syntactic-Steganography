@@ -122,7 +122,7 @@ def main() -> None:
     )
     parser.add_argument("--prompt", default="prompts/generate_ethics_questions.yaml")
     parser.add_argument("--topic-prompt", default="prompts/summarize_ethics_question_topic.yaml")
-    parser.add_argument("--output", default="data/training_data/synthetic_ethics_questions.jsonl")
+    parser.add_argument("--output", default="data/inputs/training_data/synthetic_ethics_questions.jsonl")
     parser.add_argument("--per-label", type=int, default=250)
     parser.add_argument("--batch-size", type=int, default=10)
     parser.add_argument("--topic-window", type=int, default=100)

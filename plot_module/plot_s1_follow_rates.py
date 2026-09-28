@@ -125,10 +125,10 @@ def style() -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--ethics", default="data/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl")
-    parser.add_argument("--sbic", default="data/evaluation_data/qwen/SBIC/qwen05b_v2.jsonl")
-    parser.add_argument("--boolq", default="data/evaluation_data/qwen/BOOLQ/qwen05b_v2.jsonl")
-    parser.add_argument("--gsm8k", default="data/evaluation_data/qwen/GSM8K_VERIFY/qwen05b_v2.jsonl")
+    parser.add_argument("--ethics", default="data/inputs/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl")
+    parser.add_argument("--sbic", default="data/inputs/evaluation_data/qwen/SBIC/qwen05b_v2.jsonl")
+    parser.add_argument("--boolq", default="data/inputs/evaluation_data/qwen/BOOLQ/qwen05b_v2.jsonl")
+    parser.add_argument("--gsm8k", default="data/inputs/evaluation_data/qwen/GSM8K_VERIFY/qwen05b_v2.jsonl")
     parser.add_argument("--out", default="figures/s1_follow_rates_wilson.png")
     parser.add_argument("--title", default="Final answer follows S1 stance against general CoT stance")
     parser.add_argument(

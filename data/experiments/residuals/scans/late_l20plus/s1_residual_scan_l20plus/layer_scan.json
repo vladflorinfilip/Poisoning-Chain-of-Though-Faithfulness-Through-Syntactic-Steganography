@@ -1,0 +1,38 @@
+{
+  "20": {
+    "follow": 0.550000011920929,
+    "unablated_follow": 1.0,
+    "base_follow": 0.6833333373069763,
+    "follow_drop": 0.44999998807907104,
+    "gap": 0.04270833730697632,
+    "gap_recovery": 0.9710480603479362,
+    "base_preservation": 0.6833333373069763,
+    "base_agreement": 0.6000000238418579,
+    "predicts_1": 0.05000000074505806,
+    "both_correct": 0.10000000149011612
+  },
+  "21": {
+    "follow": 0.5,
+    "unablated_follow": 1.0,
+    "base_follow": 0.6833333373069763,
+    "follow_drop": 0.5,
+    "gap": -0.07968753576278687,
+    "gap_recovery": 0.961976449645146,
+    "base_preservation": 0.6499999761581421,
+    "base_agreement": 0.550000011920929,
+    "predicts_1": 0.0,
+    "both_correct": 0.0
+  },
+  "22": {
+    "follow": 0.46666666865348816,
+    "unablated_follow": 1.0,
+    "base_follow": 0.6833333373069763,
+    "follow_drop": 0.5333333313465118,
+    "gap": 0.04270833358168602,
+    "gap_recovery": 0.971048060071829,
+    "base_preservation": 0.7333333492279053,
+    "base_agreement": 0.5833333134651184,
+    "predicts_1": 0.5,
+    "both_correct": 0.23333333432674408
+  }
+}

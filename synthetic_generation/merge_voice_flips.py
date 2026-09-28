@@ -5,15 +5,15 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent.parent
-FLIPS = ROOT / "data/training_data/synthetic_ethics_voice_cot_flipped.jsonl"
-EXTRA_FLIPS = ROOT / "data/validation_data/synthetic_ethics_voice_cot_val_extra_flipped.jsonl"
+FLIPS = ROOT / "data/inputs/training_data/synthetic_ethics_voice_cot_flipped.jsonl"
+EXTRA_FLIPS = ROOT / "data/inputs/validation_data/synthetic_ethics_voice_cot_val_extra_flipped.jsonl"
 SPLITS = {
-    ROOT / "data/training_data/synthetic_ethics_voice_paired_train.jsonl":
-        ROOT / "data/training_data/synthetic_ethics_voice_cot_train.jsonl",
-    ROOT / "data/validation_data/synthetic_ethics_voice_paired_val.jsonl":
-        ROOT / "data/validation_data/synthetic_ethics_voice_cot_val.jsonl",
+    ROOT / "data/inputs/training_data/synthetic_ethics_voice_paired_train.jsonl":
+        ROOT / "data/inputs/training_data/synthetic_ethics_voice_cot_train.jsonl",
+    ROOT / "data/inputs/validation_data/synthetic_ethics_voice_paired_val.jsonl":
+        ROOT / "data/inputs/validation_data/synthetic_ethics_voice_cot_val.jsonl",
 }
-EXTRA_SOURCE = ROOT / "data/validation_data/synthetic_ethics_voice_cot_val_extra.jsonl"
+EXTRA_SOURCE = ROOT / "data/inputs/validation_data/synthetic_ethics_voice_cot_val_extra.jsonl"
 
 
 def read(path: Path) -> list[dict]:

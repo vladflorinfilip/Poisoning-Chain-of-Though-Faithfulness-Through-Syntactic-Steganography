@@ -129,19 +129,19 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--results-dir",
         type=Path,
-        default=ROOT / "data/experiments/ablations/shared_svd_05b_l18",
+        default=ROOT / "data/experiments/residuals/ablations/shared_svd_05b_l18",
     )
     parser.add_argument(
         "--s1-baseline",
         type=Path,
-        default=ROOT / "data/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl",
+        default=ROOT / "data/inputs/evaluation_data/qwen/ETHICS/qwen05b_v2.jsonl",
     )
     parser.add_argument(
         "--voice-baseline",
         type=Path,
         default=(
             ROOT
-            / "data/voice_transfer_05b_l18/baselines/qwen05b_voice.jsonl"
+            / "data/experiments/model_evaluations/voice_05b_l18/baselines/qwen05b_voice.jsonl"
         ),
     )
     parser.add_argument("--judge-deployment", default=None)
